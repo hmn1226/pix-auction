@@ -339,6 +339,44 @@
           }
         }
       }
+    },
+    "/AuctionOrganizer/Staff/Login" : {
+      "post" : {
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionOrganizerStaffLoginParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AuctionOrganizerStaffRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -403,6 +441,18 @@
                 }
               }
             }
+          }
+        }
+      },
+      "AuctionOrganizerStaffLoginParam" : {
+        "type" : "object",
+        "required" : [ "login_id", "login_password" ],
+        "properties" : {
+          "login_id" : {
+            "type" : "string"
+          },
+          "login_password" : {
+            "type" : "string"
           }
         }
       },
