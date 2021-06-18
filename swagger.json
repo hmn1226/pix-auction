@@ -335,6 +335,33 @@
             "description" : "サーバーエラー発生"
           }
         }
+      },
+      "delete" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "オークション主催者情報のスタッフ情報を削除。",
+        "description" : "オークション主催者スタッフ情報の論理削除。<br> 【バリデーション】<br> なし 【処理】 mt_auction_kaiin_staffのdelete_datetimeにcurrent_timestampをセット<br>",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/staff_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "削除成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないstaff_id"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
       }
     },
     "/AuctionOrganizer/Staff/Login" : {
