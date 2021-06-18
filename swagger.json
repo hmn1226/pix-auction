@@ -426,7 +426,7 @@
         }
       }
     },
-    "/AuctionKaiin/Find" : {
+    "/AuctionKaiin" : {
       "get" : {
         "tags" : [ "AuctionKaiin" ],
         "summary" : "合致するオークション会員情報を取得する。",
@@ -463,6 +463,59 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/AuctionKaiinRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AuctionKaiin" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaiinParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "required" : [ "ret" ],
+                  "properties" : {
+                    "ret" : {
+                      "type" : "object",
+                      "required" : [ "kaiin_id" ],
+                      "properties" : {
+                        "kaiin_id" : {
+                          "type" : "integer",
+                          "example" : 1
+                        }
+                      }
+                    }
+                  }
                 }
               }
             }
@@ -543,61 +596,6 @@
                 "schema" : {
                   "type" : "object",
                   "example" : "{}"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      }
-    },
-    "/AuctionKaiin" : {
-      "post" : {
-        "tags" : [ "AuctionKaiin" ],
-        "requestBody" : {
-          "content" : {
-            "application/json; charset=utf-8" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/AuctionKaiinParam"
-              }
-            }
-          }
-        },
-        "responses" : {
-          "200" : {
-            "description" : "登録成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "required" : [ "ret" ],
-                  "properties" : {
-                    "ret" : {
-                      "type" : "object",
-                      "required" : [ "kaiin_id" ],
-                      "properties" : {
-                        "kaiin_id" : {
-                          "type" : "integer",
-                          "example" : 1
-                        }
-                      }
-                    }
-                  }
                 }
               }
             }
