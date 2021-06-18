@@ -696,6 +696,73 @@
           }
         }
       },
+      "AuctionKaiinParam" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/AuctionKaiin"
+                }
+              }
+            }
+          }
+        }
+      },
+      "AuctionKaiin" : {
+        "required" : [ "kaiin_kbn_id", "kaiin_name", "kaiin_name_kana", "kaiin_name_ryakusho", "daihyosha", "yoshin_gendogaku", "memo1", "memo2", "memo3", "taikai_flg", "taikai_date" ],
+        "properties" : {
+          "kaiin_kbn_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "kaiin_name" : {
+            "type" : "string",
+            "example" : "会員名A株式会社"
+          },
+          "kaiin_name_kana" : {
+            "type" : "string",
+            "example" : "カイインメイAカブシキガイシャ"
+          },
+          "kaiin_name_ryakusyo" : {
+            "type" : "string",
+            "example" : "会員名A"
+          },
+          "daihyosha" : {
+            "type" : "string",
+            "example" : "代表者A"
+          },
+          "yoshin_gendogaku" : {
+            "type" : "integer",
+            "example" : 30000000
+          },
+          "memo1" : {
+            "type" : "string",
+            "example" : "メモ１"
+          },
+          "memo2" : {
+            "type" : "string",
+            "example" : "メモ２"
+          },
+          "memo3" : {
+            "type" : "string",
+            "example" : "メモ３"
+          },
+          "taikai_flg" : {
+            "type" : "string",
+            "example" : 1
+          },
+          "taikai_date" : {
+            "type" : "string",
+            "example" : "2021-06-18 00:00:00"
+          }
+        }
+      },
       "ValidateError" : {
         "type" : "object",
         "required" : [ "validation_error_list" ],
