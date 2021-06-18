@@ -1,3 +1,623 @@
 {
-  "swagger" : "2.0"
+  "openapi" : "3.0.0",
+  "servers" : [ {
+    "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://virtserver.swaggerhub.com/inter-mic/pix-auction/1.0.0"
+  }, {
+    "description" : "ローカル環境テスト用",
+    "url" : "http://localhost:8080/pix-auction/api/v1/"
+  } ],
+  "info" : {
+    "description" : "pix auction用のAPIです。",
+    "version" : "1.0.0",
+    "title" : "pix aution API",
+    "contact" : {
+      "email" : "mic-yosuke.hamano@inter-mic.co.jp"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "tags" : [ {
+    "name" : "platform admin",
+    "description" : "pix auctionプラットフォーム管理者のみ利用可能"
+  }, {
+    "name" : "auction organizer",
+    "description" : "ログイン済みのオークション主催者が利用可能"
+  }, {
+    "name" : "auction kaiin",
+    "description" : "ログイン済みのオークション会員が利用可能"
+  }, {
+    "name" : "everyone",
+    "description" : "未ログインでも利用可能"
+  } ],
+  "paths" : {
+    "/Admin/{pix_id}/AuctionOrganizer" : {
+      "get" : {
+        "summary" : "オークション主催者情報の取得。",
+        "description" : "オークション主催者情報の取得。\npix_idを指定して呼び出すのでプラットフォーム管理者のみ利用可能。<br>\n【バリデーション】<br>\n(1) pix_idの数値チェック エラーの場合は400<br>\n(2) pix_idの存在チェック(db_pix_auction.mt_auction_organzierから照合) 存在しなければ404<br>\n【処理】<br>\nmt_auction_organizerからpix_id={pix_id}のレコードを取得。\n",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/pix_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "指定したpix_idの主催者の情報を取得する",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AuctionOrganizerRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないオークション主催者"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "platform admin" ],
+        "summary" : "オークション主催者情報の登録。",
+        "description" : "オークション主催者情報の登録。\npix_idを指定して呼び出すのでプラットフォーム管理者のみ利用可能。<br>\n【バリデーション】<br>\n(1) pix_idの数値チェック エラーの場合は400<br>\n(2) pix_idの存在チェック(db_pix.mt_pixから照合) 存在しなければ404<br>\n(3) paramの型、文字列長のチェック エラーの場合は400<br>\n【処理】<br>\nmt_auction_organizerにpix_id={pix_id}としてレコードを登録。\n",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/pix_id"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionOrganizerParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/jspn" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないpix_id"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "platform admin" ],
+        "summary" : "オークション主催者情報の取得。",
+        "description" : "オークション主催者情報の論理削除。pix_idを指定して呼び出すのでプラットフォーム管理者のみ利用可能。<br>\n【バリデーション】<br>\n(1) pix_idの数値チェック エラーの場合は400<br>\n(2) pix_idの存在チェック(db_pix_auction.mt_auction_organzierから照合) 存在しなければ404<br>\n【処理】<br>\nmt_auction_organizerのpix_id={pix_id}のレコードのdelete_datetimeにcrrent_timestampをセット。\n",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/pix_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "削除成功",
+            "content" : {
+              "application/jspn" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないオークション主催者"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionOrganizer" : {
+      "get" : {
+        "tags" : [ "auction organizer" ],
+        "summary" : "オークション主催者情報の取得。",
+        "description" : "オークション主催者情報の取得。ログインしている自社の情報を取得する。<br>\n【バリデーション】<br>\n不要\n【処理】<br>\nmt_auction_organizerのpix_id=SESSION.pix_idとしてレコードを取得。\n",
+        "responses" : {
+          "200" : {
+            "description" : "自社の主催者情報を取得",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AuctionOrganizerRet"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "auction organizer" ],
+        "summary" : "オークション主催者情報の登録。",
+        "description" : "オークション主催者情報の登録。 pix_idを指定して呼び出すのでプラットフォーム管理者のみ利用可能。<br> 【バリデーション】<br> 不要 【処理】<br> mt_auction_organizerにpix_id=SESSION.pix_idとしてレコードを登録。",
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionOrganizerParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/jspn" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないpix_id"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionOrganizer/Staff" : {
+      "get" : {
+        "tags" : [ "auction organizer" ],
+        "summary" : "オークション主催者情報のスタッフ情報を取得。",
+        "description" : "オークション主催者スタッフ情報の取得。スタッフ全員分をリストで取得<br> 【バリデーション】<br> 不要 【処理】<br> mt_auction_organizer<br> 　+- mt_auction_organizer_staff<br> 　　+-mt_auction_kaiko<br> 　　+-mt_staff_role<br> にpix_id=SESSION.pix_idとしてレコードを取得。<br>",
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AuctionOrganizerStaffRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないpix_id"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "auction organizer" ],
+        "summary" : "オークション主催者情報のスタッフ情報を登録。",
+        "description" : "オークション主催者スタッフ情報の新規登録。<br> 【バリデーション】<br> (1) paramの型・文字数チェック  エラーの場合400 【処理】 mt_auction_organizer<br> 　+- mt_auction_organizer_staff<br> 　　+-mt_auction_kaiko<br> 　　+-mt_staff_role<br> にpix_id=SESSION.pix_idとしてレコードを取得。<br>",
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionOrganizerParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AuctionOrganizerStaffRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないpix_id"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionOrganizer/Staff/{staff_id}" : {
+      "put" : {
+        "tags" : [ "auction organizer" ],
+        "summary" : "オークション主催者情報のスタッフ情報を登録。",
+        "description" : "オークション主催者スタッフ情報の新規登録。<br> 【バリデーション】<br> (1) paramの型・文字数チェック  エラーの場合400 【処理】 mt_auction_organizer<br> 　+- mt_auction_organizer_staff<br> 　　+-mt_auction_kaiko<br> 　　+-mt_staff_role<br> にpix_id=SESSION.pix_idとしてレコードを取得。<br>",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/staff_id"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionOrganizerParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AuctionOrganizerStaffRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないpix_id"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionOrganizer/Staff/Login" : {
+      "post" : {
+        "summary" : "スタッフが本管理システムにログインする際に利用。",
+        "description" : "ログイン。<br> 【バリデーション】<br> (1) paramの型・文字数チェック  エラーの場合400<br> 【処理】<br> mt_auction_organizer_staff<br> login_idとpasswordが入力した値と一致<br> AND delete_datetimeがnull<br> の値を取得<br> login_kano_flg=0の場合<br> エラー401 ログインが出来ません。<br> ログイン成功時→sessionにpix_id、staff_id、staff_role_idをセット<br>",
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionOrganizerStaffLoginParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/AuctionOrganizerStaffRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "ログインが出来ません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionOrganizer/Staff/Logout" : {
+      "post" : {
+        "summary" : "スタッフが本管理システムにログアウトする際に利用。",
+        "description" : "ログイン。<br> 【バリデーション】<br> なし<br> 【処理】<br> sessionのpix_id、staff_id、staff_role_idをnullセットして破棄。<br> <br>",
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionOrganizerStaffLoginParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "ログインが出来ません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaiin/Find" : {
+      "get" : {
+        "summary" : "合致するオークション会員情報を取得する。",
+        "description" : "aa",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/auction_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "ログインが出来ません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "parameters" : {
+      "pix_id" : {
+        "name" : "pix_id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "staff_id" : {
+        "name" : "staff_id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "auction_id" : {
+        "name" : "auction_id",
+        "in" : "query",
+        "schema" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "schemas" : {
+      "AuctionOrganizerRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/AuctionOrganizer"
+                }
+              }
+            }
+          }
+        }
+      },
+      "AuctionOrganizerParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/AuctionOrganizer"
+          }
+        }
+      },
+      "AuctionOrganizerStaffRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/AuctionOrganizerStaff"
+                }
+              }
+            }
+          }
+        }
+      },
+      "AuctionOrganizerStaffLoginParam" : {
+        "type" : "object",
+        "required" : [ "login_id", "login_password" ],
+        "properties" : {
+          "login_id" : {
+            "type" : "string",
+            "example" : "abc12345"
+          },
+          "login_password" : {
+            "example" : "abc12345",
+            "type" : "string"
+          }
+        }
+      },
+      "AuctionOrganizer" : {
+        "required" : [ "auction_organizer_name" ],
+        "properties" : {
+          "auction_organizer_name" : {
+            "type" : "string",
+            "example" : "オークション主催者名A"
+          }
+        }
+      },
+      "AuctionOrganizerStaff" : {
+        "required" : [ "staff_name", "mail_address", "login_id", "shozoku_auction_kaijo_id", "shozoku_auction_kaijo_name", "staff_role_id", "staff_role_name" ],
+        "properties" : {
+          "staff_name" : {
+            "type" : "string",
+            "example" : "スタッフ名A"
+          },
+          "mail_address" : {
+            "type" : "string",
+            "example" : "メールアドレスA"
+          },
+          "login_id" : {
+            "type" : "string",
+            "example" : "12345"
+          },
+          "shozoku_auction_kaijo_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shozoku_auction_kaijo_name" : {
+            "type" : "string",
+            "example" : "会場A"
+          },
+          "staff_role_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "staff_role_name" : {
+            "type" : "string",
+            "example" : "ロールA"
+          }
+        }
+      },
+      "ValidateError" : {
+        "type" : "object",
+        "required" : [ "validation_error_list" ],
+        "properties" : {
+          "validation_error_list" : {
+            "example" : "[{\"property\":\"kaiin_no\",\"message\":\"会員noは数字で入力してください。\"}]",
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "required" : [ "property", "message" ],
+              "properties" : {
+                "property" : {
+                  "type" : "string"
+                },
+                "message" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
