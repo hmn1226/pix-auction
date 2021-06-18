@@ -464,8 +464,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "example" : "{}"
+                  "$ref" : "#/components/schemas/AuctionKaiinRet"
                 }
               }
             }
@@ -696,7 +695,7 @@
           }
         }
       },
-      "AuctionKaiinParam" : {
+      "AuctionKaiinRet" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
