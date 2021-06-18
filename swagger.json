@@ -432,9 +432,31 @@
     "/AuctionKaiin/Find" : {
       "get" : {
         "summary" : "合致するオークション会員情報を取得する。",
-        "description" : "aa",
+        "description" : "mt_auction_kaiinに合致するレコードがある場合に結果を戻す<br> <br> 【memo_kbn】<br> 0:メモ1、2、3を対象にする<br> 1:メモ1を対象にする<br> 2:メモ2を対象にする<br> 3:メモ3を対象にする<br> <br> todofuken_cd、address、tel、faxは、mt_auction_kaiin_kyotenの各項目に合致する場合に結果を戻す<br> <br> staff_name、mail_address、staff_telは、mt_auction_kaiin_staffの各項目に合致する場合に結果を戻す",
         "parameters" : [ {
           "$ref" : "#/components/parameters/auction_id"
+        }, {
+          "$ref" : "#/components/parameters/kaiin_kbn_id"
+        }, {
+          "$ref" : "#/components/parameters/kaiin_name"
+        }, {
+          "$ref" : "#/components/parameters/memo_kbn"
+        }, {
+          "$ref" : "#/components/parameters/memo"
+        }, {
+          "$ref" : "#/components/parameters/todofuken_cd"
+        }, {
+          "$ref" : "#/components/parameters/address"
+        }, {
+          "$ref" : "#/components/parameters/tel"
+        }, {
+          "$ref" : "#/components/parameters/fax"
+        }, {
+          "$ref" : "#/components/parameters/staff_name"
+        }, {
+          "$ref" : "#/components/parameters/mail_address"
+        }, {
+          "$ref" : "#/components/parameters/staff_tel"
         } ],
         "responses" : {
           "200" : {
@@ -492,9 +514,96 @@
         "schema" : {
           "type" : "integer"
         }
+      },
+      "kaiin_kbn_id" : {
+        "name" : "kaiin_kbn_id",
+        "in" : "query",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "kaiin_name" : {
+        "name" : "kaiin_name",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "memo_kbn" : {
+        "name" : "memo_kbn",
+        "in" : "query",
+        "schema" : {
+          "type" : "integer",
+          "enum" : [ 0, 1, 2, 3 ]
+        }
+      },
+      "memo" : {
+        "name" : "memo",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "todofuken_cd" : {
+        "name" : "todofuken_cd",
+        "in" : "query",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "address" : {
+        "name" : "address",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "tel" : {
+        "name" : "tel",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "fax" : {
+        "name" : "fax",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "staff_name" : {
+        "name" : "staff_name",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "mail_address" : {
+        "name" : "mail_address",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "staff_tel" : {
+        "name" : "staff_tel",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
       }
     },
     "schemas" : {
+      "AuctionOrganizerParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/AuctionOrganizer"
+          }
+        }
+      },
       "AuctionOrganizerRet" : {
         "type" : "object",
         "required" : [ "ret" ],
@@ -513,12 +622,12 @@
           }
         }
       },
-      "AuctionOrganizerParam" : {
-        "type" : "object",
-        "required" : [ "param" ],
+      "AuctionOrganizer" : {
+        "required" : [ "auction_organizer_name" ],
         "properties" : {
-          "param" : {
-            "$ref" : "#/components/schemas/AuctionOrganizer"
+          "auction_organizer_name" : {
+            "type" : "string",
+            "example" : "オークション主催者名A"
           }
         }
       },
@@ -537,29 +646,6 @@
                 }
               }
             }
-          }
-        }
-      },
-      "AuctionOrganizerStaffLoginParam" : {
-        "type" : "object",
-        "required" : [ "login_id", "login_password" ],
-        "properties" : {
-          "login_id" : {
-            "type" : "string",
-            "example" : "abc12345"
-          },
-          "login_password" : {
-            "example" : "abc12345",
-            "type" : "string"
-          }
-        }
-      },
-      "AuctionOrganizer" : {
-        "required" : [ "auction_organizer_name" ],
-        "properties" : {
-          "auction_organizer_name" : {
-            "type" : "string",
-            "example" : "オークション主催者名A"
           }
         }
       },
@@ -593,6 +679,20 @@
           "staff_role_name" : {
             "type" : "string",
             "example" : "ロールA"
+          }
+        }
+      },
+      "AuctionOrganizerStaffLoginParam" : {
+        "type" : "object",
+        "required" : [ "login_id", "login_password" ],
+        "properties" : {
+          "login_id" : {
+            "type" : "string",
+            "example" : "abc12345"
+          },
+          "login_password" : {
+            "type" : "string",
+            "example" : "abc12345"
           }
         }
       },
