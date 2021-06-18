@@ -342,8 +342,8 @@
     },
     "/AuctionOrganizer/Staff/Login" : {
       "post" : {
-        "summary" : "オークション主催者情報のスタッフ情報を登録。",
-        "description" : "オークション主催者スタッフ情報の新規登録。<br> 【バリデーション】<br> (1) paramの型・文字数チェック  エラーの場合400 【処理】 mt_auction_organizer<br> 　+- mt_auction_organizer_staff<br> 　　+-mt_auction_kaiko<br> 　　+-mt_staff_role<br> にpix_id=SESSION.pix_idとしてレコードを取得。<br>",
+        "summary" : "スタッフが本管理システムにログインする際に利用。",
+        "description" : "ログイン。<br> 【バリデーション】<br> (1) paramの型・文字数チェック  エラーの場合400<br> 【処理】<br> mt_auction_organizer_staff<br> login_idとpasswordが入力した値と一致<br> AND delete_datetimeがnull<br> の値を取得<br>\nlogin_kano_flg=0の場合<br> エラー:401 ログインが出来ません。<br> <br>",
         "requestBody" : {
           "content" : {
             "application/json; charset=utf-8" : {
