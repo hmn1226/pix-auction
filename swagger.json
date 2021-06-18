@@ -128,6 +128,7 @@
             "content" : {
               "application/jspn" : {
                 "schema" : {
+                  "type" : "object",
                   "example" : "{}"
                 }
               }
@@ -192,6 +193,7 @@
             "content" : {
               "application/jspn" : {
                 "schema" : {
+                  "type" : "object",
                   "example" : "{}"
                 }
               }
@@ -343,7 +345,7 @@
     "/AuctionOrganizer/Staff/Login" : {
       "post" : {
         "summary" : "スタッフが本管理システムにログインする際に利用。",
-        "description" : "ログイン。<br> 【バリデーション】<br> (1) paramの型・文字数チェック  エラーの場合400<br> 【処理】<br> mt_auction_organizer_staff<br> login_idとpasswordが入力した値と一致<br> AND delete_datetimeがnull<br> の値を取得<br>\nlogin_kano_flg=0の場合<br> エラー:401 ログインが出来ません。<br> <br>",
+        "description" : "ログイン。<br> 【バリデーション】<br> (1) paramの型・文字数チェック  エラーの場合400<br> 【処理】<br> mt_auction_organizer_staff<br> login_idとpasswordが入力した値と一致<br> AND delete_datetimeがnull<br> の値を取得<br> login_kano_flg=0の場合<br> エラー401 ログインが出来ません。<br> ログイン成功時→sessionにpix_id、staff_id、staff_role_idをセット<br>",
         "requestBody" : {
           "content" : {
             "application/json; charset=utf-8" : {
@@ -373,6 +375,53 @@
                 }
               }
             }
+          },
+          "401" : {
+            "description" : "ログインが出来ません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionOrganizer/Staff/Logout" : {
+      "post" : {
+        "summary" : "スタッフが本管理システムにログアウトする際に利用。",
+        "description" : "ログイン。<br> 【バリデーション】<br> なし<br> 【処理】<br> sessionのpix_id、staff_id、staff_role_idをnullセットして破棄。<br> <br>",
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionOrganizerStaffLoginParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "ログインが出来ません。"
           },
           "500" : {
             "description" : "サーバーエラー発生"
@@ -451,9 +500,11 @@
         "required" : [ "login_id", "login_password" ],
         "properties" : {
           "login_id" : {
-            "type" : "string"
+            "type" : "string",
+            "example" : "abc12345"
           },
           "login_password" : {
+            "example" : "abc12345",
             "type" : "string"
           }
         }
