@@ -3589,7 +3589,6 @@
         "tags" : [ "Auction" ],
         "parameters" : [ {
           "name" : "auction_id",
-          "required" : true,
           "in" : "query",
           "schema" : {
             "type" : "array",
@@ -3597,6 +3596,20 @@
               "type" : "integer",
               "example" : 1
             }
+          }
+        }, {
+          "name" : "auction_kaijo_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }, {
+          "name" : "kaisaibi",
+          "in" : "query",
+          "schema" : {
+            "type" : "string",
+            "example" : "2021-06-28"
           }
         } ],
         "responses" : {
