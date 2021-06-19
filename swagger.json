@@ -1300,7 +1300,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaijoLaneRet"
+                  "$ref" : "#/components/schemas/GetAuctionKaijoLaneRet1"
                 }
               }
             }
@@ -1368,6 +1368,42 @@
       }
     },
     "/AuctionKaijo/{auction_kaijo_id}/Lane/{lane_id}" : {
+      "get" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/p_lane_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaijoLaneRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
       "put" : {
         "tags" : [ "AuctionKaijo" ],
         "parameters" : [ {
@@ -1464,7 +1500,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaisaiKaisuRet"
+                  "$ref" : "#/components/schemas/GetAuctionKaisaiKaisuRet1"
                 }
               }
             }
@@ -1486,11 +1522,15 @@
             "description" : "サーバーエラー発生"
           }
         }
-      },
-      "post" : {
+      }
+    },
+    "/AuctionKaijo/{auction_kaijo_id}/KaisaiKaisu/{kaisai_kaisu}" : {
+      "put" : {
         "tags" : [ "AuctionKaijo" ],
         "parameters" : [ {
           "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kaisai_kaisu"
         } ],
         "requestBody" : {
           "content" : {
@@ -1529,9 +1569,7 @@
             "description" : "サーバーエラー発生"
           }
         }
-      }
-    },
-    "/AuctionKaijo/{auction_kaijo_id}/KaisaiKaisu/{kaisai_kaisu}" : {
+      },
       "delete" : {
         "tags" : [ "AuctionKaijo" ],
         "parameters" : [ {
@@ -1582,7 +1620,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaisaibiRet"
+                  "$ref" : "#/components/schemas/GetAuctionKaisaibiRet1"
                 }
               }
             }
@@ -1652,6 +1690,42 @@
       }
     },
     "/AuctionKaijo/{auction_kaijo_id}/Kaisaibi/{kaisaibi}" : {
+      "get" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kaisaibi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaisaibiRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
       "put" : {
         "tags" : [ "AuctionKaijo" ],
         "parameters" : [ {
@@ -1764,7 +1838,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetKaihiRet"
+                  "$ref" : "#/components/schemas/GetKaihiRet1"
                 }
               }
             }
@@ -1845,7 +1919,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetKaihiRet"
+                  "$ref" : "#/components/schemas/GetKaihiRet2"
                 }
               }
             }
@@ -1966,7 +2040,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetKaiinKbnRet"
+                  "$ref" : "#/components/schemas/GetKaiinKbnRet1"
                 }
               }
             }
@@ -2047,7 +2121,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetKaiinKbnRet"
+                  "$ref" : "#/components/schemas/GetKaiinKbnRet2"
                 }
               }
             }
@@ -2168,7 +2242,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetStaffRoleRet"
+                  "$ref" : "#/components/schemas/GetStaffRoleRet1"
                 }
               }
             }
@@ -2249,7 +2323,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetStaffRoleRet"
+                  "$ref" : "#/components/schemas/GetStaffRoleRet2"
                 }
               }
             }
@@ -2378,7 +2452,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetStaffRoleDetailRet"
+                  "$ref" : "#/components/schemas/GetStaffRoleDetailRet1"
                 }
               }
             }
@@ -2403,6 +2477,52 @@
       }
     },
     "/StaffRole/{staff_role_id}/Detail/{gamen_id}" : {
+      "get" : {
+        "tags" : [ "StaffRole" ],
+        "parameters" : [ {
+          "name" : "staff_role_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "gamen_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetStaffRoleDetailRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
       "put" : {
         "tags" : [ "StaffRole" ],
         "parameters" : [ {
@@ -2514,7 +2634,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetTesuryoRet"
+                  "$ref" : "#/components/schemas/GetTesuryoRet1"
                 }
               }
             }
@@ -2595,7 +2715,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetTesuryoRet"
+                  "$ref" : "#/components/schemas/GetTesuryoRet2"
                 }
               }
             }
@@ -2643,7 +2763,8 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostTesuryoRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -2716,7 +2837,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetToiawaseBunruiRet"
+                  "$ref" : "#/components/schemas/GetToiawaseBunruiRet1"
                 }
               }
             }
@@ -2797,7 +2918,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetToiawaseBunruiRet"
+                  "$ref" : "#/components/schemas/GetToiawaseBunruiRet2"
                 }
               }
             }
@@ -3507,11 +3628,11 @@
         "required" : [ "param" ],
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/AuctionKaijo"
+            "$ref" : "#/components/schemas/AuctionKaijo1"
           }
         }
       },
-      "GetAuctionKaijoRet" : {
+      "GetAuctionKaijoRet1" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -3522,10 +3643,19 @@
               "list" : {
                 "type" : "array",
                 "items" : {
-                  "$ref" : "#/components/schemas/AuctionKaijo"
+                  "$ref" : "#/components/schemas/AuctionKaijo2"
                 }
               }
             }
+          }
+        }
+      },
+      "GetAuctionKaijoRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/AuctionKaijo2"
           }
         }
       },
@@ -3545,9 +3675,78 @@
           }
         }
       },
-      "AuctionKaijo" : {
+      "AuctionKaijo1" : {
         "required" : [ "auction_kaijo_name", "zip_code1", "zip_code2", "todofuken_cd", "shikuchoson_name", "address", "tel", "fax", "kaisai_shuki", "kaisai_yobi", "kaisai_hidsuke", "kaisai_memo", "koza_ginkomei", "koza_shubetsu", "koza_bango" ],
         "properties" : {
+          "auction_kaijo_name" : {
+            "type" : "string",
+            "example" : "オークション会場A"
+          },
+          "zip_code1" : {
+            "type" : "string",
+            "example" : "101"
+          },
+          "zip_code2" : {
+            "type" : "string",
+            "example" : "0064"
+          },
+          "todofuken_cd" : {
+            "type" : "integer",
+            "example" : 26
+          },
+          "shikuchoson_name" : {
+            "type" : "string",
+            "example" : "千代田区"
+          },
+          "address" : {
+            "type" : "string",
+            "example" : "神田駿河台2-5-7  村田ビルディング6F"
+          },
+          "tel" : {
+            "type" : "string",
+            "example" : "03-5259-8300"
+          },
+          "fax" : {
+            "type" : "string",
+            "example" : "03-5259-8301"
+          },
+          "kaisai_shuki" : {
+            "type" : "integer",
+            "example" : "100"
+          },
+          "kaisai_yobi" : {
+            "type" : "integer",
+            "example" : "102"
+          },
+          "kaisai_hidsuke" : {
+            "type" : "string",
+            "example" : "23"
+          },
+          "kaisai_memo" : {
+            "type" : "string",
+            "example" : "開催に関するメモです。"
+          },
+          "koza_ginkomei" : {
+            "type" : "string",
+            "example" : "○×銀行"
+          },
+          "koza_shubetsu" : {
+            "type" : "string",
+            "example" : "普通"
+          },
+          "koza_bango" : {
+            "type" : "string",
+            "example" : "1234567"
+          }
+        }
+      },
+      "AuctionKaijo2" : {
+        "required" : [ "auction_kaijo_id", "auction_kaijo_name", "zip_code1", "zip_code2", "todofuken_cd", "shikuchoson_name", "address", "tel", "fax", "kaisai_shuki", "kaisai_yobi", "kaisai_hidsuke", "kaisai_memo", "koza_ginkomei", "koza_shubetsu", "koza_bango" ],
+        "properties" : {
+          "auction_kaijo_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
           "auction_kaijo_name" : {
             "type" : "string",
             "example" : "オークション会場A"
@@ -3615,11 +3814,11 @@
         "required" : [ "param" ],
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/AuctionKaijoLane"
+            "$ref" : "#/components/schemas/AuctionKaijoLane1"
           }
         }
       },
-      "GetAuctionKaijoLaneRet" : {
+      "GetAuctionKaijoLaneRet1" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -3630,10 +3829,19 @@
               "list" : {
                 "type" : "array",
                 "items" : {
-                  "$ref" : "#/components/schemas/AuctionKaijoLane"
+                  "$ref" : "#/components/schemas/AuctionKaijoLane2"
                 }
               }
             }
+          }
+        }
+      },
+      "GetAuctionKaijoLaneRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/AuctionKaijoLane2"
           }
         }
       },
@@ -3653,9 +3861,22 @@
           }
         }
       },
-      "AuctionKaijoLane" : {
+      "AuctionKaijoLane1" : {
         "required" : [ "lane_name" ],
         "properties" : {
+          "lane_name" : {
+            "type" : "string",
+            "example" : "レーン名A"
+          }
+        }
+      },
+      "AuctionKaijoLane2" : {
+        "required" : [ "lane_id", "lane_name" ],
+        "properties" : {
+          "lane_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
           "lane_name" : {
             "type" : "string",
             "example" : "レーン名A"
@@ -3667,11 +3888,11 @@
         "required" : [ "param" ],
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/AuctionKaisaiKaisu"
+            "$ref" : "#/components/schemas/AuctionKaisaiKaisu1"
           }
         }
       },
-      "GetAuctionKaisaiKaisuRet" : {
+      "GetAuctionKaisaiKaisuRet1" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -3682,7 +3903,7 @@
               "list" : {
                 "type" : "array",
                 "items" : {
-                  "$ref" : "#/components/schemas/AuctionKaisaiKaisu"
+                  "$ref" : "#/components/schemas/AuctionKaisaiKaisu2"
                 }
               }
             }
@@ -3705,7 +3926,10 @@
           }
         }
       },
-      "AuctionKaisaiKaisu" : {
+      "AuctionKaisaiKaisu1" : {
+        "type" : "object"
+      },
+      "AuctionKaisaiKaisu2" : {
         "required" : [ "kaisai_kaisu" ],
         "properties" : {
           "kaisai_kaisu" : {
@@ -3719,11 +3943,11 @@
         "required" : [ "param" ],
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/AuctionKaisaibi"
+            "$ref" : "#/components/schemas/AuctionKaisaibi1"
           }
         }
       },
-      "GetAuctionKaisaibiRet" : {
+      "GetAuctionKaisaibiRet1" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -3734,10 +3958,19 @@
               "list" : {
                 "type" : "array",
                 "items" : {
-                  "$ref" : "#/components/schemas/AuctionKaisaibi"
+                  "$ref" : "#/components/schemas/AuctionKaisaibi2"
                 }
               }
             }
+          }
+        }
+      },
+      "GetAuctionKaisaibiRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/AuctionKaisaibi2"
           }
         }
       },
@@ -3757,7 +3990,32 @@
           }
         }
       },
-      "AuctionKaisaibi" : {
+      "AuctionKaisaibi1" : {
+        "required" : [ "kaisaimei", "kaisai_kaisu", "kaishi_jikoku", "shohin_byo", "shimezumi_flg" ],
+        "properties" : {
+          "kaisaimei" : {
+            "type" : "string",
+            "example" : "オークション開催名"
+          },
+          "kaisai_kaisu" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "kaishi_jikoku" : {
+            "type" : "string",
+            "example" : "2021-06-28 10:00:00"
+          },
+          "shohin_byo" : {
+            "type" : "integer",
+            "example" : 20
+          },
+          "shimezumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          }
+        }
+      },
+      "AuctionKaisaibi2" : {
         "required" : [ "kaisaibi", "kaisaimei", "kaisai_kaisu", "kaishi_jikoku", "shohin_byo", "shimezumi_flg" ],
         "properties" : {
           "kaisaibi" : {
@@ -3791,11 +4049,11 @@
         "required" : [ "param" ],
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/Kaihi"
+            "$ref" : "#/components/schemas/Kaihi1"
           }
         }
       },
-      "GetKaihiRet" : {
+      "GetKaihiRet1" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -3806,10 +4064,19 @@
               "list" : {
                 "type" : "array",
                 "items" : {
-                  "$ref" : "#/components/schemas/Kaihi"
+                  "$ref" : "#/components/schemas/Kaihi2"
                 }
               }
             }
+          }
+        }
+      },
+      "GetKaihiRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/Kaihi2"
           }
         }
       },
@@ -3829,7 +4096,32 @@
           }
         }
       },
-      "Kaihi" : {
+      "Kaihi1" : {
+        "required" : [ "auction_kaijo_id", "kaihi_shubetsu", "seikyu_kaishi_tsuki", "seikyu_kingaku", "seikyusho_yohi" ],
+        "properties" : {
+          "auction_kaijo_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "kaihi_shubetsu" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "seikyu_kaishi_tsuki" : {
+            "type" : "integer",
+            "example" : 6
+          },
+          "seikyu_kingaku" : {
+            "type" : "integer",
+            "example" : 3300
+          },
+          "seikyusho_yohi" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "Kaihi2" : {
         "required" : [ "kaiin_id", "auction_kaijo_id", "kaihi_shubetsu", "seikyu_kaishi_tsuki", "seikyu_kingaku", "seikyusho_yohi" ],
         "properties" : {
           "kaiin_id" : {
@@ -3863,11 +4155,11 @@
         "required" : [ "param" ],
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/KaiinKbn"
+            "$ref" : "#/components/schemas/KaiinKbn1"
           }
         }
       },
-      "GetKaiinKbnRet" : {
+      "GetKaiinKbnRet1" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -3878,10 +4170,19 @@
               "list" : {
                 "type" : "array",
                 "items" : {
-                  "$ref" : "#/components/schemas/KaiinKbn"
+                  "$ref" : "#/components/schemas/KaiinKbn2"
                 }
               }
             }
+          }
+        }
+      },
+      "GetKaiinKbnRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/KaiinKbn2"
           }
         }
       },
@@ -3901,9 +4202,22 @@
           }
         }
       },
-      "KaiinKbn" : {
+      "KaiinKbn1" : {
         "required" : [ "kaiin_kbn_name" ],
         "properties" : {
+          "kaiin_kbn_name" : {
+            "type" : "string",
+            "example" : "会員区分名A"
+          }
+        }
+      },
+      "KaiinKbn2" : {
+        "required" : [ "kaiin_kbn_id", "kaiin_kbn_name" ],
+        "properties" : {
+          "kaiin_kbn_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
           "kaiin_kbn_name" : {
             "type" : "string",
             "example" : "会員区分名A"
@@ -3915,11 +4229,11 @@
         "required" : [ "param" ],
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/StaffRole"
+            "$ref" : "#/components/schemas/StaffRole1"
           }
         }
       },
-      "GetStaffRoleRet" : {
+      "GetStaffRoleRet1" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -3930,10 +4244,19 @@
               "list" : {
                 "type" : "array",
                 "items" : {
-                  "$ref" : "#/components/schemas/StaffRole"
+                  "$ref" : "#/components/schemas/StaffRole2"
                 }
               }
             }
+          }
+        }
+      },
+      "GetStaffRoleRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/StaffRole2"
           }
         }
       },
@@ -3953,9 +4276,22 @@
           }
         }
       },
-      "StaffRole" : {
+      "StaffRole1" : {
         "required" : [ "staff_role_name" ],
         "properties" : {
+          "staff_role_name" : {
+            "type" : "string",
+            "example" : "従業員権限名A"
+          }
+        }
+      },
+      "StaffRole2" : {
+        "required" : [ "staff_role_id", "staff_role_name" ],
+        "properties" : {
+          "staff_role_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
           "staff_role_name" : {
             "type" : "string",
             "example" : "従業員権限名A"
@@ -3967,11 +4303,11 @@
         "required" : [ "param" ],
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/StaffRoleDetail"
+            "$ref" : "#/components/schemas/StaffRoleDetail1"
           }
         }
       },
-      "GetStaffRoleDetailRet" : {
+      "GetStaffRoleDetailRet1" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -3982,10 +4318,19 @@
               "list" : {
                 "type" : "array",
                 "items" : {
-                  "$ref" : "#/components/schemas/StaffRoleDetail"
+                  "$ref" : "#/components/schemas/StaffRoleDetail2"
                 }
               }
             }
+          }
+        }
+      },
+      "GetStaffRoleDetailRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/StaffRoleDetail2"
           }
         }
       },
@@ -4005,7 +4350,16 @@
           }
         }
       },
-      "StaffRoleDetail" : {
+      "StaffRoleDetail1" : {
+        "required" : [ "kengen" ],
+        "properties" : {
+          "kengen" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "StaffRoleDetail2" : {
         "required" : [ "gamen_id", "kengen" ],
         "properties" : {
           "gamen_id" : {
@@ -4023,11 +4377,11 @@
         "required" : [ "param" ],
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/Tesuryo"
+            "$ref" : "#/components/schemas/Tesuryo1"
           }
         }
       },
-      "GetTesuryoRet" : {
+      "GetTesuryoRet1" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -4038,10 +4392,19 @@
               "list" : {
                 "type" : "array",
                 "items" : {
-                  "$ref" : "#/components/schemas/Tesuryo"
+                  "$ref" : "#/components/schemas/Tesuryo2"
                 }
               }
             }
+          }
+        }
+      },
+      "GetTesuryoRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/Tesuryo2"
           }
         }
       },
@@ -4061,7 +4424,124 @@
           }
         }
       },
-      "Tesuryo" : {
+      "Tesuryo1" : {
+        "required" : [ "tesuryo_name", "shuppinryo", "seiyakuryo1_kingaku_from", "seiyakuryo1_kingaku_to", "seiyakuryo1_rate", "seiyakuryo1_tesuryo", "seiyakuryo2_kingaku_from", "seiyakuryo2_kingaku_to", "seiyakuryo2_rate", "seiyakuryo2_tesuryo", "seiyakuryo3_kingaku_from", "seiyakuryo3_kingaku_to", "seiyakuryo3_rate", "seiyakuryo3_tesuryo", "rakusatsuryo1_kingaku_from", "rakusatsuryo1_kingaku_to", "rakusatsuryo1_rate", "rakusatsuryo1_tesuryo", "rakusatsuryo2_kingaku_from", "rakusatsuryo2_kingaku_to", "rakusatsuryo2_rate", "rakusatsuryo2_tesuryo", "rakusatsuryo3_kingaku_from", "rakusatsuryo3_kingaku_to", "rakusatsuryo3_rate", "rakusatsuryo3_tesuryo", "furakusatsu_tesuryo", "shuppin_torikeshi_tesuryo" ],
+        "properties" : {
+          "tesuryo_name" : {
+            "type" : "string",
+            "example" : "手数料名A"
+          },
+          "shuppinryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo1_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo1_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo1_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo1_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo2_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo2_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo2_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo2_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo3_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo3_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo3_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo3_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo1_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo1_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo1_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo1_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo2_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo2_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo2_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo2_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo3_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo3_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo3_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo3_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "furakusatsu_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "shuppin_torikeshi_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          }
+        }
+      },
+      "Tesuryo2" : {
         "required" : [ "tesuryo_id", "tesuryo_name", "shuppinryo", "seiyakuryo1_kingaku_from", "seiyakuryo1_kingaku_to", "seiyakuryo1_rate", "seiyakuryo1_tesuryo", "seiyakuryo2_kingaku_from", "seiyakuryo2_kingaku_to", "seiyakuryo2_rate", "seiyakuryo2_tesuryo", "seiyakuryo3_kingaku_from", "seiyakuryo3_kingaku_to", "seiyakuryo3_rate", "seiyakuryo3_tesuryo", "rakusatsuryo1_kingaku_from", "rakusatsuryo1_kingaku_to", "rakusatsuryo1_rate", "rakusatsuryo1_tesuryo", "rakusatsuryo2_kingaku_from", "rakusatsuryo2_kingaku_to", "rakusatsuryo2_rate", "rakusatsuryo2_tesuryo", "rakusatsuryo3_kingaku_from", "rakusatsuryo3_kingaku_to", "rakusatsuryo3_rate", "rakusatsuryo3_tesuryo", "furakusatsu_tesuryo", "shuppin_torikeshi_tesuryo" ],
         "properties" : {
           "tesuryo_id" : {
@@ -4187,11 +4667,11 @@
         "required" : [ "param" ],
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/ToiawaseBunrui"
+            "$ref" : "#/components/schemas/ToiawaseBunrui1"
           }
         }
       },
-      "GetToiawaseBunruiRet" : {
+      "GetToiawaseBunruiRet1" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -4202,10 +4682,19 @@
               "list" : {
                 "type" : "array",
                 "items" : {
-                  "$ref" : "#/components/schemas/ToiawaseBunrui"
+                  "$ref" : "#/components/schemas/ToiawaseBunrui2"
                 }
               }
             }
+          }
+        }
+      },
+      "GetToiawaseBunruiRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/ToiawaseBunrui2"
           }
         }
       },
@@ -4225,7 +4714,16 @@
           }
         }
       },
-      "ToiawaseBunrui" : {
+      "ToiawaseBunrui1" : {
+        "required" : [ "toiawase_bunrui_name" ],
+        "properties" : {
+          "toiawase_bunrui_name" : {
+            "type" : "string",
+            "example" : "問合せ分類名A"
+          }
+        }
+      },
+      "ToiawaseBunrui2" : {
         "required" : [ "toiawase_bunrui_id", "toiawase_bunrui_name" ],
         "properties" : {
           "toiawase_bunrui_id" : {
