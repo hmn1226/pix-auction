@@ -33,7 +33,7 @@
         "summary" : "オークション主催者情報の取得。",
         "description" : "オークション主催者情報の取得。\npix_idを指定して呼び出すのでプラットフォーム管理者のみ利用可能。<br>\n【バリデーション】<br>\n(1) pix_idの数値チェック エラーの場合は400<br>\n(2) pix_idの存在チェック(db_pix_auction.mt_auction_organzierから照合) 存在しなければ404<br>\n【処理】<br>\nmt_auction_organizerからpix_id={pix_id}のレコードを取得。\n",
         "parameters" : [ {
-          "$ref" : "#/components/parameters/pix_id"
+          "$ref" : "#/components/parameters/p_pix_id"
         } ],
         "responses" : {
           "200" : {
@@ -41,7 +41,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AuctionOrganizerRet"
+                  "$ref" : "#/components/schemas/GetAuctionOrganizerRet"
                 }
               }
             }
@@ -69,7 +69,7 @@
         "summary" : "オークション主催者情報の登録。",
         "description" : "オークション主催者情報の登録。\npix_idを指定して呼び出すのでプラットフォーム管理者のみ利用可能。<br>\n【バリデーション】<br>\n(1) pix_idの数値チェック エラーの場合は400<br>\n(2) pix_idの存在チェック(db_pix.mt_pixから照合) 存在しなければ404<br>\n(3) paramの型、文字列長のチェック エラーの場合は400<br>\n【処理】<br>\nmt_auction_organizerにpix_id={pix_id}としてレコードを登録。\n",
         "parameters" : [ {
-          "$ref" : "#/components/parameters/pix_id"
+          "$ref" : "#/components/parameters/p_pix_id"
         } ],
         "requestBody" : {
           "content" : {
@@ -115,7 +115,7 @@
         "summary" : "オークション主催者情報の取得。",
         "description" : "オークション主催者情報の論理削除。pix_idを指定して呼び出すのでプラットフォーム管理者のみ利用可能。<br>\n【バリデーション】<br>\n(1) pix_idの数値チェック エラーの場合は400<br>\n(2) pix_idの存在チェック(db_pix_auction.mt_auction_organzierから照合) 存在しなければ404<br>\n【処理】<br>\nmt_auction_organizerのpix_id={pix_id}のレコードのdelete_datetimeにcrrent_timestampをセット。\n",
         "parameters" : [ {
-          "$ref" : "#/components/parameters/pix_id"
+          "$ref" : "#/components/parameters/p_pix_id"
         } ],
         "responses" : {
           "200" : {
@@ -159,7 +159,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AuctionOrganizerRet"
+                  "$ref" : "#/components/schemas/GetAuctionOrganizerRet"
                 }
               }
             }
@@ -224,7 +224,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AuctionOrganizerStaffRet"
+                  "$ref" : "#/components/schemas/GetAuctionOrganizerStaffRet"
                 }
               }
             }
@@ -266,7 +266,8 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AuctionOrganizerStaffRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -296,7 +297,7 @@
         "summary" : "オークション主催者情報のスタッフ情報を登録。",
         "description" : "オークション主催者スタッフ情報の新規登録。<br> 【バリデーション】<br> (1) paramの型・文字数チェック  エラーの場合400 【処理】 mt_auction_organizer<br> 　+- mt_auction_organizer_staff<br> 　　+-mt_auction_kaiko<br> 　　+-mt_staff_role<br> にpix_id=SESSION.pix_idとしてレコードを取得。<br>",
         "parameters" : [ {
-          "$ref" : "#/components/parameters/staff_id"
+          "$ref" : "#/components/parameters/p_staff_id"
         } ],
         "requestBody" : {
           "content" : {
@@ -313,7 +314,8 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AuctionOrganizerStaffRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -341,7 +343,7 @@
         "summary" : "オークション主催者情報のスタッフ情報を削除。",
         "description" : "オークション主催者スタッフ情報の論理削除。<br> 【バリデーション】<br> なし 【処理】 mt_auction_kaiin_staffのdelete_datetimeにcurrent_timestampをセット<br>",
         "parameters" : [ {
-          "$ref" : "#/components/parameters/staff_id"
+          "$ref" : "#/components/parameters/p_staff_id"
         } ],
         "responses" : {
           "200" : {
@@ -384,7 +386,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AuctionOrganizerStaffRet"
+                  "$ref" : "#/components/schemas/PostAuctionOrganizerStaffLoginRet"
                 }
               }
             }
@@ -459,29 +461,29 @@
         "summary" : "合致するオークション会員情報を取得する。",
         "description" : "mt_auction_kaiinに合致するレコードがある場合に結果を戻す<br> <br> 【memo_kbn】<br> 0:メモ1、2、3を対象にする<br> 1:メモ1を対象にする<br> 2:メモ2を対象にする<br> 3:メモ3を対象にする<br> <br> todofuken_cd、address、tel、faxは、mt_auction_kaiin_kyotenの各項目に合致する場合に結果を戻す<br> <br> staff_name、mail_address、staff_telは、mt_auction_kaiin_staffの各項目に合致する場合に結果を戻す",
         "parameters" : [ {
-          "$ref" : "#/components/parameters/auction_id"
+          "$ref" : "#/components/parameters/q_auction_id"
         }, {
-          "$ref" : "#/components/parameters/kaiin_kbn_id"
+          "$ref" : "#/components/parameters/q_kaiin_kbn_id"
         }, {
-          "$ref" : "#/components/parameters/kaiin_name"
+          "$ref" : "#/components/parameters/q_kaiin_name"
         }, {
-          "$ref" : "#/components/parameters/memo_kbn"
+          "$ref" : "#/components/parameters/q_memo_kbn"
         }, {
-          "$ref" : "#/components/parameters/memo"
+          "$ref" : "#/components/parameters/q_memo"
         }, {
-          "$ref" : "#/components/parameters/todofuken_cd"
+          "$ref" : "#/components/parameters/q_todofuken_cd"
         }, {
-          "$ref" : "#/components/parameters/address"
+          "$ref" : "#/components/parameters/q_address"
         }, {
-          "$ref" : "#/components/parameters/tel"
+          "$ref" : "#/components/parameters/q_tel"
         }, {
-          "$ref" : "#/components/parameters/fax"
+          "$ref" : "#/components/parameters/q_fax"
         }, {
-          "$ref" : "#/components/parameters/staff_name"
+          "$ref" : "#/components/parameters/q_staff_name"
         }, {
-          "$ref" : "#/components/parameters/mail_address"
+          "$ref" : "#/components/parameters/q_mail_address"
         }, {
-          "$ref" : "#/components/parameters/staff_tel"
+          "$ref" : "#/components/parameters/q_staff_tel"
         } ],
         "responses" : {
           "200" : {
@@ -489,7 +491,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AuctionKaiinRet"
+                  "$ref" : "#/components/schemas/GetAuctionKaiinRet"
                 }
               }
             }
@@ -529,20 +531,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "required" : [ "ret" ],
-                  "properties" : {
-                    "ret" : {
-                      "type" : "object",
-                      "required" : [ "kaiin_id" ],
-                      "properties" : {
-                        "kaiin_id" : {
-                          "type" : "integer",
-                          "example" : 1
-                        }
-                      }
-                    }
-                  }
+                  "$ref" : "#/components/schemas/PostAuctionKaiinRet"
                 }
               }
             }
@@ -570,7 +559,7 @@
       "get" : {
         "tags" : [ "AuctionKaiin" ],
         "parameters" : [ {
-          "$ref" : "#/components/parameters/kaiin_id"
+          "$ref" : "#/components/parameters/p_kaiin_id"
         } ],
         "responses" : {
           "200" : {
@@ -578,7 +567,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AuctionKaiinRet"
+                  "$ref" : "#/components/schemas/GetAuctionKaiinRet"
                 }
               }
             }
@@ -604,7 +593,7 @@
       "put" : {
         "tags" : [ "AuctionKaiin" ],
         "parameters" : [ {
-          "$ref" : "#/components/parameters/kaiin_id"
+          "$ref" : "#/components/parameters/p_kaiin_id"
         } ],
         "requestBody" : {
           "content" : {
@@ -650,7 +639,7 @@
       "get" : {
         "tags" : [ "AuctionKaiin" ],
         "parameters" : [ {
-          "$ref" : "#/components/parameters/kaiin_id"
+          "$ref" : "#/components/parameters/p_kaiin_id"
         } ],
         "responses" : {
           "200" : {
@@ -658,7 +647,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/AuctionKaiinKyotenRet"
+                  "$ref" : "#/components/schemas/GetAuctionKaiinKyotenRet"
                 }
               }
             }
@@ -684,7 +673,90 @@
       "post" : {
         "tags" : [ "AuctionKaiin" ],
         "parameters" : [ {
-          "$ref" : "#/components/parameters/kaiin_id"
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaiinKyotenParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionKaiinKyotenRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaiin/{kaiin_id}/Kyoten/{kyoten_id}" : {
+      "get" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kyoten_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaiinKyotenRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kyoten_id"
         } ],
         "requestBody" : {
           "content" : {
@@ -725,11 +797,92 @@
           }
         }
       }
+    },
+    "/AuctionKaiin/{kaiin_id}/Staff" : {
+      "get" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        }, {
+          "$ref" : "#/components/parameters/q_kyoten_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaiinStaffRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaiinStaffParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionKaiinStaffRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
     }
   },
   "components" : {
     "parameters" : {
-      "pix_id" : {
+      "p_pix_id" : {
         "name" : "pix_id",
         "in" : "path",
         "required" : true,
@@ -737,7 +890,7 @@
           "type" : "integer"
         }
       },
-      "staff_id" : {
+      "p_staff_id" : {
         "name" : "staff_id",
         "in" : "path",
         "required" : true,
@@ -745,7 +898,7 @@
           "type" : "integer"
         }
       },
-      "kaiin_id" : {
+      "p_kaiin_id" : {
         "name" : "kaiin_id",
         "in" : "path",
         "required" : true,
@@ -753,28 +906,36 @@
           "type" : "integer"
         }
       },
-      "auction_id" : {
+      "p_kyoten_id" : {
+        "name" : "kyoten_id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "q_auction_id" : {
         "name" : "auction_id",
         "in" : "query",
         "schema" : {
           "type" : "integer"
         }
       },
-      "kaiin_kbn_id" : {
+      "q_kaiin_kbn_id" : {
         "name" : "kaiin_kbn_id",
         "in" : "query",
         "schema" : {
           "type" : "integer"
         }
       },
-      "kaiin_name" : {
+      "q_kaiin_name" : {
         "name" : "kaiin_name",
         "in" : "query",
         "schema" : {
           "type" : "string"
         }
       },
-      "memo_kbn" : {
+      "q_memo_kbn" : {
         "name" : "memo_kbn",
         "in" : "query",
         "schema" : {
@@ -782,60 +943,68 @@
           "enum" : [ 0, 1, 2, 3 ]
         }
       },
-      "memo" : {
+      "q_memo" : {
         "name" : "memo",
         "in" : "query",
         "schema" : {
           "type" : "string"
         }
       },
-      "todofuken_cd" : {
+      "q_todofuken_cd" : {
         "name" : "todofuken_cd",
         "in" : "query",
         "schema" : {
           "type" : "integer"
         }
       },
-      "address" : {
+      "q_address" : {
         "name" : "address",
         "in" : "query",
         "schema" : {
           "type" : "string"
         }
       },
-      "tel" : {
+      "q_tel" : {
         "name" : "tel",
         "in" : "query",
         "schema" : {
           "type" : "string"
         }
       },
-      "fax" : {
+      "q_fax" : {
         "name" : "fax",
         "in" : "query",
         "schema" : {
           "type" : "string"
         }
       },
-      "staff_name" : {
+      "q_staff_name" : {
         "name" : "staff_name",
         "in" : "query",
         "schema" : {
           "type" : "string"
         }
       },
-      "mail_address" : {
+      "q_mail_address" : {
         "name" : "mail_address",
         "in" : "query",
         "schema" : {
           "type" : "string"
         }
       },
-      "staff_tel" : {
+      "q_staff_tel" : {
         "name" : "staff_tel",
         "in" : "query",
         "schema" : {
           "type" : "string"
+        }
+      },
+      "q_kyoten_id" : {
+        "name" : "kyoten_id",
+        "in" : "query",
+        "required" : true,
+        "schema" : {
+          "type" : "integer"
         }
       }
     },
@@ -849,7 +1018,7 @@
           }
         }
       },
-      "AuctionOrganizerRet" : {
+      "GetAuctionOrganizerRet" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -876,7 +1045,7 @@
           }
         }
       },
-      "AuctionOrganizerStaffRet" : {
+      "GetAuctionOrganizerStaffRet" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -889,6 +1058,22 @@
                 "items" : {
                   "$ref" : "#/components/schemas/AuctionOrganizerStaff"
                 }
+              }
+            }
+          }
+        }
+      },
+      "PostAuctionOrganizerStaffLoginRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "loginable" ],
+            "properties" : {
+              "loginable" : {
+                "type" : "boolean",
+                "example" : true
               }
             }
           }
@@ -950,7 +1135,7 @@
           }
         }
       },
-      "AuctionKaiinRet" : {
+      "GetAuctionKaiinRet" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -963,6 +1148,22 @@
                 "items" : {
                   "$ref" : "#/components/schemas/AuctionKaiin"
                 }
+              }
+            }
+          }
+        }
+      },
+      "PostAuctionKaiinRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "kaiin_id" ],
+            "properties" : {
+              "kaiin_id" : {
+                "type" : "integer",
+                "example" : 1
               }
             }
           }
@@ -1032,7 +1233,7 @@
           }
         }
       },
-      "AuctionKaiinKyotenRet" : {
+      "GetAuctionKaiinKyotenRet" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -1045,6 +1246,22 @@
                 "items" : {
                   "$ref" : "#/components/schemas/AuctionKaiinKyoten2"
                 }
+              }
+            }
+          }
+        }
+      },
+      "PostAuctionKaiinKyotenRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "kyoten_id" ],
+            "properties" : {
+              "kaiin_id" : {
+                "type" : "integer",
+                "example" : 1
               }
             }
           }
@@ -1135,6 +1352,49 @@
           "kobutsusho_bango" : {
             "type" : "string",
             "example" : "123456789012"
+          }
+        }
+      },
+      "AuctionKaiinStaffParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/AuctionKaiinStaff"
+          }
+        }
+      },
+      "GetAuctionKaiinStaffRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/AuctionKaiinStaff"
+                }
+              }
+            }
+          }
+        }
+      },
+      "PostAuctionKaiinStaffRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "staff_id" ],
+            "properties" : {
+              "kaiin_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
           }
         }
       },
