@@ -3608,6 +3608,72 @@
           "schema" : {
             "type" : "string"
           }
+        }, {
+          "name" : "box_no_from",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "no_from",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "box_no_to",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "no_to",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "shohin_shubetsu",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "hinban",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "shuppin_kaiin_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "rakusatsu_kaiin_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "auction_kekka",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "rakusatsu_kakaku_from",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "rakusatsu_kakaku_to",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
         } ],
         "responses" : {
           "200" : {
@@ -5952,25 +6018,8 @@
         }
       },
       "Auction1" : {
-        "required" : [ "auction_id", "alarm_kaiin_id", "alarm_kaiin_staff_id", "alarm_timing" ],
-        "properties" : {
-          "auction_id" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "alarm_kaiin_id" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "alarm_kaiin_staff_id" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "alarm_timing" : {
-            "type" : "integer",
-            "example" : 1
-          }
-        }
+        "required" : [ "object_id", "auction_kaijo_id", "kaisaibi", "box_no", false, "shohin_shubetsu", "brand_cd", "hinban", "shohinmei", "rank", "waku", "wakiishi", "juryo", "biko", "shosai", "shiiresaki_memo", "teisei", "teisei_naiyo", "shuppinryo", "shuppinryo_zei", "seiyakuryo_rate", "seiyakuryo", "seiyakuryo_zei", "rakusatsuryo_rate", "rakusatsuryo", "rakusatsuryo_zei", "furakusatsu_tesuryo", "shuppin_torikeshi_tesuryo", "shuppin_torikeshi_tesuryo_zei", "shimezumi_flg", "nyukinzumi_flg", "shiharaizumi_flg", "shiharai_kaiin_cd", "seikyu_kaiin_cd" ],
+        "properties" : null
       },
       "Auction2" : {
         "required" : [ "alarm_id", "auction_id", "alarm_kaiin_id", "alarm_kaiin_staff_id", "alarm_timing" ],
