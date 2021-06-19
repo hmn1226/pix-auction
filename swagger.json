@@ -247,7 +247,7 @@
           }
         }
       },
-      "put" : {
+      "post" : {
         "tags" : [ "AuctionOrganizer" ],
         "summary" : "オークション主催者情報のスタッフ情報を登録。",
         "description" : "オークション主催者スタッフ情報の新規登録。<br> 【バリデーション】<br> (1) paramの型・文字数チェック  エラーの場合400 【処理】 mt_auction_organizer<br> 　+- mt_auction_organizer_staff<br> 　　+-mt_auction_kaiko<br> 　　+-mt_staff_role<br> にpix_id=SESSION.pix_idとしてレコードを取得。<br>",
@@ -266,8 +266,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "type" : "object",
-                  "example" : "{}"
+                  "$ref" : "#/components/schemas/PostAuctionOrganizerStaffRet"
                 }
               }
             }
@@ -633,6 +632,41 @@
             "description" : "サーバーエラー発生"
           }
         }
+      },
+      "delete" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "削除成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
       }
     },
     "/AuctionKaiin/{kaiin_id}/Kyoten" : {
@@ -796,6 +830,43 @@
             "description" : "サーバーエラー発生"
           }
         }
+      },
+      "delete" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kyoten_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "削除成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
       }
     },
     "/AuctionKaiin/{kaiin_id}/Staff" : {
@@ -880,7 +951,43 @@
       }
     },
     "/AuctionKaiin/{kaiin_id}/Staff/{kaiin_staff_id}" : {
-      "post" : {
+      "get" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kaiin_staff_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaiinStaffRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
         "tags" : [ "AuctionKaiin" ],
         "parameters" : [ {
           "$ref" : "#/components/parameters/p_kaiin_id"
@@ -899,6 +1006,43 @@
         "responses" : {
           "200" : {
             "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kaiin_staff_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "削除成功",
             "content" : {
               "application/json" : {
                 "schema" : {
@@ -1106,6 +1250,22 @@
                 "items" : {
                   "$ref" : "#/components/schemas/AuctionOrganizerStaff"
                 }
+              }
+            }
+          }
+        }
+      },
+      "PostAuctionOrganizerStaffRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "staff_id" ],
+            "properties" : {
+              "staff_id" : {
+                "type" : "integer",
+                "example" : 1
               }
             }
           }
