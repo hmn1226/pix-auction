@@ -938,14 +938,6 @@
           "type" : "integer"
         }
       },
-      "p_kaiin_staff_id" : {
-        "name" : "kaiin_staff_id",
-        "in" : "path",
-        "required" : true,
-        "schema" : {
-          "type" : "integer"
-        }
-      },
       "p_kaiin_id" : {
         "name" : "kaiin_id",
         "in" : "path",
@@ -956,6 +948,14 @@
       },
       "p_kyoten_id" : {
         "name" : "kyoten_id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "p_kaiin_staff_id" : {
+        "name" : "kaiin_staff_id",
         "in" : "path",
         "required" : true,
         "schema" : {
