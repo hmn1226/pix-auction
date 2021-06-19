@@ -3583,6 +3583,221 @@
           }
         }
       }
+    },
+    "/Auction" : {
+      "get" : {
+        "tags" : [ "Auction" ],
+        "parameters" : [ {
+          "name" : "auction_id",
+          "required" : true,
+          "in" : "query",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer",
+              "example" : 1
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Auction" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Auction/{auction_id}" : {
+      "get" : {
+        "tags" : [ "Auction" ],
+        "parameters" : [ {
+          "name" : "auction_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Auction" ],
+        "parameters" : [ {
+          "name" : "auction_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TesuryoParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Auction" ],
+        "parameters" : [ {
+          "name" : "auction_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -5650,6 +5865,104 @@
         }
       },
       "Alarm2" : {
+        "required" : [ "alarm_id", "auction_id", "alarm_kaiin_id", "alarm_kaiin_staff_id", "alarm_timing" ],
+        "properties" : {
+          "alarm_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "auction_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_kaiin_staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_timing" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "AuctionParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/Auction1"
+          }
+        }
+      },
+      "GetAuctionRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/Auction2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetAuctionRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/Auction2"
+          }
+        }
+      },
+      "PostAuctionRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "auction_id" ],
+            "properties" : {
+              "auction_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "Auction1" : {
+        "required" : [ "auction_id", "alarm_kaiin_id", "alarm_kaiin_staff_id", "alarm_timing" ],
+        "properties" : {
+          "auction_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_kaiin_staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_timing" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "Auction2" : {
         "required" : [ "alarm_id", "auction_id", "alarm_kaiin_id", "alarm_kaiin_staff_id", "alarm_timing" ],
         "properties" : {
           "alarm_id" : {
