@@ -1,3 +1,6372 @@
 {
-  "swagger" : "2.0"
+  "openapi" : "3.0.0",
+  "servers" : [ {
+    "description" : "SwaggerHub API Auto Mocking",
+    "url" : "https://virtserver.swaggerhub.com/inter-mic/pix-auction/1.0.0"
+  }, {
+    "description" : "ローカル環境テスト用",
+    "url" : "http://localhost:8080/pix-auction/api/v1/"
+  } ],
+  "info" : {
+    "description" : "pix auction用のAPIです。",
+    "version" : "1.0.0",
+    "title" : "pix aution API",
+    "contact" : {
+      "email" : "mic-yosuke.hamano@inter-mic.co.jp"
+    },
+    "license" : {
+      "name" : "Apache 2.0",
+      "url" : "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  },
+  "tags" : [ {
+    "name" : "AuctionOrganizer",
+    "description" : "オークション主催者に関する情報"
+  }, {
+    "name" : "AuctionKaiin",
+    "description" : "オークション会員に関する情報"
+  }, {
+    "name" : "AuctionKaijo",
+    "description" : "オークション会場に関する情報"
+  }, {
+    "name" : "Kaihi",
+    "description" : "会費に関する情報"
+  }, {
+    "name" : "KaiinKbn",
+    "description" : "会員区分に関する情報"
+  }, {
+    "name" : "Brand",
+    "description" : "ブランドに関する情報"
+  }, {
+    "name" : "StaffRole",
+    "description" : "従業員権限に関する情報"
+  }, {
+    "name" : "Tesuryo",
+    "description" : "手数料に関する情報"
+  }, {
+    "name" : "ToiawaseBunrui",
+    "description" : "問合せ分類に関する情報"
+  }, {
+    "name" : "ToiawaseTemplate",
+    "description" : "問合せテンプレートに関する情報"
+  }, {
+    "name" : "Alarm",
+    "description" : "アラームに関する情報"
+  }, {
+    "name" : "Auction",
+    "description" : "オークション出品商品に関する情報"
+  }, {
+    "name" : "AuctionBoxWariate",
+    "description" : "オークション出品商品箱割当に関する情報"
+  }, {
+    "name" : "Hasso",
+    "description" : "発送に関する情報"
+  }, {
+    "name" : "Nyukin",
+    "description" : "入金に関する情報"
+  }, {
+    "name" : "NyusatsuYoyaku",
+    "description" : "入札予約に関する情報"
+  }, {
+    "name" : "Okiniiri",
+    "description" : "お気に入りに関する情報"
+  }, {
+    "name" : "Oshirase",
+    "description" : "お知らせに関する情報"
+  }, {
+    "name" : "ShiharaiYotei",
+    "description" : "支払予定に関する情報"
+  }, {
+    "name" : "Shohiyo",
+    "description" : "諸費用に関する情報"
+  }, {
+    "name" : "Toiawase",
+    "description" : "問合せに関する情報"
+  }, {
+    "name" : "TorihikiJisseki",
+    "description" : "取引実績に関する情報"
+  }, {
+    "name" : "LogOsatsu",
+    "description" : "応札ログに関する情報"
+  }, {
+    "name" : "LogEtsuran",
+    "description" : "閲覧ログに関する情報"
+  } ],
+  "paths" : {
+    "/Admin/AuctionOrganizer" : {
+      "get" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "オークション主催者情報の取得。",
+        "description" : "オークション主催者情報の取得。\npix_idを指定して呼び出すのでプラットフォーム管理者のみ利用可能。<br>\n【バリデーション】<br>\n(1) pix_idの数値チェック エラーの場合は400<br>\n(2) pix_idの存在チェック(db_pix_auction.mt_auction_organzierから照合) 存在しなければ404<br>\n【処理】<br>\n",
+        "responses" : {
+          "200" : {
+            "description" : "指定したpix_idの主催者の情報を取得する",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionOrganizerRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないオークション主催者"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "オークション主催者情報の登録。",
+        "description" : "オークション主催者情報の登録。\npix_idを指定して呼び出すのでプラットフォーム管理者のみ利用可能。<br>\n【バリデーション】<br>\n(1) pix_idの数値チェック エラーの場合は400<br>\n(2) pix_idの存在チェック(db_pix.mt_pixから照合) 存在しなければ404<br>\n(3) paramの型、文字列長のチェック エラーの場合は400<br>\n【処理】<br>\nmt_auction_organizerにpix_id={pix_id}としてレコードを登録。\n",
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionOrganizerParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/jspn" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionOrganizerRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないpix_id"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Admin/AuctionOrganizer/{pix_id}" : {
+      "get" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "オークション主催者情報の取得。",
+        "description" : "オークション主催者情報の取得。\npix_idを指定して呼び出すのでプラットフォーム管理者のみ利用可能。<br>\n【バリデーション】<br>\n(1) pix_idの数値チェック エラーの場合は400<br>\n(2) pix_idの存在チェック(db_pix_auction.mt_auction_organzierから照合) 存在しなければ404<br>\n【処理】<br>\nmt_auction_organizerからpix_id={pix_id}のレコードを取得。\n",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_pix_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "指定したpix_idの主催者の情報を取得する",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionOrganizerRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないオークション主催者"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "オークション主催者情報の登録。",
+        "description" : "オークション主催者情報の登録。\npix_idを指定して呼び出すのでプラットフォーム管理者のみ利用可能。<br>\n【バリデーション】<br>\n(1) pix_idの数値チェック エラーの場合は400<br>\n(2) pix_idの存在チェック(db_pix.mt_pixから照合) 存在しなければ404<br>\n(3) paramの型、文字列長のチェック エラーの場合は400<br>\n【処理】<br>\nmt_auction_organizerにpix_id={pix_id}としてレコードを登録。\n",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_pix_id"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionOrganizerParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/jspn" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないpix_id"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "オークション主催者情報の取得。",
+        "description" : "オークション主催者情報の論理削除。pix_idを指定して呼び出すのでプラットフォーム管理者のみ利用可能。<br>\n【バリデーション】<br>\n(1) pix_idの数値チェック エラーの場合は400<br>\n(2) pix_idの存在チェック(db_pix_auction.mt_auction_organzierから照合) 存在しなければ404<br>\n【処理】<br>\nmt_auction_organizerのpix_id={pix_id}のレコードのdelete_datetimeにcrrent_timestampをセット。\n",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_pix_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "削除成功",
+            "content" : {
+              "application/jspn" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないオークション主催者"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionOrganizer" : {
+      "get" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "オークション主催者情報の取得。",
+        "description" : "オークション主催者情報の取得。ログインしている自社の情報を取得する。<br>\n【バリデーション】<br>\n不要\n【処理】<br>\nmt_auction_organizerのpix_id=SESSION.pix_idとしてレコードを取得。\n",
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionOrganizerRet2"
+                }
+              }
+            }
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "オークション主催者情報の登録。",
+        "description" : "オークション主催者情報の登録。 pix_idを指定して呼び出すのでプラットフォーム管理者のみ利用可能。<br> 【バリデーション】<br> 不要 【処理】<br> mt_auction_organizerにpix_id=SESSION.pix_idとしてレコードを登録。",
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionOrganizerParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/jspn" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないpix_id"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionOrganizer/Staff" : {
+      "get" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "オークション主催者情報のスタッフ情報を取得。",
+        "description" : "オークション主催者スタッフ情報の取得。スタッフ全員分をリストで取得<br> 【バリデーション】<br> 不要 【処理】<br> mt_auction_organizer<br> 　+- mt_auction_organizer_staff<br> 　　+-mt_auction_kaiko<br> 　　+-mt_staff_role<br> にpix_id=SESSION.pix_idとしてレコードを取得。<br>",
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionOrganizerStaffRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないpix_id"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "オークション主催者情報のスタッフ情報を登録。",
+        "description" : "オークション主催者スタッフ情報の新規登録。<br> 【バリデーション】<br> (1) paramの型・文字数チェック  エラーの場合400 【処理】 mt_auction_organizer<br> 　+- mt_auction_organizer_staff<br> 　　+-mt_auction_kaiko<br> 　　+-mt_staff_role<br> にpix_id=SESSION.pix_idとしてレコードを取得。<br>",
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionOrganizerStaffParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionOrganizerStaffRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないpix_id"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionOrganizer/Staff/{kaiin_staff_id}" : {
+      "get" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "オークション主催者情報のスタッフ情報を取得。",
+        "description" : "オークション主催者スタッフ情報の取得。スタッフ全員分をリストで取得<br> 【バリデーション】<br> 不要 【処理】<br> mt_auction_organizer<br> 　+- mt_auction_organizer_staff<br> 　　+-mt_auction_kaiko<br> 　　+-mt_staff_role<br> にpix_id=SESSION.pix_idとしてレコードを取得。<br>",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_staff_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionOrganizerStaffRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないpix_id"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "オークション主催者情報のスタッフ情報を登録。",
+        "description" : "オークション主催者スタッフ情報の新規登録。<br> 【バリデーション】<br> (1) paramの型・文字数チェック  エラーの場合400 【処理】 mt_auction_organizer<br> 　+- mt_auction_organizer_staff<br> 　　+-mt_auction_kaiko<br> 　　+-mt_staff_role<br> にpix_id=SESSION.pix_idとしてレコードを取得。<br>",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_staff_id"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionOrganizerStaffParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないpix_id"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "オークション主催者情報のスタッフ情報を削除。",
+        "description" : "オークション主催者スタッフ情報の論理削除。<br> 【バリデーション】<br> なし 【処理】 mt_auction_kaiin_staffのdelete_datetimeにcurrent_timestampをセット<br>",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_staff_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "削除成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないstaff_id"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionOrganizer/Staff/Login" : {
+      "post" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "スタッフが本管理システムにログインする際に利用。",
+        "description" : "ログイン。<br> 【バリデーション】<br> (1) paramの型・文字数チェック  エラーの場合400<br> 【処理】<br> mt_auction_organizer_staff<br> login_idとpasswordが入力した値と一致<br> AND delete_datetimeがnull<br> の値を取得<br> login_kano_flg=0の場合<br> エラー401 ログインが出来ません。<br> ログイン成功時→sessionにpix_id、staff_id、staff_role_idをセット<br>",
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionOrganizerStaffLoginParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "処理成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionOrganizerStaffLoginRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "ログインが出来ません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionOrganizer/Staff/Logout" : {
+      "post" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "スタッフが本管理システムにログアウトする際に利用。",
+        "description" : "ログイン。<br> 【バリデーション】<br> なし<br> 【処理】<br> sessionのpix_id、staff_id、staff_role_idをnullセットして破棄。<br> <br>",
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionOrganizerStaffLoginParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "処理成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "401" : {
+            "description" : "ログインが出来ません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaiin" : {
+      "get" : {
+        "tags" : [ "AuctionKaiin" ],
+        "summary" : "合致するオークション会員情報を取得する。",
+        "description" : "mt_auction_kaiinに合致するレコードがある場合に結果を戻す<br> <br> todofuken_cd、address、tel、faxは、mt_auction_kaiin_kyotenの各項目に合致する場合に結果を戻す<br> <br> staff_name、mail_address、staff_telは、mt_auction_kaiin_staffの各項目に合致する場合に結果を戻す",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/q_auction_id"
+        }, {
+          "$ref" : "#/components/parameters/q_kaiin_kbn_id"
+        }, {
+          "$ref" : "#/components/parameters/q_kaiin_name"
+        }, {
+          "$ref" : "#/components/parameters/q_memo_kbn"
+        }, {
+          "$ref" : "#/components/parameters/q_memo"
+        }, {
+          "$ref" : "#/components/parameters/q_todofuken_cd"
+        }, {
+          "$ref" : "#/components/parameters/q_address"
+        }, {
+          "$ref" : "#/components/parameters/q_tel"
+        }, {
+          "$ref" : "#/components/parameters/q_fax"
+        }, {
+          "$ref" : "#/components/parameters/q_staff_name"
+        }, {
+          "$ref" : "#/components/parameters/q_mail_address"
+        }, {
+          "$ref" : "#/components/parameters/q_staff_tel"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaiinRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AuctionKaiin" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaiinParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionKaiinRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaiin/{kaiin_id}" : {
+      "get" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaiinRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaiinParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "削除成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaiin/{kaiin_id}/Kyoten" : {
+      "get" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaiinKyotenRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaiinKyotenParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionKaiinKyotenRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaiin/{kaiin_id}/Kyoten/{kyoten_id}" : {
+      "get" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kyoten_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaiinKyotenRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kyoten_id"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaiinKyotenParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kyoten_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "削除成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaiin/{kaiin_id}/Staff" : {
+      "get" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        }, {
+          "$ref" : "#/components/parameters/q_kyoten_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaiinStaffRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaiinStaffParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionKaiinStaffRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaiin/{kaiin_id}/Staff/{kaiin_staff_id}" : {
+      "get" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kaiin_staff_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaiinStaffRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kaiin_staff_id"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaiinStaffParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "AuctionKaiin" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kaiin_staff_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "削除成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaijo" : {
+      "get" : {
+        "tags" : [ "AuctionKaijo" ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaijoRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AuctionKaijo" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaijoParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionKaijoRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaijo/{auction_kaijo_id}" : {
+      "get" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaijoRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaijoParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "削除成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaijo/{auction_kaijo_id}/Lane" : {
+      "get" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaijoLaneRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaijoLaneParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionKaijoLaneRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaijo/{auction_kaijo_id}/Lane/{lane_id}" : {
+      "get" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/p_lane_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaijoLaneRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/p_lane_id"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaijoLaneParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/p_lane_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "削除成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaijo/{auction_kaijo_id}/KaisaiKaisu" : {
+      "get" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaisaiKaisuRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaijo/{auction_kaijo_id}/KaisaiKaisu/{kaisai_kaisu}" : {
+      "put" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kaisai_kaisu"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaisaiKaisuParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionKaisaiKaisuRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kaisai_kaisu"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaijo/{auction_kaijo_id}/Kaisaibi" : {
+      "get" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaisaibiRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kaisai_kaisu"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaisaibiParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionKaisaibiRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaijo/{auction_kaijo_id}/Kaisaibi/{kaisaibi}" : {
+      "get" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kaisaibi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaisaibiRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kaisaibi"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaisaibiParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionKaisaibiRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kaisaibi"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Kaihi" : {
+      "get" : {
+        "tags" : [ "Kaihi" ],
+        "parameters" : [ {
+          "name" : "kaiin_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "auction_kaijo_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "kaihi_shubetsu",
+          "description" : "1:月会費  2:年会費",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetKaihiRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Kaihi" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/KaihiParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostKaihiRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Kaihi/{kaihi_id}" : {
+      "get" : {
+        "tags" : [ "Kaihi" ],
+        "parameters" : [ {
+          "name" : "kaihi_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetKaihiRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Kaihi" ],
+        "parameters" : [ {
+          "name" : "kaihi_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/KaihiParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostKaihiRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Kaihi" ],
+        "parameters" : [ {
+          "name" : "kaihi_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/KaiinKbn" : {
+      "get" : {
+        "tags" : [ "KaiinKbn" ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetKaiinKbnRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "KaiinKbn" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/KaiinKbnParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostKaiinKbnRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/KaiinKbn/{kaiin_kbn_id}" : {
+      "get" : {
+        "tags" : [ "KaiinKbn" ],
+        "parameters" : [ {
+          "name" : "kaiin_kbn_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetKaiinKbnRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "KaiinKbn" ],
+        "parameters" : [ {
+          "name" : "kaiin_kbn_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/KaiinKbnParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostKaiinKbnRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "KaiinKbn" ],
+        "parameters" : [ {
+          "name" : "kaiin_kbn_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/StaffRole" : {
+      "get" : {
+        "tags" : [ "StaffRole" ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetStaffRoleRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "StaffRole" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/StaffRoleParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostStaffRoleRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/StaffRole/{staff_role_id}" : {
+      "get" : {
+        "tags" : [ "StaffRole" ],
+        "parameters" : [ {
+          "name" : "staff_role_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetStaffRoleRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "StaffRole" ],
+        "parameters" : [ {
+          "name" : "staff_role_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/StaffRoleParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostStaffRoleRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "StaffRole" ],
+        "parameters" : [ {
+          "name" : "staff_role_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/StaffRole/{staff_role_id}/Detail" : {
+      "get" : {
+        "tags" : [ "StaffRole" ],
+        "parameters" : [ {
+          "name" : "staff_role_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetStaffRoleDetailRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/StaffRole/{staff_role_id}/Detail/{gamen_id}" : {
+      "get" : {
+        "tags" : [ "StaffRole" ],
+        "parameters" : [ {
+          "name" : "staff_role_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "gamen_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetStaffRoleDetailRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "StaffRole" ],
+        "parameters" : [ {
+          "name" : "staff_role_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "gamen_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/StaffRoleDetailParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostStaffRoleDetailRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "StaffRole" ],
+        "parameters" : [ {
+          "name" : "staff_role_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "gamen_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "削除成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostStaffRoleDetailRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Tesuryo" : {
+      "get" : {
+        "tags" : [ "Tesuryo" ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetTesuryoRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Tesuryo" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TesuryoParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostTesuryoRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Tesuryo/{tesuryo_id}" : {
+      "get" : {
+        "tags" : [ "Tesuryo" ],
+        "parameters" : [ {
+          "name" : "tesuryo_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetTesuryoRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Tesuryo" ],
+        "parameters" : [ {
+          "name" : "tesuryo_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TesuryoParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Tesuryo" ],
+        "parameters" : [ {
+          "name" : "tesuryo_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/ToiawaseBunrui" : {
+      "get" : {
+        "tags" : [ "ToiawaseBunrui" ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetToiawaseBunruiRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "ToiawaseBunrui" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ToiawaseBunruiParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostToiawaseBunruiRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/ToiawaseBunrui/{toiawase_bunrui_id}" : {
+      "get" : {
+        "tags" : [ "ToiawaseBunrui" ],
+        "parameters" : [ {
+          "name" : "toiawase_bunrui_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetToiawaseBunruiRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "ToiawaseBunrui" ],
+        "parameters" : [ {
+          "name" : "toiawase_bunrui_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ToiawaseBunruiParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostToiawaseBunruiRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "ToiawaseBunrui" ],
+        "parameters" : [ {
+          "name" : "toiawase_bunrui_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/ToiawaseTemplate" : {
+      "get" : {
+        "tags" : [ "ToiawaseTemplate" ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetToiawaseTemplateRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "ToiawaseTemplate" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ToiawaseTemplateParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostToiawaseTemplateRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/ToiawaseTemplate/{toiawase_template_id}" : {
+      "get" : {
+        "tags" : [ "ToiawaseTemplate" ],
+        "parameters" : [ {
+          "name" : "toiawase_template_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetToiawaseTemplateRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "ToiawaseTemplate" ],
+        "parameters" : [ {
+          "name" : "toiawase_template_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ToiawaseTemplateParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostToiawaseTemplateRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "ToiawaseTemplate" ],
+        "parameters" : [ {
+          "name" : "toiawase_template_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Alarm" : {
+      "get" : {
+        "tags" : [ "Alarm" ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAlarmRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Alarm" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AlarmParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAlarmRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Alarm/{alarm_id}" : {
+      "get" : {
+        "tags" : [ "Alarm" ],
+        "parameters" : [ {
+          "name" : "alarm_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAlarmRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Alarm" ],
+        "parameters" : [ {
+          "name" : "alarm_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AlarmParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAlarmRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Alarm" ],
+        "parameters" : [ {
+          "name" : "alarm_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Auction" : {
+      "get" : {
+        "tags" : [ "Auction" ],
+        "parameters" : [ {
+          "name" : "auction_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "array",
+            "items" : {
+              "type" : "integer"
+            }
+          }
+        }, {
+          "name" : "auction_kaijo_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "kaisaibi",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "box_no_from",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "no_from",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "box_no_to",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "no_to",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "shohin_shubetsu",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "hinban",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "shuppin_kaiin_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "rakusatsu_kaiin_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "auction_kekka",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "rakusatsu_kakaku_from",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "rakusatsu_kakaku_to",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Auction" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Auction/List" : {
+      "post" : {
+        "tags" : [ "Auction" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Auction/{auction_id}" : {
+      "get" : {
+        "tags" : [ "Auction" ],
+        "parameters" : [ {
+          "name" : "auction_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Auction" ],
+        "parameters" : [ {
+          "name" : "auction_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TesuryoParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Auction" ],
+        "parameters" : [ {
+          "name" : "auction_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    }
+  },
+  "components" : {
+    "parameters" : {
+      "p_pix_id" : {
+        "name" : "pix_id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "p_kaiin_id" : {
+        "name" : "kaiin_id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "p_kyoten_id" : {
+        "name" : "kyoten_id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "p_kaiin_staff_id" : {
+        "name" : "kaiin_staff_id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "p_auction_kaijo_id" : {
+        "name" : "auction_kaijo_id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "p_lane_id" : {
+        "name" : "lane_id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "p_kaisai_kaisu" : {
+        "name" : "kaisai_kaisu",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "p_kaisaibi" : {
+        "name" : "kaisaibi",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "q_auction_id" : {
+        "name" : "auction_id",
+        "in" : "query",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "q_kaiin_kbn_id" : {
+        "name" : "kaiin_kbn_id",
+        "in" : "query",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "q_kaiin_name" : {
+        "name" : "kaiin_name",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "q_memo_kbn" : {
+        "name" : "memo_kbn",
+        "description" : "0:メモ1、2、3を対象にする<br> 1:メモ1を対象にする<br> 2:メモ2を対象にする<br> 3:メモ3を対象にする<br>",
+        "in" : "query",
+        "schema" : {
+          "type" : "integer",
+          "enum" : [ 0, 1, 2, 3 ]
+        }
+      },
+      "q_memo" : {
+        "name" : "memo",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "q_todofuken_cd" : {
+        "name" : "todofuken_cd",
+        "in" : "query",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "q_address" : {
+        "name" : "address",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "q_tel" : {
+        "name" : "tel",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "q_fax" : {
+        "name" : "fax",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "q_staff_name" : {
+        "name" : "staff_name",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "q_mail_address" : {
+        "name" : "mail_address",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "q_staff_tel" : {
+        "name" : "staff_tel",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "q_kyoten_id" : {
+        "name" : "kyoten_id",
+        "in" : "query",
+        "required" : true,
+        "schema" : {
+          "type" : "integer"
+        }
+      }
+    },
+    "schemas" : {
+      "AuctionOrganizerParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/AuctionOrganizer1"
+          }
+        }
+      },
+      "GetAuctionOrganizerRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/AuctionOrganizer2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetAuctionOrganizerRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/AuctionOrganizer2"
+          }
+        }
+      },
+      "PostAuctionOrganizerRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "auction_organizer_id" ],
+            "properties" : {
+              "auction_organizer_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "AuctionOrganizer1" : {
+        "required" : [ "auction_organizer_name" ],
+        "properties" : {
+          "auction_organizer_name" : {
+            "type" : "string",
+            "example" : "オークション主催者名A"
+          }
+        }
+      },
+      "AuctionOrganizer2" : {
+        "required" : [ "auction_organizer_id", "auction_organizer_name" ],
+        "properties" : {
+          "auction_organizer_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "auction_organizer_name" : {
+            "type" : "string",
+            "example" : "オークション主催者名A"
+          }
+        }
+      },
+      "AuctionOrganizerStaffParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/AuctionOrganizerStaff1"
+          }
+        }
+      },
+      "GetAuctionOrganizerStaffRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/AuctionOrganizerStaff2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetAuctionOrganizerStaffRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/AuctionOrganizerStaff2"
+          }
+        }
+      },
+      "PostAuctionOrganizerStaffRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "staff_id" ],
+            "properties" : {
+              "staff_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "PostAuctionOrganizerStaffLoginRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "loginable" ],
+            "properties" : {
+              "loginable" : {
+                "type" : "boolean",
+                "example" : true
+              }
+            }
+          }
+        }
+      },
+      "AuctionOrganizerStaff1" : {
+        "required" : [ "staff_name", "mail_address", "login_id", "shozoku_auction_kaijo_id", "shozoku_auction_kaijo_name", "staff_role_id", "staff_role_name" ],
+        "properties" : {
+          "staff_name" : {
+            "type" : "string",
+            "example" : "スタッフ名A"
+          },
+          "mail_address" : {
+            "type" : "string",
+            "example" : "メールアドレスA"
+          },
+          "login_id" : {
+            "type" : "string",
+            "example" : "12345"
+          },
+          "shozoku_auction_kaijo_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shozoku_auction_kaijo_name" : {
+            "type" : "string",
+            "example" : "会場A"
+          },
+          "staff_role_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "staff_role_name" : {
+            "type" : "string",
+            "example" : "ロールA"
+          }
+        }
+      },
+      "AuctionOrganizerStaff2" : {
+        "required" : [ "staff_id", "staff_name", "mail_address", "login_id", "shozoku_auction_kaijo_id", "shozoku_auction_kaijo_name", "staff_role_id", "staff_role_name" ],
+        "properties" : {
+          "staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "staff_name" : {
+            "type" : "string",
+            "example" : "スタッフ名A"
+          },
+          "mail_address" : {
+            "type" : "string",
+            "example" : "メールアドレスA"
+          },
+          "login_id" : {
+            "type" : "string",
+            "example" : "12345"
+          },
+          "shozoku_auction_kaijo_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shozoku_auction_kaijo_name" : {
+            "type" : "string",
+            "example" : "会場A"
+          },
+          "staff_role_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "staff_role_name" : {
+            "type" : "string",
+            "example" : "ロールA"
+          }
+        }
+      },
+      "AuctionOrganizerStaffLoginParam" : {
+        "type" : "object",
+        "required" : [ "login_id", "login_password" ],
+        "properties" : {
+          "login_id" : {
+            "type" : "string",
+            "example" : "abc12345"
+          },
+          "login_password" : {
+            "type" : "string",
+            "example" : "abc12345"
+          }
+        }
+      },
+      "AuctionKaiinParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/AuctionKaiin1"
+          }
+        }
+      },
+      "GetAuctionKaiinRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/AuctionKaiin2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetAuctionKaiinRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/AuctionKaiin2"
+          }
+        }
+      },
+      "PostAuctionKaiinRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "kaiin_id" ],
+            "properties" : {
+              "kaiin_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "AuctionKaiin1" : {
+        "required" : [ "kaiin_name", "kaiin_name_kana", "kaiin_name_ryakusho", "daihyosha", "yoshin_gendogaku", "memo1", "memo2", "memo3", "taikai_flg", "taikai_date", "kyoten_list" ],
+        "properties" : {
+          "kaiin_name" : {
+            "type" : "string",
+            "example" : "会員名A株式会社"
+          },
+          "kaiin_name_kana" : {
+            "type" : "string",
+            "example" : "カイインメイAカブシキガイシャ"
+          },
+          "kaiin_name_ryakusyo" : {
+            "type" : "string",
+            "example" : "会員名A"
+          },
+          "daihyosha" : {
+            "type" : "string",
+            "example" : "代表者A"
+          },
+          "yoshin_gendogaku" : {
+            "type" : "integer",
+            "example" : 30000000
+          },
+          "memo1" : {
+            "type" : "string",
+            "example" : "メモ１"
+          },
+          "memo2" : {
+            "type" : "string",
+            "example" : "メモ２"
+          },
+          "memo3" : {
+            "type" : "string",
+            "example" : "メモ３"
+          },
+          "taikai_flg" : {
+            "type" : "string",
+            "example" : 1
+          },
+          "taikai_date" : {
+            "type" : "string",
+            "example" : "2021-06-18 00:00:00"
+          },
+          "kyoten_list" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AuctionKaiinKyoten2"
+            }
+          }
+        }
+      },
+      "AuctionKaiin2" : {
+        "required" : [ "kaiin_kbn_id", "kaiin_name", "kaiin_name_kana", "kaiin_name_ryakusho", "daihyosha", "yoshin_gendogaku", "memo1", "memo2", "memo3", "taikai_flg", "taikai_date", "kyoten_list" ],
+        "properties" : {
+          "kaiin_kbn_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "kaiin_name" : {
+            "type" : "string",
+            "example" : "会員名A株式会社"
+          },
+          "kaiin_name_kana" : {
+            "type" : "string",
+            "example" : "カイインメイAカブシキガイシャ"
+          },
+          "kaiin_name_ryakusyo" : {
+            "type" : "string",
+            "example" : "会員名A"
+          },
+          "daihyosha" : {
+            "type" : "string",
+            "example" : "代表者A"
+          },
+          "yoshin_gendogaku" : {
+            "type" : "integer",
+            "example" : 30000000
+          },
+          "memo1" : {
+            "type" : "string",
+            "example" : "メモ１"
+          },
+          "memo2" : {
+            "type" : "string",
+            "example" : "メモ２"
+          },
+          "memo3" : {
+            "type" : "string",
+            "example" : "メモ３"
+          },
+          "taikai_flg" : {
+            "type" : "string",
+            "example" : 1
+          },
+          "taikai_date" : {
+            "type" : "string",
+            "example" : "2021-06-18 00:00:00"
+          },
+          "kyoten_list" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AuctionKaiinKyoten2"
+            }
+          }
+        }
+      },
+      "AuctionKaiinKyotenParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/AuctionKaiinKyoten1"
+          }
+        }
+      },
+      "GetAuctionKaiinKyotenRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/AuctionKaiinKyoten2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetAuctionKaiinKyotenRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/AuctionKaiinKyoten2"
+          }
+        }
+      },
+      "PostAuctionKaiinKyotenRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "kyoten_id" ],
+            "properties" : {
+              "kyoten_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "AuctionKaiinKyoten1" : {
+        "required" : [ "kaiin_kyoten_name", "zip_code1", "zip_code2", "todofuken_cd", "shikuchoson_name", "address", "tel", "fax", "kobutsusho_bango" ],
+        "properties" : {
+          "kaiin_kyoten_name" : {
+            "type" : "string",
+            "example" : "会員拠点名A"
+          },
+          "zip_code1" : {
+            "type" : "string",
+            "example" : "101"
+          },
+          "zip_code2" : {
+            "type" : "string",
+            "example" : "0064"
+          },
+          "todofuken_cd" : {
+            "type" : "integer",
+            "example" : 26
+          },
+          "shikuchoson_name" : {
+            "type" : "string",
+            "example" : "千代田区"
+          },
+          "address" : {
+            "type" : "string",
+            "example" : "神田駿河台2-5-7  村田ビルディング6F"
+          },
+          "tel" : {
+            "type" : "string",
+            "example" : "03-5259-8300"
+          },
+          "fax" : {
+            "type" : "string",
+            "example" : "03-5259-8301"
+          },
+          "kobutsusho_bango" : {
+            "type" : "string",
+            "example" : "123456789012"
+          }
+        }
+      },
+      "AuctionKaiinKyoten2" : {
+        "required" : [ "kaiin_kyoten_id", "kaiin_kyoten_name", "zip_code1", "zip_code2", "todofuken_cd", "shikuchoson_name", "address", "tel", "fax", "kobutsusho_bango", "staff_list" ],
+        "properties" : {
+          "kaiin_kyoten_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "kaiin_kyoten_name" : {
+            "type" : "string",
+            "example" : "会員拠点名A"
+          },
+          "zip_code1" : {
+            "type" : "string",
+            "example" : "101"
+          },
+          "zip_code2" : {
+            "type" : "string",
+            "example" : "0064"
+          },
+          "todofuken_cd" : {
+            "type" : "integer",
+            "example" : 26
+          },
+          "shikuchoson_name" : {
+            "type" : "string",
+            "example" : "千代田区"
+          },
+          "address" : {
+            "type" : "string",
+            "example" : "神田駿河台2-5-7  村田ビルディング6F"
+          },
+          "tel" : {
+            "type" : "string",
+            "example" : "03-5259-8300"
+          },
+          "fax" : {
+            "type" : "string",
+            "example" : "03-5259-8301"
+          },
+          "kobutsusho_bango" : {
+            "type" : "string",
+            "example" : "123456789012"
+          },
+          "staff_list" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AuctionKaiinStaff2"
+            }
+          }
+        }
+      },
+      "AuctionKaiinStaffParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/AuctionKaiinStaff1"
+          }
+        }
+      },
+      "GetAuctionKaiinStaffRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/AuctionKaiinStaff2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetAuctionKaiinStaffRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/AuctionKaiinStaff2"
+          }
+        }
+      },
+      "PostAuctionKaiinStaffRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "staff_id" ],
+            "properties" : {
+              "staff_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "AuctionKaiinStaff1" : {
+        "required" : [ "staff_name", "mail_address", "staff_tel", "memo", "shozoku_kyoten" ],
+        "properties" : {
+          "staff_name" : {
+            "type" : "string",
+            "example" : "スタッフA"
+          },
+          "mail_address" : {
+            "type" : "string",
+            "example" : "staff@test.co.jp"
+          },
+          "staff_tel" : {
+            "type" : "string",
+            "example" : "090-0000-0000"
+          },
+          "memo" : {
+            "type" : "string",
+            "example" : "スタッフに対してのメモです。"
+          },
+          "shozoku_kyoten_id" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "AuctionKaiinStaff2" : {
+        "required" : [ "staff_id", "staff_name", "mail_address", "staff_tel", "memo", "shozoku_kyoten" ],
+        "properties" : {
+          "staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "staff_name" : {
+            "type" : "string",
+            "example" : "スタッフA"
+          },
+          "mail_address" : {
+            "type" : "string",
+            "example" : "staff@test.co.jp"
+          },
+          "staff_tel" : {
+            "type" : "string",
+            "example" : "090-0000-0000"
+          },
+          "memo" : {
+            "type" : "string",
+            "example" : "スタッフに対してのメモです。"
+          },
+          "shozoku_kyoten_id" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "AuctionKaijoParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/AuctionKaijo1"
+          }
+        }
+      },
+      "GetAuctionKaijoRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/AuctionKaijo2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetAuctionKaijoRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/AuctionKaijo2"
+          }
+        }
+      },
+      "PostAuctionKaijoRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "auction_kaijo_id" ],
+            "properties" : {
+              "auction_kaijo_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "AuctionKaijo1" : {
+        "required" : [ "auction_kaijo_name", "zip_code1", "zip_code2", "todofuken_cd", "shikuchoson_name", "address", "tel", "fax", "kaisai_shuki", "kaisai_yobi", "kaisai_hidsuke", "kaisai_memo", "koza_ginkomei", "koza_shubetsu", "koza_bango" ],
+        "properties" : {
+          "auction_kaijo_name" : {
+            "type" : "string",
+            "example" : "オークション会場A"
+          },
+          "zip_code1" : {
+            "type" : "string",
+            "example" : "101"
+          },
+          "zip_code2" : {
+            "type" : "string",
+            "example" : "0064"
+          },
+          "todofuken_cd" : {
+            "type" : "integer",
+            "example" : 26
+          },
+          "shikuchoson_name" : {
+            "type" : "string",
+            "example" : "千代田区"
+          },
+          "address" : {
+            "type" : "string",
+            "example" : "神田駿河台2-5-7  村田ビルディング6F"
+          },
+          "tel" : {
+            "type" : "string",
+            "example" : "03-5259-8300"
+          },
+          "fax" : {
+            "type" : "string",
+            "example" : "03-5259-8301"
+          },
+          "kaisai_shuki" : {
+            "type" : "integer",
+            "example" : "100"
+          },
+          "kaisai_yobi" : {
+            "type" : "integer",
+            "example" : "102"
+          },
+          "kaisai_hidsuke" : {
+            "type" : "string",
+            "example" : "23"
+          },
+          "kaisai_memo" : {
+            "type" : "string",
+            "example" : "開催に関するメモです。"
+          },
+          "koza_ginkomei" : {
+            "type" : "string",
+            "example" : "○×銀行"
+          },
+          "koza_shubetsu" : {
+            "type" : "string",
+            "example" : "普通"
+          },
+          "koza_bango" : {
+            "type" : "string",
+            "example" : "1234567"
+          }
+        }
+      },
+      "AuctionKaijo2" : {
+        "required" : [ "auction_kaijo_id", "auction_kaijo_name", "zip_code1", "zip_code2", "todofuken_cd", "shikuchoson_name", "address", "tel", "fax", "kaisai_shuki", "kaisai_yobi", "kaisai_hidsuke", "kaisai_memo", "koza_ginkomei", "koza_shubetsu", "koza_bango" ],
+        "properties" : {
+          "auction_kaijo_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "auction_kaijo_name" : {
+            "type" : "string",
+            "example" : "オークション会場A"
+          },
+          "zip_code1" : {
+            "type" : "string",
+            "example" : "101"
+          },
+          "zip_code2" : {
+            "type" : "string",
+            "example" : "0064"
+          },
+          "todofuken_cd" : {
+            "type" : "integer",
+            "example" : 26
+          },
+          "shikuchoson_name" : {
+            "type" : "string",
+            "example" : "千代田区"
+          },
+          "address" : {
+            "type" : "string",
+            "example" : "神田駿河台2-5-7  村田ビルディング6F"
+          },
+          "tel" : {
+            "type" : "string",
+            "example" : "03-5259-8300"
+          },
+          "fax" : {
+            "type" : "string",
+            "example" : "03-5259-8301"
+          },
+          "kaisai_shuki" : {
+            "type" : "integer",
+            "example" : "100"
+          },
+          "kaisai_yobi" : {
+            "type" : "integer",
+            "example" : "102"
+          },
+          "kaisai_hidsuke" : {
+            "type" : "string",
+            "example" : "23"
+          },
+          "kaisai_memo" : {
+            "type" : "string",
+            "example" : "開催に関するメモです。"
+          },
+          "koza_ginkomei" : {
+            "type" : "string",
+            "example" : "○×銀行"
+          },
+          "koza_shubetsu" : {
+            "type" : "string",
+            "example" : "普通"
+          },
+          "koza_bango" : {
+            "type" : "string",
+            "example" : "1234567"
+          }
+        }
+      },
+      "AuctionKaijoLaneParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/AuctionKaijoLane1"
+          }
+        }
+      },
+      "GetAuctionKaijoLaneRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/AuctionKaijoLane2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetAuctionKaijoLaneRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/AuctionKaijoLane2"
+          }
+        }
+      },
+      "PostAuctionKaijoLaneRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "lane_id" ],
+            "properties" : {
+              "lane_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "AuctionKaijoLane1" : {
+        "required" : [ "lane_name" ],
+        "properties" : {
+          "lane_name" : {
+            "type" : "string",
+            "example" : "レーン名A"
+          }
+        }
+      },
+      "AuctionKaijoLane2" : {
+        "required" : [ "lane_id", "lane_name" ],
+        "properties" : {
+          "lane_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "lane_name" : {
+            "type" : "string",
+            "example" : "レーン名A"
+          }
+        }
+      },
+      "AuctionKaisaiKaisuParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/AuctionKaisaiKaisu1"
+          }
+        }
+      },
+      "GetAuctionKaisaiKaisuRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/AuctionKaisaiKaisu2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "PostAuctionKaisaiKaisuRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "kaisai_kaisu" ],
+            "properties" : {
+              "kaisai_kaisu" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "AuctionKaisaiKaisu1" : {
+        "type" : "object"
+      },
+      "AuctionKaisaiKaisu2" : {
+        "required" : [ "kaisai_kaisu" ],
+        "properties" : {
+          "kaisai_kaisu" : {
+            "type" : "integer",
+            "example" : 100
+          }
+        }
+      },
+      "AuctionKaisaibiParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/AuctionKaisaibi1"
+          }
+        }
+      },
+      "GetAuctionKaisaibiRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/AuctionKaisaibi2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetAuctionKaisaibiRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/AuctionKaisaibi2"
+          }
+        }
+      },
+      "PostAuctionKaisaibiRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "kaisaibi" ],
+            "properties" : {
+              "kaisaibi" : {
+                "type" : "string",
+                "example" : "2021-06-28"
+              }
+            }
+          }
+        }
+      },
+      "AuctionKaisaibi1" : {
+        "required" : [ "kaisaimei", "kaisai_kaisu", "kaishi_jikoku", "shohin_byo", "shimezumi_flg" ],
+        "properties" : {
+          "kaisaimei" : {
+            "type" : "string",
+            "example" : "オークション開催名"
+          },
+          "kaisai_kaisu" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "kaishi_jikoku" : {
+            "type" : "string",
+            "example" : "2021-06-28 10:00:00"
+          },
+          "shohin_byo" : {
+            "type" : "integer",
+            "example" : 20
+          },
+          "shimezumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          }
+        }
+      },
+      "AuctionKaisaibi2" : {
+        "required" : [ "kaisaibi", "kaisaimei", "kaisai_kaisu", "kaishi_jikoku", "shohin_byo", "shimezumi_flg" ],
+        "properties" : {
+          "kaisaibi" : {
+            "type" : "string",
+            "example" : "2021-06-28"
+          },
+          "kaisaimei" : {
+            "type" : "string",
+            "example" : "オークション開催名"
+          },
+          "kaisai_kaisu" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "kaishi_jikoku" : {
+            "type" : "string",
+            "example" : "2021-06-28 10:00:00"
+          },
+          "shohin_byo" : {
+            "type" : "integer",
+            "example" : 20
+          },
+          "shimezumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          }
+        }
+      },
+      "KaihiParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/Kaihi1"
+          }
+        }
+      },
+      "GetKaihiRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/Kaihi2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetKaihiRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/Kaihi2"
+          }
+        }
+      },
+      "PostKaihiRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "kaihi_id" ],
+            "properties" : {
+              "kaihi_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "Kaihi1" : {
+        "required" : [ "auction_kaijo_id", "kaihi_shubetsu", "seikyu_kaishi_tsuki", "seikyu_kingaku", "seikyusho_yohi" ],
+        "properties" : {
+          "auction_kaijo_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "kaihi_shubetsu" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "seikyu_kaishi_tsuki" : {
+            "type" : "integer",
+            "example" : 6
+          },
+          "seikyu_kingaku" : {
+            "type" : "integer",
+            "example" : 3300
+          },
+          "seikyusho_yohi" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "Kaihi2" : {
+        "required" : [ "kaiin_id", "auction_kaijo_id", "kaihi_shubetsu", "seikyu_kaishi_tsuki", "seikyu_kingaku", "seikyusho_yohi" ],
+        "properties" : {
+          "kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "auction_kaijo_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "kaihi_shubetsu" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "seikyu_kaishi_tsuki" : {
+            "type" : "integer",
+            "example" : 6
+          },
+          "seikyu_kingaku" : {
+            "type" : "integer",
+            "example" : 3300
+          },
+          "seikyusho_yohi" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "KaiinKbnParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/KaiinKbn1"
+          }
+        }
+      },
+      "GetKaiinKbnRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/KaiinKbn2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetKaiinKbnRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/KaiinKbn2"
+          }
+        }
+      },
+      "PostKaiinKbnRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "kaiin_kbn_id" ],
+            "properties" : {
+              "kaiin_kbn_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "KaiinKbn1" : {
+        "required" : [ "kaiin_kbn_name" ],
+        "properties" : {
+          "kaiin_kbn_name" : {
+            "type" : "string",
+            "example" : "会員区分名A"
+          }
+        }
+      },
+      "KaiinKbn2" : {
+        "required" : [ "kaiin_kbn_id", "kaiin_kbn_name" ],
+        "properties" : {
+          "kaiin_kbn_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "kaiin_kbn_name" : {
+            "type" : "string",
+            "example" : "会員区分名A"
+          }
+        }
+      },
+      "StaffRoleParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/StaffRole1"
+          }
+        }
+      },
+      "GetStaffRoleRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/StaffRole2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetStaffRoleRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/StaffRole2"
+          }
+        }
+      },
+      "PostStaffRoleRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "staff_role_id" ],
+            "properties" : {
+              "staff_role_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "StaffRole1" : {
+        "required" : [ "staff_role_name" ],
+        "properties" : {
+          "staff_role_name" : {
+            "type" : "string",
+            "example" : "従業員権限名A"
+          }
+        }
+      },
+      "StaffRole2" : {
+        "required" : [ "staff_role_id", "staff_role_name" ],
+        "properties" : {
+          "staff_role_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "staff_role_name" : {
+            "type" : "string",
+            "example" : "従業員権限名A"
+          }
+        }
+      },
+      "StaffRoleDetailParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/StaffRoleDetail1"
+          }
+        }
+      },
+      "GetStaffRoleDetailRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/StaffRoleDetail2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetStaffRoleDetailRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/StaffRoleDetail2"
+          }
+        }
+      },
+      "PostStaffRoleDetailRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "gamen_id" ],
+            "properties" : {
+              "gamen_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "StaffRoleDetail1" : {
+        "required" : [ "kengen" ],
+        "properties" : {
+          "kengen" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "StaffRoleDetail2" : {
+        "required" : [ "gamen_id", "kengen" ],
+        "properties" : {
+          "gamen_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "kengen" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "TesuryoParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/Tesuryo1"
+          }
+        }
+      },
+      "GetTesuryoRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/Tesuryo2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetTesuryoRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/Tesuryo2"
+          }
+        }
+      },
+      "PostTesuryoRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "tesuryo_id" ],
+            "properties" : {
+              "tesuryo_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "Tesuryo1" : {
+        "required" : [ "tesuryo_name", "shuppinryo", "seiyakuryo1_kingaku_from", "seiyakuryo1_kingaku_to", "seiyakuryo1_rate", "seiyakuryo1_tesuryo", "seiyakuryo2_kingaku_from", "seiyakuryo2_kingaku_to", "seiyakuryo2_rate", "seiyakuryo2_tesuryo", "seiyakuryo3_kingaku_from", "seiyakuryo3_kingaku_to", "seiyakuryo3_rate", "seiyakuryo3_tesuryo", "rakusatsuryo1_kingaku_from", "rakusatsuryo1_kingaku_to", "rakusatsuryo1_rate", "rakusatsuryo1_tesuryo", "rakusatsuryo2_kingaku_from", "rakusatsuryo2_kingaku_to", "rakusatsuryo2_rate", "rakusatsuryo2_tesuryo", "rakusatsuryo3_kingaku_from", "rakusatsuryo3_kingaku_to", "rakusatsuryo3_rate", "rakusatsuryo3_tesuryo", "furakusatsu_tesuryo", "shuppin_torikeshi_tesuryo" ],
+        "properties" : {
+          "tesuryo_name" : {
+            "type" : "string",
+            "example" : "手数料名A"
+          },
+          "shuppinryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo1_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo1_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo1_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo1_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo2_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo2_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo2_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo2_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo3_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo3_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo3_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo3_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo1_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo1_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo1_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo1_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo2_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo2_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo2_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo2_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo3_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo3_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo3_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo3_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "furakusatsu_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "shuppin_torikeshi_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          }
+        }
+      },
+      "Tesuryo2" : {
+        "required" : [ "tesuryo_id", "tesuryo_name", "shuppinryo", "seiyakuryo1_kingaku_from", "seiyakuryo1_kingaku_to", "seiyakuryo1_rate", "seiyakuryo1_tesuryo", "seiyakuryo2_kingaku_from", "seiyakuryo2_kingaku_to", "seiyakuryo2_rate", "seiyakuryo2_tesuryo", "seiyakuryo3_kingaku_from", "seiyakuryo3_kingaku_to", "seiyakuryo3_rate", "seiyakuryo3_tesuryo", "rakusatsuryo1_kingaku_from", "rakusatsuryo1_kingaku_to", "rakusatsuryo1_rate", "rakusatsuryo1_tesuryo", "rakusatsuryo2_kingaku_from", "rakusatsuryo2_kingaku_to", "rakusatsuryo2_rate", "rakusatsuryo2_tesuryo", "rakusatsuryo3_kingaku_from", "rakusatsuryo3_kingaku_to", "rakusatsuryo3_rate", "rakusatsuryo3_tesuryo", "furakusatsu_tesuryo", "shuppin_torikeshi_tesuryo" ],
+        "properties" : {
+          "tesuryo_id" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "tesuryo_name" : {
+            "type" : "string",
+            "example" : "手数料名A"
+          },
+          "shuppinryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo1_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo1_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo1_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo1_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo2_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo2_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo2_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo2_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo3_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo3_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo3_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo3_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo1_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo1_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo1_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo1_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo2_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo2_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo2_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo2_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo3_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo3_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo3_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo3_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "furakusatsu_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "shuppin_torikeshi_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          }
+        }
+      },
+      "ToiawaseBunruiParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/ToiawaseBunrui1"
+          }
+        }
+      },
+      "GetToiawaseBunruiRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/ToiawaseBunrui2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetToiawaseBunruiRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/ToiawaseBunrui2"
+          }
+        }
+      },
+      "PostToiawaseBunruiRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "toiawase_bunrui_id" ],
+            "properties" : {
+              "toiawase_bunrui_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "ToiawaseBunrui1" : {
+        "required" : [ "toiawase_bunrui_name" ],
+        "properties" : {
+          "toiawase_bunrui_name" : {
+            "type" : "string",
+            "example" : "問合せ分類名A"
+          }
+        }
+      },
+      "ToiawaseBunrui2" : {
+        "required" : [ "toiawase_bunrui_id", "toiawase_bunrui_name" ],
+        "properties" : {
+          "toiawase_bunrui_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "toiawase_bunrui_name" : {
+            "type" : "string",
+            "example" : "問合せ分類名A"
+          }
+        }
+      },
+      "ToiawaseTemplateParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/ToiawaseTemplate1"
+          }
+        }
+      },
+      "GetToiawaseTemplateRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/ToiawaseTemplate2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetToiawaseTemplateRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/ToiawaseTemplate2"
+          }
+        }
+      },
+      "PostToiawaseTemplateRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "toiawase_template_id" ],
+            "properties" : {
+              "toiawase_template_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "ToiawaseTemplate1" : {
+        "required" : [ "toiawase_template_name", "toiawase_template" ],
+        "properties" : {
+          "toiawase_template_name" : {
+            "type" : "string",
+            "example" : "問合せテンプレート名A"
+          },
+          "toiawase_template" : {
+            "type" : "string",
+            "example" : "問合せテンプレートA"
+          }
+        }
+      },
+      "ToiawaseTemplate2" : {
+        "required" : [ "toiawase_template_id", "toiawase_template_name", "toiawase_template" ],
+        "properties" : {
+          "toiawase_template_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "toiawase_template_name" : {
+            "type" : "string",
+            "example" : "問合せテンプレート名A"
+          },
+          "toiawase_template" : {
+            "type" : "string",
+            "example" : "問合せテンプレートA"
+          }
+        }
+      },
+      "AlarmParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/Alarm1"
+          }
+        }
+      },
+      "GetAlarmRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/Alarm2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetAlarmRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/Alarm2"
+          }
+        }
+      },
+      "PostAlarmRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "alarm_id" ],
+            "properties" : {
+              "alarm_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "Alarm1" : {
+        "required" : [ "auction_id", "alarm_kaiin_id", "alarm_kaiin_staff_id", "alarm_timing" ],
+        "properties" : {
+          "auction_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_kaiin_staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_timing" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "Alarm2" : {
+        "required" : [ "alarm_id", "auction_id", "alarm_kaiin_id", "alarm_kaiin_staff_id", "alarm_timing" ],
+        "properties" : {
+          "alarm_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "auction_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_kaiin_staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_timing" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "AuctionParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/Auction1"
+          }
+        }
+      },
+      "GetAuctionRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/Auction2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetAuctionRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/Auction2"
+          }
+        }
+      },
+      "PostAuctionRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "auction_id" ],
+            "properties" : {
+              "auction_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "Auction1" : {
+        "required" : [ "object_id", "auction_kaijo_id", "kaisaibi", "box_no", false, "shohin_shubetsu", "brand_cd", "hinban", "shohinmei", "rank", "waku", "wakiishi", "juryo", "biko", "shosai", "shiiresaki_memo", "teisei", "teisei_naiyo", "shuppinryo", "shuppinryo_zei", "seiyakuryo_rate", "seiyakuryo", "seiyakuryo_zei", "rakusatsuryo_rate", "rakusatsuryo", "rakusatsuryo_zei", "furakusatsu_tesuryo", "shuppin_torikeshi_tesuryo", "shuppin_torikeshi_tesuryo_zei", "shimezumi_flg", "nyukinzumi_flg", "shiharaizumi_flg", "shiharai_kaiin_cd", "seikyu_kaiin_cd" ],
+        "properties" : {
+          "object_id" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "auction_kaijo_id" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "kaisaibi" : {
+            "type" : "string",
+            "example" : "2021-06-29"
+          },
+          "box_no" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "no" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "shohin_shubetsu" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "brand_cd" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "hinban" : {
+            "type" : "string",
+            "example" : "ABCDE12345"
+          },
+          "shohinmei" : {
+            "type" : "string",
+            "example" : "商品名A"
+          },
+          "rank" : {
+            "type" : "string",
+            "example" : "5.0"
+          },
+          "waku" : {
+            "type" : "string",
+            "example" : "SS"
+          },
+          "wakiishi" : {
+            "type" : "string",
+            "example" : "wakiishi"
+          },
+          "juryo" : {
+            "type" : "string",
+            "example" : "100g"
+          },
+          "biko" : {
+            "type" : "integer",
+            "example" : "備考です"
+          },
+          "shosai" : {
+            "type" : "string",
+            "example" : "詳細"
+          },
+          "shiiresaki_memo" : {
+            "type" : "string",
+            "example" : "仕入れ先メモです"
+          },
+          "teisei" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "teisei_naiyo" : {
+            "type" : "string",
+            "example" : "訂正内容"
+          },
+          "shuppinryo" : {
+            "type" : "integer",
+            "example" : 1000
+          },
+          "shuppinryo_zei" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "seiyakuryo_rate" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "seiyakuryo" : {
+            "type" : "integer",
+            "example" : 3000
+          },
+          "seiyakuryo_zei" : {
+            "type" : "integer",
+            "example" : 300
+          },
+          "rakusatsuryo_rate" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "rakusatsuryo" : {
+            "type" : "integer",
+            "example" : 3000
+          },
+          "rakusatsuryo_zei" : {
+            "type" : "integer",
+            "example" : 300
+          },
+          "furakusatsu_tesuryo" : {
+            "type" : "integer",
+            "example" : 1000
+          },
+          "shuppin_torikeshi_tesuryo" : {
+            "type" : "integer",
+            "example" : 1000
+          },
+          "shuppin_torikeshi_tesuryo_zei" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "shimezumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "nyukinzumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "shiharaizumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "shiharai_kaiin_cd" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seikyu_kaiin_cd" : {
+            "type" : "integer",
+            "example" : 0
+          }
+        }
+      },
+      "Auction2" : {
+        "required" : [ "auction_id", "object_id", "auction_kaijo_id", "kaisaibi", "box_no", false, "shohin_shubetsu", "brand_cd", "hinban", "shohinmei", "rank", "waku", "wakiishi", "juryo", "biko", "shosai", "shiiresaki_memo", "teisei", "teisei_naiyo", "shuppinryo", "shuppinryo_zei", "seiyakuryo_rate", "seiyakuryo", "seiyakuryo_zei", "rakusatsuryo_rate", "rakusatsuryo", "rakusatsuryo_zei", "furakusatsu_tesuryo", "shuppin_torikeshi_tesuryo", "shuppin_torikeshi_tesuryo_zei", "shimezumi_flg", "nyukinzumi_flg", "shiharaizumi_flg", "shiharai_kaiin_cd", "seikyu_kaiin_cd" ],
+        "properties" : {
+          "auction_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "object_id" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "auction_kaijo_id" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "kaisaibi" : {
+            "type" : "string",
+            "example" : "2021-06-29"
+          },
+          "box_no" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "no" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "shohin_shubetsu" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "brand_cd" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "hinban" : {
+            "type" : "string",
+            "example" : "ABCDE12345"
+          },
+          "shohinmei" : {
+            "type" : "string",
+            "example" : "商品名A"
+          },
+          "rank" : {
+            "type" : "string",
+            "example" : "5.0"
+          },
+          "waku" : {
+            "type" : "string",
+            "example" : "SS"
+          },
+          "wakiishi" : {
+            "type" : "string",
+            "example" : "wakiishi"
+          },
+          "juryo" : {
+            "type" : "string",
+            "example" : "100g"
+          },
+          "biko" : {
+            "type" : "integer",
+            "example" : "備考です"
+          },
+          "shosai" : {
+            "type" : "string",
+            "example" : "詳細"
+          },
+          "shiiresaki_memo" : {
+            "type" : "string",
+            "example" : "仕入れ先メモです"
+          },
+          "teisei" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "teisei_naiyo" : {
+            "type" : "string",
+            "example" : "訂正内容"
+          },
+          "shuppinryo" : {
+            "type" : "integer",
+            "example" : 1000
+          },
+          "shuppinryo_zei" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "seiyakuryo_rate" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "seiyakuryo" : {
+            "type" : "integer",
+            "example" : 3000
+          },
+          "seiyakuryo_zei" : {
+            "type" : "integer",
+            "example" : 300
+          },
+          "rakusatsuryo_rate" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "rakusatsuryo" : {
+            "type" : "integer",
+            "example" : 3000
+          },
+          "rakusatsuryo_zei" : {
+            "type" : "integer",
+            "example" : 300
+          },
+          "furakusatsu_tesuryo" : {
+            "type" : "integer",
+            "example" : 1000
+          },
+          "shuppin_torikeshi_tesuryo" : {
+            "type" : "integer",
+            "example" : 1000
+          },
+          "shuppin_torikeshi_tesuryo_zei" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "shimezumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "nyukinzumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "shiharaizumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "shiharai_kaiin_cd" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seikyu_kaiin_cd" : {
+            "type" : "integer",
+            "example" : 0
+          }
+        }
+      },
+      "ValidateError" : {
+        "type" : "object",
+        "required" : [ "validation_error_list" ],
+        "properties" : {
+          "validation_error_list" : {
+            "example" : "[{\"property\":\"kaiin_no\",\"message\":\"会員noは数字で入力してください。\"}]",
+            "type" : "array",
+            "items" : {
+              "type" : "object",
+              "required" : [ "property", "message" ],
+              "properties" : {
+                "property" : {
+                  "type" : "string"
+                },
+                "message" : {
+                  "type" : "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
