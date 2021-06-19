@@ -521,7 +521,7 @@
       "get" : {
         "tags" : [ "AuctionKaiin" ],
         "summary" : "合致するオークション会員情報を取得する。",
-        "description" : "mt_auction_kaiinに合致するレコードがある場合に結果を戻す<br> <br> 【memo_kbn】<br> 0:メモ1、2、3を対象にする<br> 1:メモ1を対象にする<br> 2:メモ2を対象にする<br> 3:メモ3を対象にする<br> <br> todofuken_cd、address、tel、faxは、mt_auction_kaiin_kyotenの各項目に合致する場合に結果を戻す<br> <br> staff_name、mail_address、staff_telは、mt_auction_kaiin_staffの各項目に合致する場合に結果を戻す",
+        "description" : "mt_auction_kaiinに合致するレコードがある場合に結果を戻す<br> <br> todofuken_cd、address、tel、faxは、mt_auction_kaiin_kyotenの各項目に合致する場合に結果を戻す<br> <br> staff_name、mail_address、staff_telは、mt_auction_kaiin_staffの各項目に合致する場合に結果を戻す",
         "parameters" : [ {
           "$ref" : "#/components/parameters/q_auction_id"
         }, {
@@ -1734,6 +1734,228 @@
           }
         }
       }
+    },
+    "/Kaihi" : {
+      "get" : {
+        "tags" : [ "Kaihi" ],
+        "parameters" : [ {
+          "name" : "kaiin_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "auction_kaijo_id",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "kaihi_shubetsu",
+          "description" : "1:月会費  2:年会費",
+          "in" : "query",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetKaihiRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Kaihi" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/KaihiParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostKaihiRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Kaihi/{kaihi_id}" : {
+      "get" : {
+        "tags" : [ "Kaihi" ],
+        "parameters" : [ {
+          "name" : "kaihi_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetKaihiRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Kaihi" ],
+        "parameters" : [ {
+          "name" : "kaihi_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/KaihiParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostKaihiRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Kaihi" ],
+        "parameters" : [ {
+          "name" : "kaihi_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -1825,6 +2047,7 @@
       },
       "q_memo_kbn" : {
         "name" : "memo_kbn",
+        "description" : "0:メモ1、2、3を対象にする<br> 1:メモ1を対象にする<br> 2:メモ2を対象にする<br> 3:メモ3を対象にする<br>",
         "in" : "query",
         "schema" : {
           "type" : "integer",
@@ -2608,6 +2831,78 @@
           "shimezumi_flg" : {
             "type" : "integer",
             "example" : 0
+          }
+        }
+      },
+      "KaihiParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/Kaihi"
+          }
+        }
+      },
+      "GetKaihiRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/Kaihi"
+                }
+              }
+            }
+          }
+        }
+      },
+      "PostKaihiRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "kaihi_id" ],
+            "properties" : {
+              "kaihi_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "Kaihi" : {
+        "required" : [ "kaiin_id", "auction_kaijo_id", "kaihi_shubetsu", "seikyu_kaishi_tsuki", "seikyu_kingaku", "seikyusho_yohi" ],
+        "properties" : {
+          "kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "auction_kaijo_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "kaihi_shubetsu" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "seikyu_kaishi_tsuki" : {
+            "type" : "integer",
+            "example" : 6
+          },
+          "seikyu_kingaku" : {
+            "type" : "integer",
+            "example" : 3300
+          },
+          "seikyusho_yohi" : {
+            "type" : "integer",
+            "example" : 1
           }
         }
       },
