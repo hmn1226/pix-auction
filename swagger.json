@@ -1457,6 +1457,79 @@
           }
         }
       }
+    },
+    "/AuctionKaijo/{auction_kaijo_id}/KaisaiKaisu" : {
+      "get" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaisaiKaisuRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaisaiKaisu/{kaisai_kaisu}" : {
+      "delete" : {
+        "tags" : [ "AuctionKaisaiKaisu" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaisai_kaisu"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -1503,6 +1576,14 @@
       },
       "p_lane_id" : {
         "name" : "lane_id",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "p_kaisai_kaisu" : {
+        "name" : "kaisai_kaisu",
         "in" : "path",
         "required" : true,
         "schema" : {
@@ -2191,6 +2272,58 @@
           "lane_name" : {
             "type" : "string",
             "example" : "レーン名A"
+          }
+        }
+      },
+      "AuctionKaisaiKaisuParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/AuctionKaisaiKaisu"
+          }
+        }
+      },
+      "GetAuctionKaisaiKaisuRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/AuctionKaisaiKaisu"
+                }
+              }
+            }
+          }
+        }
+      },
+      "PostAuctionKaisaiKaisuRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "kaisai_kaisu" ],
+            "properties" : {
+              "kaisai_kaisu" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "AuctionKaisaiKaisu" : {
+        "required" : [ "kaisai_kaisu" ],
+        "properties" : {
+          "kaisai_kaisu" : {
+            "type" : "integer",
+            "example" : 100
           }
         }
       },
