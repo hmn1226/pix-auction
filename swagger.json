@@ -90,7 +90,84 @@
     "description" : "閲覧ログに関する情報"
   } ],
   "paths" : {
-    "/Admin/{pix_id}/AuctionOrganizer" : {
+    "/Admin/AuctionOrganizer" : {
+      "get" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "オークション主催者情報の取得。",
+        "description" : "オークション主催者情報の取得。\npix_idを指定して呼び出すのでプラットフォーム管理者のみ利用可能。<br>\n【バリデーション】<br>\n(1) pix_idの数値チェック エラーの場合は400<br>\n(2) pix_idの存在チェック(db_pix_auction.mt_auction_organzierから照合) 存在しなければ404<br>\n【処理】<br>\n",
+        "responses" : {
+          "200" : {
+            "description" : "指定したpix_idの主催者の情報を取得する",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionOrganizerRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないオークション主催者"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "オークション主催者情報の登録。",
+        "description" : "オークション主催者情報の登録。\npix_idを指定して呼び出すのでプラットフォーム管理者のみ利用可能。<br>\n【バリデーション】<br>\n(1) pix_idの数値チェック エラーの場合は400<br>\n(2) pix_idの存在チェック(db_pix.mt_pixから照合) 存在しなければ404<br>\n(3) paramの型、文字列長のチェック エラーの場合は400<br>\n【処理】<br>\nmt_auction_organizerにpix_id={pix_id}としてレコードを登録。\n",
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionOrganizerParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/jspn" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionOrganizerRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないpix_id"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Admin/AuctionOrganizer/{pix_id}" : {
       "get" : {
         "tags" : [ "AuctionOrganizer" ],
         "summary" : "オークション主催者情報の取得。",
@@ -104,7 +181,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionOrganizerRet"
+                  "$ref" : "#/components/schemas/GetAuctionOrganizerRet2"
                 }
               }
             }
@@ -222,7 +299,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionOrganizerRet"
+                  "$ref" : "#/components/schemas/GetAuctionOrganizerRet2"
                 }
               }
             }
@@ -3268,11 +3345,11 @@
         "required" : [ "param" ],
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/AuctionOrganizer"
+            "$ref" : "#/components/schemas/AuctionOrganizer1"
           }
         }
       },
-      "GetAuctionOrganizerRet" : {
+      "GetAuctionOrganizerRet1" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -3283,16 +3360,54 @@
               "list" : {
                 "type" : "array",
                 "items" : {
-                  "$ref" : "#/components/schemas/AuctionOrganizer"
+                  "$ref" : "#/components/schemas/AuctionOrganizer2"
                 }
               }
             }
           }
         }
       },
-      "AuctionOrganizer" : {
+      "GetAuctionOrganizerRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/AuctionOrganizer2"
+          }
+        }
+      },
+      "PostAuctionOrganizerRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "auction_organizer_id" ],
+            "properties" : {
+              "auction_organizer_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "AuctionOrganizer1" : {
         "required" : [ "auction_organizer_name" ],
         "properties" : {
+          "auction_organizer_name" : {
+            "type" : "string",
+            "example" : "オークション主催者名A"
+          }
+        }
+      },
+      "AuctionOrganizer2" : {
+        "required" : [ "auction_organizer_id", "auction_organizer_name" ],
+        "properties" : {
+          "auction_organizer_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
           "auction_organizer_name" : {
             "type" : "string",
             "example" : "オークション主催者名A"
