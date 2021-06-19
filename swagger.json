@@ -47,6 +47,9 @@
     "name" : "ToiawaseBunrui",
     "description" : "問合せ分類に関する情報"
   }, {
+    "name" : "ToiawaseTemplate",
+    "description" : "問合せテンプレートに関する情報"
+  }, {
     "name" : "Alarm",
     "description" : "アラームに関する情報"
   }, {
@@ -3176,6 +3179,410 @@
           }
         }
       }
+    },
+    "/ToiawaseTemplate" : {
+      "get" : {
+        "tags" : [ "ToiawaseTemplate" ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetToiawaseTemplateRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "ToiawaseTemplate" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ToiawaseTemplateParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostToiawaseTemplateRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/ToiawaseTemplate/{toiawase_template_id}" : {
+      "get" : {
+        "tags" : [ "ToiawaseTemplate" ],
+        "parameters" : [ {
+          "name" : "toiawase_template_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetToiawaseTemplateRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "ToiawaseTemplate" ],
+        "parameters" : [ {
+          "name" : "toiawase_template_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ToiawaseTemplateParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostToiawaseTemplateRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "ToiawaseTemplate" ],
+        "parameters" : [ {
+          "name" : "toiawase_template_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Alarm" : {
+      "get" : {
+        "tags" : [ "Alarm" ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAlarmRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Alarm" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AlarmParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAlarmRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Alarm/{alarm_id}" : {
+      "get" : {
+        "tags" : [ "Alarm" ],
+        "parameters" : [ {
+          "name" : "alarm_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAlarmRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Alarm" ],
+        "parameters" : [ {
+          "name" : "alarm_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AlarmParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAlarmRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Alarm" ],
+        "parameters" : [ {
+          "name" : "alarm_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -5055,9 +5462,9 @@
         "properties" : {
           "ret" : {
             "type" : "object",
-            "required" : [ "gamen_id" ],
+            "required" : [ "toiawase_bunrui_id" ],
             "properties" : {
-              "gamen_id" : {
+              "toiawase_bunrui_id" : {
                 "type" : "integer",
                 "example" : 1
               }
@@ -5084,6 +5491,186 @@
           "toiawase_bunrui_name" : {
             "type" : "string",
             "example" : "問合せ分類名A"
+          }
+        }
+      },
+      "ToiawaseTemplateParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/ToiawaseTemplate1"
+          }
+        }
+      },
+      "GetToiawaseTemplateRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/ToiawaseTemplate2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetToiawaseTemplateRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/ToiawaseTemplate2"
+          }
+        }
+      },
+      "PostToiawaseTemplateRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "toiawase_template_id" ],
+            "properties" : {
+              "toiawase_template_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "ToiawaseTemplate1" : {
+        "required" : [ "toiawase_template_name", "toiawase_template" ],
+        "properties" : {
+          "toiawase_template_name" : {
+            "type" : "string",
+            "example" : "問合せテンプレート名A"
+          },
+          "toiawase_template" : {
+            "type" : "string",
+            "example" : "問合せテンプレートA"
+          }
+        }
+      },
+      "ToiawaseTemplate2" : {
+        "required" : [ "toiawase_template_id", "toiawase_template_name", "toiawase_template" ],
+        "properties" : {
+          "toiawase_template_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "toiawase_template_name" : {
+            "type" : "string",
+            "example" : "問合せテンプレート名A"
+          },
+          "toiawase_template" : {
+            "type" : "string",
+            "example" : "問合せテンプレートA"
+          }
+        }
+      },
+      "AlarmParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/Alarm1"
+          }
+        }
+      },
+      "GetAlarmRet1" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/Alarm2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetAlarmRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/Alarm2"
+          }
+        }
+      },
+      "PostAlarmRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "alarm_id" ],
+            "properties" : {
+              "alarm_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "Alarm1" : {
+        "required" : [ "auction_id", "alarm_kaiin_id", "alarm_kaiin_staff_id", "alarm_timing" ],
+        "properties" : {
+          "auction_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_kaiin_staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_timing" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "Alarm2" : {
+        "required" : [ "alarm_id", "auction_id", "alarm_kaiin_id", "alarm_kaiin_staff_id", "alarm_timing" ],
+        "properties" : {
+          "alarm_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "auction_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_kaiin_staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "alarm_timing" : {
+            "type" : "integer",
+            "example" : 1
           }
         }
       },
