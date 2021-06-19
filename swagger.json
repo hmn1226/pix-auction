@@ -3593,23 +3593,20 @@
           "schema" : {
             "type" : "array",
             "items" : {
-              "type" : "integer",
-              "example" : 1
+              "type" : "integer"
             }
           }
         }, {
           "name" : "auction_kaijo_id",
           "in" : "query",
           "schema" : {
-            "type" : "integer",
-            "example" : 1
+            "type" : "integer"
           }
         }, {
           "name" : "kaisaibi",
           "in" : "query",
           "schema" : {
-            "type" : "string",
-            "example" : "2021-06-28"
+            "type" : "string"
           }
         } ],
         "responses" : {
