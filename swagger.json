@@ -287,7 +287,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionOrganizerStaffRet"
+                  "$ref" : "#/components/schemas/GetAuctionOrganizerStaffRet1"
                 }
               }
             }
@@ -318,7 +318,7 @@
           "content" : {
             "application/json; charset=utf-8" : {
               "schema" : {
-                "$ref" : "#/components/schemas/AuctionOrganizerParam"
+                "$ref" : "#/components/schemas/AuctionOrganizerStaffParam"
               }
             }
           }
@@ -354,6 +354,42 @@
       }
     },
     "/AuctionOrganizer/Staff/{kaiin_staff_id}" : {
+      "get" : {
+        "tags" : [ "AuctionOrganizer" ],
+        "summary" : "オークション主催者情報のスタッフ情報を取得。",
+        "description" : "オークション主催者スタッフ情報の取得。スタッフ全員分をリストで取得<br> 【バリデーション】<br> 不要 【処理】<br> mt_auction_organizer<br> 　+- mt_auction_organizer_staff<br> 　　+-mt_auction_kaiko<br> 　　+-mt_staff_role<br> にpix_id=SESSION.pix_idとしてレコードを取得。<br>",
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_kaiin_staff_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionOrganizerStaffRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "存在しないpix_id"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
       "put" : {
         "tags" : [ "AuctionOrganizer" ],
         "summary" : "オークション主催者情報のスタッフ情報を登録。",
@@ -365,7 +401,7 @@
           "content" : {
             "application/json; charset=utf-8" : {
               "schema" : {
-                "$ref" : "#/components/schemas/AuctionOrganizerParam"
+                "$ref" : "#/components/schemas/AuctionOrganizerStaffParam"
               }
             }
           }
@@ -553,7 +589,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaiinRet"
+                  "$ref" : "#/components/schemas/GetAuctionKaiinRet1"
                 }
               }
             }
@@ -629,7 +665,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaiinRet"
+                  "$ref" : "#/components/schemas/GetAuctionKaiinRet2"
                 }
               }
             }
@@ -744,7 +780,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaiinKyotenRet"
+                  "$ref" : "#/components/schemas/GetAuctionKaiinKyotenRet1"
                 }
               }
             }
@@ -825,7 +861,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaiinKyotenRet"
+                  "$ref" : "#/components/schemas/GetAuctionKaiinKyotenRet2"
                 }
               }
             }
@@ -946,7 +982,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaiinStaffRet"
+                  "$ref" : "#/components/schemas/GetAuctionKaiinStaffRet1"
                 }
               }
             }
@@ -1027,7 +1063,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaiinStaffRet"
+                  "$ref" : "#/components/schemas/GetAuctionKaiinStaffRet2"
                 }
               }
             }
@@ -1143,7 +1179,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaijoRet"
+                  "$ref" : "#/components/schemas/GetAuctionKaijoRet1"
                 }
               }
             }
@@ -1208,6 +1244,40 @@
       }
     },
     "/AuctionKaijo/{auction_kaijo_id}" : {
+      "get" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaijoRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
       "put" : {
         "tags" : [ "AuctionKaijo" ],
         "parameters" : [ {
@@ -3229,7 +3299,16 @@
           }
         }
       },
-      "GetAuctionOrganizerStaffRet" : {
+      "AuctionOrganizerStaffParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/AuctionOrganizerStaff1"
+          }
+        }
+      },
+      "GetAuctionOrganizerStaffRet1" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -3240,10 +3319,19 @@
               "list" : {
                 "type" : "array",
                 "items" : {
-                  "$ref" : "#/components/schemas/AuctionOrganizerStaff"
+                  "$ref" : "#/components/schemas/AuctionOrganizerStaff2"
                 }
               }
             }
+          }
+        }
+      },
+      "GetAuctionOrganizerStaffRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/AuctionOrganizerStaff2"
           }
         }
       },
@@ -3279,9 +3367,46 @@
           }
         }
       },
-      "AuctionOrganizerStaff" : {
+      "AuctionOrganizerStaff1" : {
         "required" : [ "staff_name", "mail_address", "login_id", "shozoku_auction_kaijo_id", "shozoku_auction_kaijo_name", "staff_role_id", "staff_role_name" ],
         "properties" : {
+          "staff_name" : {
+            "type" : "string",
+            "example" : "スタッフ名A"
+          },
+          "mail_address" : {
+            "type" : "string",
+            "example" : "メールアドレスA"
+          },
+          "login_id" : {
+            "type" : "string",
+            "example" : "12345"
+          },
+          "shozoku_auction_kaijo_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shozoku_auction_kaijo_name" : {
+            "type" : "string",
+            "example" : "会場A"
+          },
+          "staff_role_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "staff_role_name" : {
+            "type" : "string",
+            "example" : "ロールA"
+          }
+        }
+      },
+      "AuctionOrganizerStaff2" : {
+        "required" : [ "staff_id", "staff_name", "mail_address", "login_id", "shozoku_auction_kaijo_id", "shozoku_auction_kaijo_name", "staff_role_id", "staff_role_name" ],
+        "properties" : {
+          "staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
           "staff_name" : {
             "type" : "string",
             "example" : "スタッフ名A"
@@ -3331,11 +3456,11 @@
         "required" : [ "param" ],
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/AuctionKaiin"
+            "$ref" : "#/components/schemas/AuctionKaiin1"
           }
         }
       },
-      "GetAuctionKaiinRet" : {
+      "GetAuctionKaiinRet1" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -3346,10 +3471,19 @@
               "list" : {
                 "type" : "array",
                 "items" : {
-                  "$ref" : "#/components/schemas/AuctionKaiin"
+                  "$ref" : "#/components/schemas/AuctionKaiin2"
                 }
               }
             }
+          }
+        }
+      },
+      "GetAuctionKaiinRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/AuctionKaiin2"
           }
         }
       },
@@ -3369,7 +3503,58 @@
           }
         }
       },
-      "AuctionKaiin" : {
+      "AuctionKaiin1" : {
+        "required" : [ "kaiin_name", "kaiin_name_kana", "kaiin_name_ryakusho", "daihyosha", "yoshin_gendogaku", "memo1", "memo2", "memo3", "taikai_flg", "taikai_date", "kyoten_list" ],
+        "properties" : {
+          "kaiin_name" : {
+            "type" : "string",
+            "example" : "会員名A株式会社"
+          },
+          "kaiin_name_kana" : {
+            "type" : "string",
+            "example" : "カイインメイAカブシキガイシャ"
+          },
+          "kaiin_name_ryakusyo" : {
+            "type" : "string",
+            "example" : "会員名A"
+          },
+          "daihyosha" : {
+            "type" : "string",
+            "example" : "代表者A"
+          },
+          "yoshin_gendogaku" : {
+            "type" : "integer",
+            "example" : 30000000
+          },
+          "memo1" : {
+            "type" : "string",
+            "example" : "メモ１"
+          },
+          "memo2" : {
+            "type" : "string",
+            "example" : "メモ２"
+          },
+          "memo3" : {
+            "type" : "string",
+            "example" : "メモ３"
+          },
+          "taikai_flg" : {
+            "type" : "string",
+            "example" : 1
+          },
+          "taikai_date" : {
+            "type" : "string",
+            "example" : "2021-06-18 00:00:00"
+          },
+          "kyoten_list" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AuctionKaiinKyoten2"
+            }
+          }
+        }
+      },
+      "AuctionKaiin2" : {
         "required" : [ "kaiin_kbn_id", "kaiin_name", "kaiin_name_kana", "kaiin_name_ryakusho", "daihyosha", "yoshin_gendogaku", "memo1", "memo2", "memo3", "taikai_flg", "taikai_date", "kyoten_list" ],
         "properties" : {
           "kaiin_kbn_id" : {
@@ -3419,7 +3604,7 @@
           "kyoten_list" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/AuctionKaiinKyoten1"
+              "$ref" : "#/components/schemas/AuctionKaiinKyoten2"
             }
           }
         }
@@ -3429,11 +3614,11 @@
         "required" : [ "param" ],
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/AuctionKaiinKyoten2"
+            "$ref" : "#/components/schemas/AuctionKaiinKyoten1"
           }
         }
       },
-      "GetAuctionKaiinKyotenRet" : {
+      "GetAuctionKaiinKyotenRet1" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -3448,6 +3633,15 @@
                 }
               }
             }
+          }
+        }
+      },
+      "GetAuctionKaiinKyotenRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/AuctionKaiinKyoten2"
           }
         }
       },
@@ -3468,53 +3662,6 @@
         }
       },
       "AuctionKaiinKyoten1" : {
-        "required" : [ "kaiin_kyoten_name", "zip_code1", "zip_code2", "todofuken_cd", "shikuchoson_name", "address", "tel", "fax", "kobutsusho_bango", "staff_list" ],
-        "properties" : {
-          "kaiin_kyoten_name" : {
-            "type" : "string",
-            "example" : "会員拠点名A"
-          },
-          "zip_code1" : {
-            "type" : "string",
-            "example" : "101"
-          },
-          "zip_code2" : {
-            "type" : "string",
-            "example" : "0064"
-          },
-          "todofuken_cd" : {
-            "type" : "integer",
-            "example" : 26
-          },
-          "shikuchoson_name" : {
-            "type" : "string",
-            "example" : "千代田区"
-          },
-          "address" : {
-            "type" : "string",
-            "example" : "神田駿河台2-5-7  村田ビルディング6F"
-          },
-          "tel" : {
-            "type" : "string",
-            "example" : "03-5259-8300"
-          },
-          "fax" : {
-            "type" : "string",
-            "example" : "03-5259-8301"
-          },
-          "kobutsusho_bango" : {
-            "type" : "string",
-            "example" : "123456789012"
-          },
-          "staff_list" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/AuctionKaiinStaff"
-            }
-          }
-        }
-      },
-      "AuctionKaiinKyoten2" : {
         "required" : [ "kaiin_kyoten_name", "zip_code1", "zip_code2", "todofuken_cd", "shikuchoson_name", "address", "tel", "fax", "kobutsusho_bango" ],
         "properties" : {
           "kaiin_kyoten_name" : {
@@ -3555,16 +3702,67 @@
           }
         }
       },
+      "AuctionKaiinKyoten2" : {
+        "required" : [ "kaiin_kyoten_id", "kaiin_kyoten_name", "zip_code1", "zip_code2", "todofuken_cd", "shikuchoson_name", "address", "tel", "fax", "kobutsusho_bango", "staff_list" ],
+        "properties" : {
+          "kaiin_kyoten_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "kaiin_kyoten_name" : {
+            "type" : "string",
+            "example" : "会員拠点名A"
+          },
+          "zip_code1" : {
+            "type" : "string",
+            "example" : "101"
+          },
+          "zip_code2" : {
+            "type" : "string",
+            "example" : "0064"
+          },
+          "todofuken_cd" : {
+            "type" : "integer",
+            "example" : 26
+          },
+          "shikuchoson_name" : {
+            "type" : "string",
+            "example" : "千代田区"
+          },
+          "address" : {
+            "type" : "string",
+            "example" : "神田駿河台2-5-7  村田ビルディング6F"
+          },
+          "tel" : {
+            "type" : "string",
+            "example" : "03-5259-8300"
+          },
+          "fax" : {
+            "type" : "string",
+            "example" : "03-5259-8301"
+          },
+          "kobutsusho_bango" : {
+            "type" : "string",
+            "example" : "123456789012"
+          },
+          "staff_list" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AuctionKaiinStaff2"
+            }
+          }
+        }
+      },
       "AuctionKaiinStaffParam" : {
         "type" : "object",
         "required" : [ "param" ],
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/AuctionKaiinStaff"
+            "$ref" : "#/components/schemas/AuctionKaiinStaff1"
           }
         }
       },
-      "GetAuctionKaiinStaffRet" : {
+      "GetAuctionKaiinStaffRet1" : {
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
@@ -3575,10 +3773,19 @@
               "list" : {
                 "type" : "array",
                 "items" : {
-                  "$ref" : "#/components/schemas/AuctionKaiinStaff"
+                  "$ref" : "#/components/schemas/AuctionKaiinStaff2"
                 }
               }
             }
+          }
+        }
+      },
+      "GetAuctionKaiinStaffRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/AuctionKaiinStaff2"
           }
         }
       },
@@ -3598,9 +3805,38 @@
           }
         }
       },
-      "AuctionKaiinStaff" : {
+      "AuctionKaiinStaff1" : {
         "required" : [ "staff_name", "mail_address", "staff_tel", "memo", "shozoku_kyoten" ],
         "properties" : {
+          "staff_name" : {
+            "type" : "string",
+            "example" : "スタッフA"
+          },
+          "mail_address" : {
+            "type" : "string",
+            "example" : "staff@test.co.jp"
+          },
+          "staff_tel" : {
+            "type" : "string",
+            "example" : "090-0000-0000"
+          },
+          "memo" : {
+            "type" : "string",
+            "example" : "スタッフに対してのメモです。"
+          },
+          "shozoku_kyoten_id" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "AuctionKaiinStaff2" : {
+        "required" : [ "staff_id", "staff_name", "mail_address", "staff_tel", "memo", "shozoku_kyoten" ],
+        "properties" : {
+          "staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
           "staff_name" : {
             "type" : "string",
             "example" : "スタッフA"
