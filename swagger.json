@@ -2457,6 +2457,254 @@
             "description" : "サーバーエラー発生"
           }
         }
+      },
+      "delete" : {
+        "tags" : [ "StaffRole" ],
+        "parameters" : [ {
+          "name" : "staff_role_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "gamen_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "削除成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostStaffRoleDetailRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Tesuryo" : {
+      "get" : {
+        "tags" : [ "Tesuryo" ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetTesuryoRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Tesuryo" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TesuryoParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostTesuryoRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Tesuryo/{tesuryo_id}" : {
+      "get" : {
+        "tags" : [ "Tesuryo" ],
+        "parameters" : [ {
+          "name" : "tesuryo_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetTesuryoRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Tesuryo" ],
+        "parameters" : [ {
+          "name" : "tesuryo_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TesuryoParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostTesuryoRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Tesuryo" ],
+        "parameters" : [ {
+          "name" : "tesuryo_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
       }
     }
   },
@@ -3565,6 +3813,170 @@
           "kengen" : {
             "type" : "integer",
             "example" : 1
+          }
+        }
+      },
+      "TesuryoParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/Tesuryo"
+          }
+        }
+      },
+      "GetTesuryoRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/Tesuryo"
+                }
+              }
+            }
+          }
+        }
+      },
+      "PostTesuryoRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "tesuryo_id" ],
+            "properties" : {
+              "tesuryo_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "Tesuryo" : {
+        "required" : [ "tesuryo_id", "tesuryo_name", "shuppinryo", "seiyakuryo1_kingaku_from", "seiyakuryo1_kingaku_to", "seiyakuryo1_rate", "seiyakuryo1_tesuryo", "seiyakuryo2_kingaku_from", "seiyakuryo2_kingaku_to", "seiyakuryo2_rate", "seiyakuryo2_tesuryo", "seiyakuryo3_kingaku_from", "seiyakuryo3_kingaku_to", "seiyakuryo3_rate", "seiyakuryo3_tesuryo", "rakusatsuryo1_kingaku_from", "rakusatsuryo1_kingaku_to", "rakusatsuryo1_rate", "rakusatsuryo1_tesuryo", "rakusatsuryo2_kingaku_from", "rakusatsuryo2_kingaku_to", "rakusatsuryo2_rate", "rakusatsuryo2_tesuryo", "rakusatsuryo3_kingaku_from", "rakusatsuryo3_kingaku_to", "rakusatsuryo3_rate", "rakusatsuryo3_tesuryo", "furakusatsu_tesuryo", "shuppin_torikeshi_tesuryo" ],
+        "properties" : {
+          "tesuryo_id" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "tesuryo_name" : {
+            "type" : "string",
+            "example" : "手数料名A"
+          },
+          "shuppinryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo1_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo1_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo1_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo1_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo2_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo2_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo2_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo2_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo3_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo3_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo3_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seiyakuryo3_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo1_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo1_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo1_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo1_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo2_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo2_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo2_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo2_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo3_kingaku_from" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo3_kingaku_to" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo3_rate" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "rakusatsuryo3_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "furakusatsu_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "shuppin_torikeshi_tesuryo" : {
+            "type" : "integer",
+            "example" : 0
           }
         }
       },
