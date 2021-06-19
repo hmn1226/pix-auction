@@ -29,12 +29,6 @@
     "name" : "AuctionKaijo",
     "description" : "オークション会場に関する情報"
   }, {
-    "name" : "AuctionKaisaiKaisu",
-    "description" : "オークション開催回数に関する情報"
-  }, {
-    "name" : "AuctionKaisaiKaisaibi",
-    "description" : "オークション開催日に関する情報"
-  }, {
     "name" : "Kaihi",
     "description" : "会費に関する情報"
   }, {
@@ -1492,13 +1486,223 @@
             "description" : "サーバーエラー発生"
           }
         }
+      },
+      "post" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaisaiKaisuParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionKaisaiKaisuRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
       }
     },
-    "/AuctionKaisaiKaisu/{kaisai_kaisu}" : {
+    "/AuctionKaijo/{auction_kaijo_id}/KaisaiKaisu/{kaisai_kaisu}" : {
       "delete" : {
-        "tags" : [ "AuctionKaisaiKaisu" ],
+        "tags" : [ "AuctionKaijo" ],
         "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        }, {
           "$ref" : "#/components/parameters/p_kaisai_kaisu"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaijo/{auction_kaijo_id}/Kaisaibi" : {
+      "get" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionKaisaibiRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kaisai_kaisu"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaisaibiParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionKaisaibiRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/AuctionKaijo/{auction_kaijo_id}/Kaisaibi/{kaisaibi}" : {
+      "put" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kaisaibi"
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKaisaibiParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostAuctionKaisaibiRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "AuctionKaijo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/p_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/p_kaisaibi"
         } ],
         "responses" : {
           "200" : {
@@ -1588,6 +1792,14 @@
         "required" : true,
         "schema" : {
           "type" : "integer"
+        }
+      },
+      "p_kaisaibi" : {
+        "name" : "kaisaibi",
+        "in" : "path",
+        "required" : true,
+        "schema" : {
+          "type" : "string"
         }
       },
       "q_auction_id" : {
@@ -2324,6 +2536,78 @@
           "kaisai_kaisu" : {
             "type" : "integer",
             "example" : 100
+          }
+        }
+      },
+      "AuctionKaisaibiParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/AuctionKaisaibi"
+          }
+        }
+      },
+      "GetAuctionKaisaibiRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/AuctionKaisaibi"
+                }
+              }
+            }
+          }
+        }
+      },
+      "PostAuctionKaisaibiRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "kaisaibi" ],
+            "properties" : {
+              "kaisaibi" : {
+                "type" : "string",
+                "example" : "2021-06-28"
+              }
+            }
+          }
+        }
+      },
+      "AuctionKaisaibi" : {
+        "required" : [ "kaisaibi", "kaisaimei", "kaisai_kaisu", "kaishi_jikoku", "shohin_byo", "shimezumi_flg" ],
+        "properties" : {
+          "kaisaibi" : {
+            "type" : "string",
+            "example" : "2021-06-28"
+          },
+          "kaisaimei" : {
+            "type" : "string",
+            "example" : "オークション開催名"
+          },
+          "kaisai_kaisu" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "kaishi_jikoku" : {
+            "type" : "string",
+            "example" : "2021-06-28 10:00:00"
+          },
+          "shohin_byo" : {
+            "type" : "integer",
+            "example" : 20
+          },
+          "shimezumi_flg" : {
+            "type" : "integer",
+            "example" : 0
           }
         }
       },
