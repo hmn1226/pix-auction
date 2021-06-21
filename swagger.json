@@ -3745,14 +3745,14 @@
         }
       }
     },
-    "/Auction/List" : {
+    "/Auction/createWithList" : {
       "post" : {
         "tags" : [ "Auction" ],
         "requestBody" : {
           "content" : {
             "application/json; charset=utf-8" : {
               "schema" : {
-                "$ref" : "#/components/schemas/AuctionParam"
+                "$ref" : "#/components/schemas/AuctionCreateWithListParam"
               }
             }
           }
@@ -3763,7 +3763,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostAuctionRet"
+                  "$ref" : "#/components/schemas/PostAuctionCreateWithListRet"
                 }
               }
             }
@@ -3880,6 +3880,199 @@
         "tags" : [ "Auction" ],
         "parameters" : [ {
           "name" : "auction_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Auction/{auction_kaijo_id}/{kaisaibi}/{box_no}/{no}" : {
+      "get" : {
+        "tags" : [ "Auction" ],
+        "parameters" : [ {
+          "name" : "auction_kaijo_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "kaisaibi",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "box_no",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : false,
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetAuctionRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Auction" ],
+        "parameters" : [ {
+          "name" : "auction_kaijo_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "kaisaibi",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "box_no",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : false,
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TesuryoParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Auction" ],
+        "parameters" : [ {
+          "name" : "auction_kaijo_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "kaisaibi",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "box_no",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : false,
           "required" : true,
           "in" : "path",
           "schema" : {
@@ -6016,6 +6209,24 @@
           }
         }
       },
+      "AuctionCreateWithListParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/Auction1"
+                }
+              }
+            }
+          }
+        }
+      },
       "GetAuctionRet1" : {
         "type" : "object",
         "required" : [ "ret" ],
@@ -6054,6 +6265,31 @@
               "auction_id" : {
                 "type" : "integer",
                 "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "PostAuctionCreateWithListRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "auction_id_list" ],
+            "properties" : {
+              "auction_id_list" : {
+                "type" : "array",
+                "items" : {
+                  "type" : "object",
+                  "required" : [ "auction_id" ],
+                  "properties" : {
+                    "auction_id" : {
+                      "type" : "integer",
+                      "example" : 1
+                    }
+                  }
+                }
               }
             }
           }
