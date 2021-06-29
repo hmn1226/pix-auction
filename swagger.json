@@ -2383,6 +2383,209 @@
         }
       }
     },
+    "/Brand" : {
+      "get" : {
+        "tags" : [ "Brand" ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetBrandRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Brand" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BrandParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostBrandRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Brand/{brand_cd}" : {
+      "get" : {
+        "tags" : [ "Brand" ],
+        "parameters" : [ {
+          "name" : "brand_cd",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetBrandRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Brand" ],
+        "parameters" : [ {
+          "name" : "brand_cd",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BrandParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostBrandRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "description" : "ブランド情報(論理削除)",
+        "tags" : [ "Brand" ],
+        "parameters" : [ {
+          "name" : "brand_cd",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
     "/StaffRole" : {
       "get" : {
         "tags" : [ "StaffRole" ],
@@ -4161,6 +4364,1311 @@
           }
         }
       }
+    },
+    "/Okiniiri" : {
+      "get" : {
+        "tags" : [ "Okiniiri" ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetOkiniiriRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Okiniiri" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/OkiniiriParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostOkiniiriRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Okiniiri/{okiniiri_id}" : {
+      "get" : {
+        "tags" : [ "Okiniiri" ],
+        "parameters" : [ {
+          "name" : "okiniiri_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetOkiniiriRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Okiniiri" ],
+        "parameters" : [ {
+          "name" : "okiniiri_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/OkiniiriParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostOkiniiriRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Okiniiri" ],
+        "parameters" : [ {
+          "name" : "okiniiri_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : { }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Oshirase" : {
+      "get" : {
+        "tags" : [ "Oshirase" ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetOshiraseRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Oshirase" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/OshiraseParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostOshiraseRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Oshirase/{oshirase_id}" : {
+      "get" : {
+        "tags" : [ "Oshirase" ],
+        "parameters" : [ {
+          "name" : "oshirase_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetOshiraseRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Oshirase" ],
+        "parameters" : [ {
+          "name" : "oshirase_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/OshiraseParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostOshiraseRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "description" : "お知らせ情報(論理削除)",
+        "tags" : [ "Oshirase" ],
+        "parameters" : [ {
+          "name" : "oshirase_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Shohiyo" : {
+      "get" : {
+        "tags" : [ "Shohiyo" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/q_keijobi"
+        }, {
+          "$ref" : "#/components/parameters/q_seisan_kaiin_id"
+        }, {
+          "$ref" : "#/components/parameters/q_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/q_kaisaibi"
+        }, {
+          "$ref" : "#/components/parameters/q_box_no"
+        }, {
+          "$ref" : "#/components/parameters/q_no"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetShohiyoRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Shohiyo" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ShohiyoParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostShohiyoRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Shohiyo/{shohiyo_id}" : {
+      "get" : {
+        "tags" : [ "Shohiyo" ],
+        "parameters" : [ {
+          "name" : "shohiyo_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetShohiyoRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Shohiyo" ],
+        "parameters" : [ {
+          "name" : "shohiyo_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ShohiyoParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostShohiyoRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Shohiyo" ],
+        "parameters" : [ {
+          "name" : "shohiyo_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : { }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Toiawase" : {
+      "get" : {
+        "tags" : [ "Toiawase" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/q_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/q_toiawase_kaiin_id"
+        }, {
+          "$ref" : "#/components/parameters/q_uketsuke_kaiin_staff_id"
+        }, {
+          "$ref" : "#/components/parameters/q_kaisaibi"
+        }, {
+          "$ref" : "#/components/parameters/q_box_no"
+        }, {
+          "$ref" : "#/components/parameters/q_no"
+        }, {
+          "$ref" : "#/components/parameters/q_toiawase_datetime_from"
+        }, {
+          "$ref" : "#/components/parameters/q_toiawase_datetime_to"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetToiawaseRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Toiawase" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ToiawaseParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostToiawaseRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/toiawase/{toiawase_id}" : {
+      "get" : {
+        "tags" : [ "Toiawase" ],
+        "parameters" : [ {
+          "name" : "toiawase_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetToiawaseRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Toiawase" ],
+        "parameters" : [ {
+          "name" : "toiawase_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ToiawaseParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostToiawaseRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Toiawase" ],
+        "parameters" : [ {
+          "name" : "toiawase_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : { }
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/toiawase/{toiawase_id}/Detail" : {
+      "get" : {
+        "tags" : [ "Toiawase" ],
+        "parameters" : [ {
+          "name" : "toiawase_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetToiawaseDetailRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Toiawase" ],
+        "parameters" : [ {
+          "name" : "toiawase_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/ToiawaseDetailParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostToiawaseDetailRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/TorihikiJisseki" : {
+      "get" : {
+        "tags" : [ "TorihikiJisseki" ],
+        "parameters" : [ {
+          "$ref" : "#/components/parameters/q_auction_kaijo_id"
+        }, {
+          "$ref" : "#/components/parameters/q_keijobi"
+        }, {
+          "$ref" : "#/components/parameters/q_seisan_kaiin_id"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetTorihikiJissekiRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/TorihikiJisseki/Shime" : {
+      "post" : {
+        "tags" : [ "TorihikiJisseki" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TorihikiJissekiParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/TorihikiJisseki/ShimeKaijo" : {
+      "post" : {
+        "tags" : [ "TorihikiJisseki" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/TorihikiJissekiParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/LogOsatsu/{auction_id}" : {
+      "get" : {
+        "tags" : [ "LogOsatsu" ],
+        "parameters" : [ {
+          "name" : "auction_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetLogOsatsuRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/LogOsatsu/{auction_kaijo_id}/{kaisaibi}/{box_no}/{no}" : {
+      "get" : {
+        "tags" : [ "LogOsatsu" ],
+        "parameters" : [ {
+          "name" : "auction_kaijo_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "kaisaibi",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "box_no",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "no",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetLogOsatsuRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/LogEtsuran/{auction_id}" : {
+      "get" : {
+        "tags" : [ "LogEtsuran" ],
+        "parameters" : [ {
+          "name" : "auction_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetLogEtsuranRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/LogEtsuran/{auction_kaijo_id}/{kaisaibi}/{box_no}/{no}" : {
+      "get" : {
+        "tags" : [ "LogEtsuran" ],
+        "parameters" : [ {
+          "name" : "auction_kaijo_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "kaisaibi",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "box_no",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "no",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetLogEtsuranRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/LogEtsuran/{auction_kaiin_id}" : {
+      "get" : {
+        "tags" : [ "LogEtsuran" ],
+        "parameters" : [ {
+          "name" : "auction_kaiin_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "$ref" : "#/components/parameters/q_etsuran_date_time_from"
+        }, {
+          "$ref" : "#/components/parameters/q_etsuran_date_time_to"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetLogEtsuranRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
     }
   },
   "components" : {
@@ -4321,6 +5829,90 @@
         "required" : true,
         "schema" : {
           "type" : "integer"
+        }
+      },
+      "q_keijobi" : {
+        "name" : "keijobi",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "q_seisan_kaiin_id" : {
+        "name" : "seisan_kaiin_id",
+        "in" : "query",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "q_auction_kaijo_id" : {
+        "name" : "auction_kaijo_id",
+        "in" : "query",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "q_kaisaibi" : {
+        "name" : "auction_id",
+        "in" : "query",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "q_box_no" : {
+        "name" : "box_no",
+        "in" : "query",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "q_no" : {
+        "name" : "no",
+        "in" : "query",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "q_toiawase_kaiin_id" : {
+        "name" : "toiawase_kaiin_id",
+        "in" : "query",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "q_uketsuke_kaiin_staff_id" : {
+        "name" : "uketsuke_kaiin_staff_id",
+        "in" : "query",
+        "schema" : {
+          "type" : "integer"
+        }
+      },
+      "q_toiawase_datetime_from" : {
+        "name" : "toiawase_datetime_from",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "q_toiawase_datetime_to" : {
+        "name" : "toiawase_datetime_to",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "q_etsuran_date_time_from" : {
+        "name" : "etsuran_date_time_from",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
+        }
+      },
+      "q_etsuran_date_time_to" : {
+        "name" : "etsuran_date_time_to",
+        "in" : "query",
+        "schema" : {
+          "type" : "string"
         }
       }
     },
@@ -5377,6 +6969,83 @@
           "shimezumi_flg" : {
             "type" : "integer",
             "example" : 0
+          }
+        }
+      },
+      "GetBrandRet1" : {
+        "description" : "ブランド情報の配列",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/Brand1"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetBrandRet2" : {
+        "description" : "ブランド情報",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/Brand2"
+          }
+        }
+      },
+      "PostBrandRet" : {
+        "description" : "POST(ブランド情報)",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "brand_cd" ],
+            "properties" : {
+              "brand_cd" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "BrandParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/Brand2"
+          }
+        }
+      },
+      "Brand1" : {
+        "required" : [ "brand_cd", "brand_name" ],
+        "properties" : {
+          "brand_cd" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "brand_name" : {
+            "type" : "string",
+            "example" : "GUCCI"
+          }
+        }
+      },
+      "Brand2" : {
+        "required" : [ "brand_name" ],
+        "properties" : {
+          "brand_name" : {
+            "type" : "string",
+            "example" : "GUCCI"
           }
         }
       },
@@ -6630,6 +8299,764 @@
           "seikyu_kaiin_cd" : {
             "type" : "integer",
             "example" : 0
+          }
+        }
+      },
+      "OkiniiriParam" : {
+        "description" : "POST(お気に入り情報登録)",
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/Okiniiri1"
+          }
+        }
+      },
+      "GetOkiniiriRet1" : {
+        "description" : "お気に入り情報の配列",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/Okiniiri2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetOkiniiriRet2" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/Okiniiri2"
+          }
+        }
+      },
+      "PostOkiniiriRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "okiniiri_id" ],
+            "properties" : {
+              "okiniiri_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "Okiniiri1" : {
+        "required" : [ "auction_id", "okiniiri_kaiin_id", "okiniiri_kaiin_staff_id" ],
+        "properties" : {
+          "auction_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "okiniiri_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "okiniiri_kaiin_staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "Okiniiri2" : {
+        "required" : [ "okiniiri_id", "auction_id", "okiniiri_kaiin_id", "okiniiri_kaiin_staff_id" ],
+        "properties" : {
+          "okiniiri_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "auction_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "okiniiri_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "okiniiri_kaiin_staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "OshiraseParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/Oshirase1"
+          }
+        }
+      },
+      "GetOshiraseRet1" : {
+        "description" : "お知らせ情報の配列",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/Oshirase2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetOshiraseRet2" : {
+        "description" : "お知らせ情報",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/Oshirase2"
+          }
+        }
+      },
+      "PostOshiraseRet" : {
+        "description" : "POST(お知らせ情報)",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "oshirase_id" ],
+            "properties" : {
+              "oshirase_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "Oshirase1" : {
+        "required" : [ "oshirasebi", "oshirase_naiyo", "juyo_flg" ],
+        "properties" : {
+          "oshirasebi" : {
+            "type" : "string",
+            "example" : "2021/06/25"
+          },
+          "oshirase_naiyo" : {
+            "type" : "string",
+            "example" : "お知らせ内容"
+          }
+        }
+      },
+      "Oshirase2" : {
+        "required" : [ "oshirase_id", "oshirasebi", "oshirase_naiyo", "juyo_flg" ],
+        "properties" : {
+          "oshirase_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "oshirasebi" : {
+            "type" : "string",
+            "example" : "2021/06/25"
+          },
+          "oshirase_naiyo" : {
+            "type" : "string",
+            "example" : "お知らせ内容"
+          }
+        }
+      },
+      "ShohiyoParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/Shohiyo1"
+          }
+        }
+      },
+      "GetShohiyoRet1" : {
+        "description" : "お知らせ情報の配列",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/Shohiyo2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetShohiyoRet2" : {
+        "description" : "お知らせ情報",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/Shohiyo2"
+          }
+        }
+      },
+      "PostShohiyoRet" : {
+        "description" : "POST(諸費用情報)",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "shohiyo_id" ],
+            "properties" : {
+              "oshirase_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "Shohiyo1" : {
+        "required" : [ "keijobi", "seisan_kaiin_id", "auction_id", "seikyu_shohiyo", "seikyu_shohiyo_zei", "shiharai_shohiyo", "shiharai_shohiyo_zei", "shohiyo_kbn", "shohiyo_meisai", "shimezumi_flg", "nyukinzumi_flg", "shiharaizumi_flg" ],
+        "properties" : {
+          "keijobi" : {
+            "type" : "string",
+            "example" : "2021/06/25"
+          },
+          "seisan_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "auction_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "seikyu_shohiyo" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "seikyu_shohiyo_zei" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shohiyo_kbn" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shohiyo_meisai" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shimezumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "nyukinzumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "shiharaizumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          }
+        }
+      },
+      "Shohiyo2" : {
+        "required" : [ "shohiyo_id", "keijobi", "seisan_kaiin_id", "auction_id", "seikyu_shohiyo", "seikyu_shohiyo_zei", "shiharai_shohiyo", "shiharai_shohiyo_zei", "shohiyo_kbn", "shohiyo_meisai", "shimezumi_flg", "nyukinzumi_flg", "shiharaizumi_flg" ],
+        "properties" : {
+          "shohiyo_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "keijobi" : {
+            "type" : "string",
+            "example" : "2021/06/25"
+          },
+          "seisan_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "auction_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "seikyu_shohiyo" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "seikyu_shohiyo_zei" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shohiyo_kbn" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shohiyo_meisai" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shimezumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "nyukinzumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "shiharaizumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          }
+        }
+      },
+      "ToiawaseParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/Toiawase1"
+          }
+        }
+      },
+      "GetToiawaseRet1" : {
+        "description" : "問合せ情報の配列",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "list" ],
+            "properties" : {
+              "list" : {
+                "type" : "array",
+                "items" : {
+                  "$ref" : "#/components/schemas/Toiawase2"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GetToiawaseRet2" : {
+        "description" : "問合せ情報",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/Toiawase2"
+          }
+        }
+      },
+      "PostToiawaseRet" : {
+        "description" : "POST(問合せ情報)",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "toiawase_id" ],
+            "properties" : {
+              "toiawase_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "Toiawase1" : {
+        "required" : [ "toiawase_kaiin_id", "toiawase_datetime", "uketsuke_kaiin_staff_id", "toiawase_bunrui_id", "toiawase_naiyo", "shinchoku", "kekka" ],
+        "properties" : {
+          "toiawase_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "toiawase_datetime" : {
+            "type" : "string",
+            "example" : "2021/06/25"
+          },
+          "uketsuke_kaiin_staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "toiawase_bunrui_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "toiawase_naiyo" : {
+            "type" : "string",
+            "example" : "問合せ内容"
+          },
+          "shinchoku" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shokekkahiyo_kbn" : {
+            "type" : "string",
+            "example" : "結果内容"
+          }
+        }
+      },
+      "Toiawase2" : {
+        "required" : [ "toiawase_id", "toiawase_kaiin_id", "toiawase_datetime", "uketsuke_kaiin_staff_id", "toiawase_bunrui_id", "toiawase_naiyo", "shinchoku", "kekka" ],
+        "properties" : {
+          "toiawase_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "toiawase_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "toiawase_datetime" : {
+            "type" : "string",
+            "example" : "2021/06/25"
+          },
+          "uketsuke_kaiin_staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "toiawase_bunrui_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "toiawase_naiyo" : {
+            "type" : "string",
+            "example" : "問合せ内容"
+          },
+          "shinchoku" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shokekkahiyo_kbn" : {
+            "type" : "string",
+            "example" : "結果内容"
+          }
+        }
+      },
+      "ToiawaseDetailParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/ToiawaseDetail1"
+          }
+        }
+      },
+      "GetToiawaseDetailRet" : {
+        "description" : "問合せ詳細情報",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/ToiawaseDetail2"
+          }
+        }
+      },
+      "PostToiawaseDetailRet" : {
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "type" : "object",
+            "required" : [ "toiawase_detail_id" ],
+            "properties" : {
+              "toiawase_detail_id" : {
+                "type" : "integer",
+                "example" : 1
+              }
+            }
+          }
+        }
+      },
+      "ToiawaseDetail1" : {
+        "required" : [ "soshin_datetime", "title", "body", "tanto_kaiin_staff_id" ],
+        "properties" : {
+          "soshin_datetime" : {
+            "type" : "string",
+            "example" : "送信時間"
+          },
+          "title" : {
+            "type" : "string",
+            "example" : "問合せ題名"
+          },
+          "body" : {
+            "type" : "string",
+            "example" : "問合せボディ"
+          },
+          "tanto_kaiin_staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "ToiawaseDetail2" : {
+        "required" : [ "toiawase_id", "toiawase_detail_id", "soshin_datetime", "title", "body", "tanto_kaiin_staff_id" ],
+        "properties" : {
+          "toiawase_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "toiawase_detail_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "soshin_datetime" : {
+            "type" : "string",
+            "example" : "送信時間"
+          },
+          "title" : {
+            "type" : "string",
+            "example" : "問合せ題名"
+          },
+          "body" : {
+            "type" : "string",
+            "example" : "問合せボディ"
+          },
+          "tanto_kaiin_staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "TorihikiJissekiParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "required" : [ "keijobi" ],
+            "properties" : {
+              "keijobi" : {
+                "type" : "string",
+                "example" : "6/28"
+              }
+            }
+          }
+        }
+      },
+      "GetTorihikiJissekiRet" : {
+        "description" : "取引実績",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/TorihikiJisseki"
+          }
+        }
+      },
+      "TorihikiJisseki" : {
+        "required" : [ "keijobi", "seisan_kaiin_id", "seikyu_rakusatsu_kakaku", "seikyu_rakusatsu_kakaku_zei", "shiharai_rakusatsu_kakaku", "shiharai_rakusatsu_kakaku_zei", "shuppinryo", "shuppinryo_zei", "seiyakuryo", "seiyakuryo_zei", "rakusatsuryo", "rakusatsuryo_zei", "seikyu_shohiyo", "seikyu_shohiyo_zei", "shiharai_shohiyo", "shiharai_shohiyo_zei", "nyukingaku", "shukkingaku" ],
+        "properties" : {
+          "keijobi" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "seisan_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "seikyu_rakusatsu_kakaku" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "seikyu_rakusatsu_kakaku_zei" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shiharai_rakusatsu_kakaku" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shiharai_rakusatsu_kakaku_zei" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shuppinryo" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shuppinryo_zei" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "seiyakuryo" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "seikyu_shohiyo_zei" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shiharai_shohiyo" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shiharai_shohiyo_zei" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "nyukingaku" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shukkingaku" : {
+            "type" : "integer",
+            "example" : 1
+          }
+        }
+      },
+      "GetLogOsatsuRet1" : {
+        "description" : "ログ応札",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/LogOsatsu1"
+          }
+        }
+      },
+      "GetLogOsatsuRet2" : {
+        "description" : "ログ応札",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/LogOsatsu2"
+          }
+        }
+      },
+      "LogOsatsu1" : {
+        "required" : [ "bidup_status", "osatsu_kaiin_id", "osatsu_kakaku", "osatsu_datetime", "nyusatsu_flg", "genzai_kakaku", "kenri_shutoku_flg" ],
+        "properties" : {
+          "bidup_status" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "osatsu_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "osatsu_kakaku" : {
+            "type" : "integer",
+            "example" : 10000
+          },
+          "osatsu_datetime" : {
+            "type" : "string",
+            "example" : "2021/06/28"
+          },
+          "nyusatsu_flg" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "genzai_kakaku" : {
+            "type" : "integer",
+            "example" : 10000
+          },
+          "kenri_shutoku_flg" : {
+            "type" : "integer",
+            "example" : 0
+          }
+        }
+      },
+      "LogOsatsu2" : {
+        "required" : [ "bidup_status", "osatsu_kaiin_id", "osatsu_kakaku", "osatsu_datetime", "nyusatsu_flg", "genzai_kakaku", "kenri_shutoku_flg" ],
+        "properties" : {
+          "bidup_status" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "osatsu_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "osatsu_kakaku" : {
+            "type" : "integer",
+            "example" : 10000
+          },
+          "osatsu_datetime" : {
+            "type" : "string",
+            "example" : "2021/06/28"
+          },
+          "nyusatsu_flg" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "genzai_kakaku" : {
+            "type" : "integer",
+            "example" : 10000
+          },
+          "kenri_shutoku_flg" : {
+            "type" : "integer",
+            "example" : 0
+          }
+        }
+      },
+      "GetLogEtsuranRet1" : {
+        "description" : "ログ閲覧情報",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/LogEtsuran1"
+          }
+        }
+      },
+      "GetLogEtsuranRet2" : {
+        "description" : "指定会員の閲覧情報配列",
+        "type" : "object",
+        "required" : [ "ret" ],
+        "properties" : {
+          "ret" : {
+            "$ref" : "#/components/schemas/LogEtsuran2"
+          }
+        }
+      },
+      "LogEtsuran1" : {
+        "required" : [ "etsuran_kaiin_id", "etsuran_kaiin_staff_id", "etsuran_datetime" ],
+        "properties" : {
+          "etsuran_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "etsuran_kaiin_staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "etsuran_datetime" : {
+            "type" : "string",
+            "example" : "2021/06/28"
+          }
+        }
+      },
+      "LogEtsuran2" : {
+        "required" : [ "auction_id", "etsuran_datetime" ],
+        "properties" : {
+          "auction_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "etsuran_datetime" : {
+            "type" : "string",
+            "example" : "2021/06/28"
           }
         }
       },
