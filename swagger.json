@@ -6131,15 +6131,20 @@
       },
       "AuctionOrganizerStaffLoginParam" : {
         "type" : "object",
-        "required" : [ "login_id", "login_password" ],
+        "required" : [ "param" ],
         "properties" : {
-          "login_id" : {
-            "type" : "string",
-            "example" : "abc12345"
-          },
-          "login_password" : {
-            "type" : "string",
-            "example" : "abc12345"
+          "param" : {
+            "required" : [ "login_id", "login_password" ],
+            "properties" : {
+              "login_id" : {
+                "type" : "string",
+                "example" : "abc12345"
+              },
+              "login_password" : {
+                "type" : "string",
+                "example" : "abc12345"
+              }
+            }
           }
         }
       },
