@@ -6858,22 +6858,6 @@
           }
         }
       },
-      "PostAuctionKaisaiKaisuRet" : {
-        "type" : "object",
-        "required" : [ "ret" ],
-        "properties" : {
-          "ret" : {
-            "type" : "object",
-            "required" : [ "kaisai_kaisu" ],
-            "properties" : {
-              "kaisai_kaisu" : {
-                "type" : "integer",
-                "example" : 1
-              }
-            }
-          }
-        }
-      },
       "AuctionKaisaiKaisu1" : {
         "type" : "object"
       },
@@ -8789,22 +8773,6 @@
         "properties" : {
           "ret" : {
             "$ref" : "#/components/schemas/ToiawaseDetail2"
-          }
-        }
-      },
-      "PostToiawaseDetailRet" : {
-        "type" : "object",
-        "required" : [ "ret" ],
-        "properties" : {
-          "ret" : {
-            "type" : "object",
-            "required" : [ "toiawase_detail_id" ],
-            "properties" : {
-              "toiawase_detail_id" : {
-                "type" : "integer",
-                "example" : 1
-              }
-            }
           }
         }
       },
