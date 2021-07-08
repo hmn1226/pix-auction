@@ -1695,9 +1695,10 @@
           "200" : {
             "description" : "登録成功",
             "content" : {
-              "application/json" : {
+              "application/jspn" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostAuctionKaisaiKaisuRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -1896,9 +1897,10 @@
           "200" : {
             "description" : "登録成功",
             "content" : {
-              "application/json" : {
+              "application/jspn" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostAuctionKaisaibiRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -2115,9 +2117,10 @@
           "200" : {
             "description" : "登録成功",
             "content" : {
-              "application/json" : {
+              "application/jspn" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostKaihiRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -2317,9 +2320,10 @@
           "200" : {
             "description" : "登録成功",
             "content" : {
-              "application/json" : {
+              "application/jspn" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostKaiinKbnRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -2519,9 +2523,10 @@
           "200" : {
             "description" : "登録成功",
             "content" : {
-              "application/json" : {
+              "application/jspn" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostBrandRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -2722,9 +2727,10 @@
           "200" : {
             "description" : "登録成功",
             "content" : {
-              "application/json" : {
+              "application/jspn" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostStaffRoleRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -2906,9 +2912,10 @@
           "200" : {
             "description" : "登録成功",
             "content" : {
-              "application/json" : {
+              "application/jspn" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostStaffRoleDetailRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -3317,9 +3324,10 @@
           "200" : {
             "description" : "登録成功",
             "content" : {
-              "application/json" : {
+              "application/jspn" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostToiawaseBunruiRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -3519,9 +3527,10 @@
           "200" : {
             "description" : "登録成功",
             "content" : {
-              "application/json" : {
+              "application/jspn" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostToiawaseTemplateRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -3721,9 +3730,10 @@
           "200" : {
             "description" : "登録成功",
             "content" : {
-              "application/json" : {
+              "application/jspn" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostAlarmRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -4499,11 +4509,12 @@
         },
         "responses" : {
           "200" : {
-            "description" : "取得成功",
+            "description" : "登録成功",
             "content" : {
-              "application/json" : {
+              "application/jspn" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostOkiniiriRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -4703,9 +4714,10 @@
           "200" : {
             "description" : "登録成功",
             "content" : {
-              "application/json" : {
+              "application/jspn" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostOshiraseRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -4919,9 +4931,10 @@
           "200" : {
             "description" : "登録成功",
             "content" : {
-              "application/json" : {
+              "application/jspn" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostShohiyoRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -5075,7 +5088,7 @@
         }
       }
     },
-    "/toiawase/{toiawase_id}" : {
+    "/Toiawase/{toiawase_id}" : {
       "get" : {
         "tags" : [ "Toiawase" ],
         "parameters" : [ {
@@ -5138,9 +5151,10 @@
           "200" : {
             "description" : "登録成功",
             "content" : {
-              "application/json" : {
+              "application/jspn" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostToiawaseRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
@@ -5204,7 +5218,7 @@
         }
       }
     },
-    "/toiawase/{toiawase_id}/Detail" : {
+    "/Toiawase/{toiawase_id}/Detail" : {
       "get" : {
         "tags" : [ "Toiawase" ],
         "parameters" : [ {
@@ -5267,9 +5281,10 @@
           "200" : {
             "description" : "登録成功",
             "content" : {
-              "application/json" : {
+              "application/jspn" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/PostToiawaseDetailRet"
+                  "type" : "object",
+                  "example" : "{}"
                 }
               }
             }
