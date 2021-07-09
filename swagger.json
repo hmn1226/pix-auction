@@ -559,16 +559,6 @@
           }
         },
         "responses" : {
-          "200" : {
-            "description" : "処理成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/PostAuctionOrganizerStaffLoginRet"
-                }
-              }
-            }
-          },
           "400" : {
             "description" : "パラメーター異常",
             "content" : {
