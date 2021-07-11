@@ -2184,7 +2184,7 @@
         }
       }
     },
-    "/KaiinKbnAa" : {
+    "/KaiinKbn" : {
       "get" : {
         "tags" : [ "KaiinKbn" ],
         "responses" : {
