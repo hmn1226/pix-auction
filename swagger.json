@@ -2184,22 +2184,6 @@
         }
       }
     },
-    "/KaiinKbnTest" : null,
-    "get" : {
-      "tags" : [ "KaiinKbn" ],
-      "responses" : {
-        "200" : {
-          "description" : "取得成功",
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/GetKaiinKbnRet1"
-              }
-            }
-          }
-        }
-      }
-    },
     "/KaiinKbn" : {
       "get" : {
         "tags" : [ "KaiinKbn" ],
