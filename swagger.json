@@ -93,210 +93,6 @@
     "description" : "閲覧ログに関する情報"
   } ],
   "paths" : {
-    "/Brand" : {
-      "get" : {
-        "tags" : [ "Brand" ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetBrandRet1"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "Brand" ],
-        "requestBody" : {
-          "content" : {
-            "application/json; charset=utf-8" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/BrandParam"
-              }
-            }
-          }
-        },
-        "responses" : {
-          "200" : {
-            "description" : "登録成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/PostBrandRet"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      }
-    },
-    "/Brand/{brand_cd}" : {
-      "get" : {
-        "tags" : [ "Brand" ],
-        "parameters" : [ {
-          "name" : "brand_cd",
-          "required" : true,
-          "in" : "path",
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetBrandRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "Brand" ],
-        "parameters" : [ {
-          "name" : "brand_cd",
-          "required" : true,
-          "in" : "path",
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json; charset=utf-8" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/BrandParam"
-              }
-            }
-          }
-        },
-        "responses" : {
-          "200" : {
-            "description" : "登録成功",
-            "content" : {
-              "application/jspn" : {
-                "schema" : {
-                  "type" : "object",
-                  "example" : "{}"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
-      "delete" : {
-        "description" : "ブランド情報(論理削除)",
-        "tags" : [ "Brand" ],
-        "parameters" : [ {
-          "name" : "brand_cd",
-          "required" : true,
-          "in" : "path",
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "登録成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "example" : "{}"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      }
-    },
     "/Admin/AuctionOrganizer" : {
       "get" : {
         "tags" : [ "AuctionOrganizer" ],
@@ -2554,6 +2350,210 @@
         "tags" : [ "KaiinKbn" ],
         "parameters" : [ {
           "name" : "kaiin_kbn_id",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Brand" : {
+      "get" : {
+        "tags" : [ "Brand" ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetBrandRet1"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Brand" ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BrandParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/PostBrandRet"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
+    "/Brand/{brand_cd}" : {
+      "get" : {
+        "tags" : [ "Brand" ],
+        "parameters" : [ {
+          "name" : "brand_cd",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "取得成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/GetBrandRet2"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Brand" ],
+        "parameters" : [ {
+          "name" : "brand_cd",
+          "required" : true,
+          "in" : "path",
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/BrandParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/jspn" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      },
+      "delete" : {
+        "description" : "ブランド情報(論理削除)",
+        "tags" : [ "Brand" ],
+        "parameters" : [ {
+          "name" : "brand_cd",
           "required" : true,
           "in" : "path",
           "schema" : {
