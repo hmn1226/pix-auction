@@ -2400,22 +2400,6 @@
                 }
               }
             }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
           }
         }
       }
