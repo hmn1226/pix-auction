@@ -2389,7 +2389,7 @@
     },
     "/BrandTest" : {
       "get" : {
-        "tags" : [ "Brand" ],
+        "tags" : [ "BrandTest" ],
         "responses" : {
           "200" : {
             "description" : "取得成功",
