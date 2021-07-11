@@ -6624,7 +6624,7 @@
         }
       },
       "AuctionKaijo1" : {
-        "required" : [ "auction_kaijo_name", "zip_code1", "zip_code2", "todofuken_cd", "shikuchoson_name", "address", "tel", "fax", "kaisai_shuki", "kaisai_yobi", "kaisai_hidsuke", "kaisai_memo", "koza_ginkomei", "koza_shubetsu", "koza_bango" ],
+        "required" : [ "auction_kaijo_name", "zip_code1", "zip_code2", "todofuken_cd", "todofuken_name", "shikuchoson_name", "address", "tel", "fax", "kaisai_shuki", "kaisai_yobi", "kaisai_hidsuke", "kaisai_memo", "koza_ginkomei", "koza_shubetsu", "koza_bango" ],
         "properties" : {
           "auction_kaijo_name" : {
             "type" : "string",
@@ -6641,6 +6641,10 @@
           "todofuken_cd" : {
             "type" : "integer",
             "example" : 26
+          },
+          "todofuken_name" : {
+            "type" : "string",
+            "example" : "東京都"
           },
           "shikuchoson_name" : {
             "type" : "string",
