@@ -6976,6 +6976,15 @@
           }
         }
       },
+      "BrandParam" : {
+        "type" : "object",
+        "required" : [ "param" ],
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/Brand2"
+          }
+        }
+      },
       "GetBrandRet1" : {
         "description" : "ブランド情報の配列",
         "type" : "object",
@@ -7019,15 +7028,6 @@
                 "example" : 1
               }
             }
-          }
-        }
-      },
-      "BrandParam" : {
-        "type" : "object",
-        "required" : [ "param" ],
-        "properties" : {
-          "param" : {
-            "$ref" : "#/components/schemas/Brand2"
           }
         }
       },
