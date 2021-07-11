@@ -6986,7 +6986,6 @@
         }
       },
       "GetBrandRet1" : {
-        "description" : "ブランド情報の配列",
         "type" : "object",
         "required" : [ "ret" ],
         "properties" : {
