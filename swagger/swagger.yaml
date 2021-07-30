@@ -5076,6 +5076,86 @@
         }
       }
     },
+    "/Auction/{auctionKaijoId}/{kaisaibi}/{hakoBango}/{bango}/HassoTeishi" : {
+      "put" : {
+        "tags" : [ "Auction" ],
+        "parameters" : [ {
+          "name" : "auctionKaijoId",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "kaisaibi",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "string"
+          }
+        }, {
+          "name" : "hakoBango",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        }, {
+          "name" : "bango",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
+          "schema" : {
+            "type" : "integer"
+          }
+        } ],
+        "requestBody" : {
+          "content" : {
+            "application/json; charset=utf-8" : {
+              "schema" : {
+                "$ref" : "#/components/schemas/AuctionKekkaParam"
+              }
+            }
+          }
+        },
+        "responses" : {
+          "200" : {
+            "description" : "登録成功",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "object",
+                  "example" : "{}"
+                }
+              }
+            }
+          },
+          "400" : {
+            "description" : "パラメーター異常",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "$ref" : "#/components/schemas/ValidateError"
+                }
+              }
+            }
+          },
+          "404" : {
+            "description" : "該当するデータが見つかりません。"
+          },
+          "500" : {
+            "description" : "サーバーエラー発生"
+          }
+        }
+      }
+    },
     "/Auction/{auctionKaijoId}/{kaisaibi}/{hakoBango}/{bango}/Next" : {
       "get" : {
         "tags" : [ "Auction" ],
@@ -11229,6 +11309,24 @@
           "rakusatsu_kakaku" : {
             "type" : "integer",
             "example" : 100000
+          }
+        }
+      },
+      "AuctionHassoTeishiParam" : {
+        "required" : [ "param" ],
+        "type" : "object",
+        "properties" : {
+          "param" : {
+            "$ref" : "#/components/schemas/AuctionHassoTeishiParamObj"
+          }
+        }
+      },
+      "AuctionHassoTeishiParamObj" : {
+        "required" : [ "hasso_teishi_flg" ],
+        "properties" : {
+          "hasso_teishi_flg" : {
+            "type" : "integer",
+            "example" : 1
           }
         }
       },
