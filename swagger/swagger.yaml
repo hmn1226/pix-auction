@@ -5120,7 +5120,7 @@
           "content" : {
             "application/json; charset=utf-8" : {
               "schema" : {
-                "$ref" : "#/components/schemas/AuctionKekkaParam"
+                "$ref" : "#/components/schemas/AuctionHassoTeishiParam"
               }
             }
           }
@@ -8390,7 +8390,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetShohiyoRet1"
+                  "$ref" : "#/components/schemas/GetShohiyoRet"
                 }
               }
             }
@@ -8455,47 +8455,6 @@
       }
     },
     "/Shohiyo/{shohiyoId}" : {
-      "get" : {
-        "tags" : [ "Shohiyo" ],
-        "parameters" : [ {
-          "name" : "shohiyoId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetShohiyoRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
       "put" : {
         "tags" : [ "Shohiyo" ],
         "parameters" : [ {
@@ -11462,7 +11421,7 @@
         "type" : "object",
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/AuctionBoxWariate"
+            "$ref" : "#/components/schemas/AuctionBoxWariateParamObj"
           }
         }
       },
@@ -11476,7 +11435,7 @@
         },
         "description" : "箱割当情報のリスト"
       },
-      "AuctionBoxWariate" : {
+      "AuctionBoxWariateParamObj" : {
         "required" : [ "hako_bango", "memo", "shuppin_kaiin_id" ],
         "properties" : {
           "hako_bango" : {
@@ -11486,6 +11445,27 @@
           "shuppin_kaiin_id" : {
             "type" : "integer",
             "example" : 1
+          },
+          "memo" : {
+            "type" : "string",
+            "example" : "メモ"
+          }
+        }
+      },
+      "AuctionBoxWariateRetObj" : {
+        "required" : [ "hako_bango", "memo", "shuppin_kaiin_id", "shuppin_kaiin_name" ],
+        "properties" : {
+          "hako_bango" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shuppin_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shuppin_kaiin_name" : {
+            "type" : "string",
+            "example" : "会員A"
           },
           "memo" : {
             "type" : "string",
@@ -11916,29 +11896,19 @@
         "type" : "object",
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/Shohiyo"
+            "$ref" : "#/components/schemas/ShohiyoParamObj"
           }
         }
       },
-      "GetShohiyoRet1" : {
+      "GetShohiyoRet" : {
         "required" : [ "ret" ],
         "type" : "object",
         "properties" : {
           "ret" : {
-            "$ref" : "#/components/schemas/GetShohiyoRet1_ret"
+            "$ref" : "#/components/schemas/GetShohiyoRet_ret"
           }
         },
         "description" : "お知らせ情報の配列"
-      },
-      "GetShohiyoRet2" : {
-        "required" : [ "ret" ],
-        "type" : "object",
-        "properties" : {
-          "ret" : {
-            "$ref" : "#/components/schemas/Shohiyo"
-          }
-        },
-        "description" : "お知らせ情報"
       },
       "PostShohiyoRet" : {
         "required" : [ "ret" ],
@@ -11950,7 +11920,52 @@
         },
         "description" : "POST(諸費用情報)"
       },
-      "Shohiyo" : {
+      "ShohiyoParamObj" : {
+        "required" : [ "auction_id", "keijobi", "seikyu_shohiyo", "seikyu_shohiyo_zei", "seisan_kaiin_id", "shiharai_shohiyo", "shiharai_shohiyo_zei", "shohiyo_id", "shohiyo_kbn", "shohiyo_meisai" ],
+        "properties" : {
+          "shohiyo_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "keijobi" : {
+            "type" : "string",
+            "example" : "2021-06-30"
+          },
+          "seisan_kaiin_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "auction_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "seikyu_shohiyo" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "seikyu_shohiyo_zei" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shiharai_shohiyo" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shiharai_shohiyo_zei" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shohiyo_kbn" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "shohiyo_meisai" : {
+            "type" : "string",
+            "example" : "諸費用明細"
+          }
+        }
+      },
+      "ShohiyoRetObj" : {
         "required" : [ "auction_id", "keijobi", "nyukinzumi_flg", "seikyu_shohiyo", "seikyu_shohiyo_zei", "seisan_kaiin_id", "seisan_kaiin_name", "shiharai_shohiyo", "shiharai_shohiyo_zei", "shiharaizumi_flg", "shimezumi_flg", "shohiyo_id", "shohiyo_kbn", "shohiyo_meisai" ],
         "properties" : {
           "shohiyo_id" : {
@@ -12841,7 +12856,7 @@
           "list" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/AuctionBoxWariate"
+              "$ref" : "#/components/schemas/AuctionBoxWariateRetObj"
             }
           }
         }
@@ -12970,14 +12985,14 @@
           }
         }
       },
-      "GetShohiyoRet1_ret" : {
+      "GetShohiyoRet_ret" : {
         "required" : [ "list" ],
         "type" : "object",
         "properties" : {
           "list" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/Shohiyo"
+              "$ref" : "#/components/schemas/ShohiyoRetObj"
             }
           }
         }
