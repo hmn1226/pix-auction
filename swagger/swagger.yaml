@@ -5655,101 +5655,6 @@
         }
       }
     },
-    "/Auction/Saishuppin/{auctionId}" : {
-      "post" : {
-        "tags" : [ "Auction" ],
-        "parameters" : [ {
-          "name" : "auctionId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json; charset=utf-8" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/AuctionSaishuppinParam"
-              }
-            }
-          }
-        },
-        "responses" : {
-          "200" : {
-            "description" : "登録成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "example" : "{}"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "Auction" ],
-        "parameters" : [ {
-          "name" : "auctionId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "登録成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "example" : "{}"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      }
-    },
     "/Auction/Saishuppin/{auctionKaijoId}/{kaisaibi}/{hakoBango}/{bango}" : {
       "put" : {
         "tags" : [ "Auction" ],
@@ -11320,7 +11225,7 @@
         "type" : "object",
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/AuctionSaishuppin"
+            "$ref" : "#/components/schemas/AuctionSaishuppinParamObj"
           }
         }
       },
@@ -11329,22 +11234,65 @@
         "type" : "object",
         "properties" : {
           "ret" : {
-            "$ref" : "#/components/schemas/AuctionSaishuppin"
+            "$ref" : "#/components/schemas/AuctionSaishuppinRetObj"
           }
         }
       },
-      "AuctionSaishuppin" : {
-        "required" : [ "auction_id", "saishuppin_auction_id" ],
+      "AuctionSaishuppinParamObj" : {
+        "required" : [ "irai_chosei_kakaku", "irai_kibo_kakaku", "irai_memo", "irai_nichiji", "irai_start_kakaku" ],
+        "properties" : {
+          "irai_nichiji" : {
+            "type" : "string",
+            "example" : "2021-07-21 00:00:00"
+          },
+          "irai_start_kakaku" : {
+            "type" : "integer",
+            "example" : 100000
+          },
+          "irai_chosei_kakaku" : {
+            "type" : "integer",
+            "example" : 100000
+          },
+          "irai_kibo_kakaku" : {
+            "type" : "integer",
+            "example" : 100000
+          },
+          "irai_memo" : {
+            "type" : "string",
+            "example" : "依頼時のメモです。"
+          }
+        },
+        "description" : "tt_auction_saishuppin_irai"
+      },
+      "AuctionSaishuppinRetObj" : {
+        "required" : [ "auction_id", "irai_chosei_kakaku", "irai_kibo_kakaku", "irai_memo", "irai_nichiji", "irai_start_kakaku" ],
         "properties" : {
           "auction_id" : {
             "type" : "integer",
             "example" : 1
           },
-          "saishuppin_auction_id" : {
+          "irai_nichiji" : {
+            "type" : "string",
+            "example" : "2021-07-21 00:00:00"
+          },
+          "irai_start_kakaku" : {
             "type" : "integer",
-            "example" : 1
+            "example" : 100000
+          },
+          "irai_chosei_kakaku" : {
+            "type" : "integer",
+            "example" : 100000
+          },
+          "irai_kibo_kakaku" : {
+            "type" : "integer",
+            "example" : 100000
+          },
+          "irai_memo" : {
+            "type" : "string",
+            "example" : "依頼時のメモです。"
           }
-        }
+        },
+        "description" : "tt_auction_saishuppin_irai"
       },
       "AuctionTeiseiParam" : {
         "required" : [ "param" ],
@@ -11421,7 +11369,7 @@
         "type" : "object",
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/AuctionBoxWariateParamObj"
+            "$ref" : "#/components/schemas/AuctionBoxWariate"
           }
         }
       },
@@ -11435,7 +11383,7 @@
         },
         "description" : "箱割当情報のリスト"
       },
-      "AuctionBoxWariateParamObj" : {
+      "AuctionBoxWariate" : {
         "required" : [ "hako_bango", "memo", "shuppin_kaiin_id" ],
         "properties" : {
           "hako_bango" : {
@@ -11445,27 +11393,6 @@
           "shuppin_kaiin_id" : {
             "type" : "integer",
             "example" : 1
-          },
-          "memo" : {
-            "type" : "string",
-            "example" : "メモ"
-          }
-        }
-      },
-      "AuctionBoxWariateRetObj" : {
-        "required" : [ "hako_bango", "memo", "shuppin_kaiin_id", "shuppin_kaiin_name" ],
-        "properties" : {
-          "hako_bango" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "shuppin_kaiin_id" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "shuppin_kaiin_name" : {
-            "type" : "string",
-            "example" : "会員A"
           },
           "memo" : {
             "type" : "string",
@@ -12856,7 +12783,7 @@
           "list" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/AuctionBoxWariateRetObj"
+              "$ref" : "#/components/schemas/AuctionBoxWariate"
             }
           }
         }
