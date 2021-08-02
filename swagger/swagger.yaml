@@ -806,47 +806,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaiinRet1"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "AuctionKaiin" ],
-        "requestBody" : {
-          "content" : {
-            "application/json; charset=utf-8" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/AuctionKaiinParam"
-              }
-            }
-          }
-        },
-        "responses" : {
-          "200" : {
-            "description" : "登録成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/PostAuctionKaiinRet"
+                  "$ref" : "#/components/schemas/GetAuctionKaiinRetList"
                 }
               }
             }
@@ -889,7 +849,7 @@
             "content" : {
               "application/json" : {
                 "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaiinRet2"
+                  "$ref" : "#/components/schemas/GetAuctionKaiinRetData"
                 }
               }
             }
@@ -967,518 +927,6 @@
         "tags" : [ "AuctionKaiin" ],
         "parameters" : [ {
           "name" : "kaiinId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "削除成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "example" : "{}"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      }
-    },
-    "/AuctionKaiin/{kaiinId}/Kyoten" : {
-      "get" : {
-        "tags" : [ "AuctionKaiin" ],
-        "parameters" : [ {
-          "name" : "kaiinId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaiinKyotenRet1"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "AuctionKaiin" ],
-        "parameters" : [ {
-          "name" : "kaiinId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json; charset=utf-8" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/AuctionKaiinKyotenParam"
-              }
-            }
-          }
-        },
-        "responses" : {
-          "200" : {
-            "description" : "登録成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/PostAuctionKaiinKyotenRet"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      }
-    },
-    "/AuctionKaiin/{kaiinId}/Kyoten/{kyotenId}" : {
-      "get" : {
-        "tags" : [ "AuctionKaiin" ],
-        "parameters" : [ {
-          "name" : "kaiinId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        }, {
-          "name" : "kyotenId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaiinKyotenRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "AuctionKaiin" ],
-        "parameters" : [ {
-          "name" : "kaiinId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        }, {
-          "name" : "kyotenId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json; charset=utf-8" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/AuctionKaiinKyotenParam"
-              }
-            }
-          }
-        },
-        "responses" : {
-          "200" : {
-            "description" : "登録成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "example" : "{}"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "AuctionKaiin" ],
-        "parameters" : [ {
-          "name" : "kaiinId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        }, {
-          "name" : "kyotenId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "削除成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "example" : "{}"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      }
-    },
-    "/AuctionKaiin/{kaiinId}/Staff" : {
-      "get" : {
-        "tags" : [ "AuctionKaiin" ],
-        "parameters" : [ {
-          "name" : "kaiinId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaiinStaffRet1"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "AuctionKaiin" ],
-        "parameters" : [ {
-          "name" : "kaiinId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json; charset=utf-8" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/AuctionKaiinStaffParam"
-              }
-            }
-          }
-        },
-        "responses" : {
-          "200" : {
-            "description" : "登録成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/PostAuctionKaiinStaffRet"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      }
-    },
-    "/AuctionKaiin/{kaiinId}/Staff/{kaiinStaffId}" : {
-      "get" : {
-        "tags" : [ "AuctionKaiin" ],
-        "parameters" : [ {
-          "name" : "kaiinId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        }, {
-          "name" : "kaiinStaffId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaiinStaffRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "AuctionKaiin" ],
-        "parameters" : [ {
-          "name" : "kaiinId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        }, {
-          "name" : "kaiinStaffId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json; charset=utf-8" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/AuctionKaiinStaffParam"
-              }
-            }
-          }
-        },
-        "responses" : {
-          "200" : {
-            "description" : "登録成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "example" : "{}"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "AuctionKaiin" ],
-        "parameters" : [ {
-          "name" : "kaiinId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        }, {
-          "name" : "kaiinStaffId",
           "in" : "path",
           "required" : true,
           "style" : "simple",
@@ -1821,56 +1269,6 @@
       }
     },
     "/AuctionKaijo/{auctionKaijoId}/Lane/{laneId}" : {
-      "get" : {
-        "tags" : [ "AuctionKaijo" ],
-        "parameters" : [ {
-          "name" : "auctionKaijoId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        }, {
-          "name" : "laneId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaijoLaneRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
       "put" : {
         "tags" : [ "AuctionKaijo" ],
         "parameters" : [ {
@@ -2242,56 +1640,6 @@
       }
     },
     "/AuctionKaijo/{auctionKaijoId}/Kaisaibi/{kaisaibi}" : {
-      "get" : {
-        "tags" : [ "AuctionKaijo" ],
-        "parameters" : [ {
-          "name" : "auctionKaijoId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        }, {
-          "name" : "kaisaibi",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionKaisaibiRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
       "put" : {
         "tags" : [ "AuctionKaijo" ],
         "parameters" : [ {
@@ -2507,47 +1855,6 @@
       }
     },
     "/Kaihi/{kaihiId}" : {
-      "get" : {
-        "tags" : [ "Kaihi" ],
-        "parameters" : [ {
-          "name" : "kaihiId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetKaihiRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
       "put" : {
         "tags" : [ "Kaihi" ],
         "parameters" : [ {
@@ -2716,47 +2023,6 @@
       }
     },
     "/KaiinKbn/{kaiinKbnId}" : {
-      "get" : {
-        "tags" : [ "KaiinKbn" ],
-        "parameters" : [ {
-          "name" : "kaiinKbnId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetKaiinKbnRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
       "put" : {
         "tags" : [ "KaiinKbn" ],
         "parameters" : [ {
@@ -2959,47 +2225,6 @@
       }
     },
     "/Brand/{brandCd}" : {
-      "get" : {
-        "tags" : [ "Brand" ],
-        "parameters" : [ {
-          "name" : "brandCd",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetBrandRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
       "put" : {
         "tags" : [ "Brand" ],
         "parameters" : [ {
@@ -3169,47 +2394,6 @@
       }
     },
     "/StaffRole/{staffRoleId}" : {
-      "get" : {
-        "tags" : [ "StaffRole" ],
-        "parameters" : [ {
-          "name" : "staffRoleId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetStaffRoleRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
       "put" : {
         "tags" : [ "StaffRole" ],
         "parameters" : [ {
@@ -3636,47 +2820,6 @@
       }
     },
     "/Tesuryo/{tesuryoId}" : {
-      "get" : {
-        "tags" : [ "Tesuryo" ],
-        "parameters" : [ {
-          "name" : "tesuryoId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetTesuryoRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
       "put" : {
         "tags" : [ "Tesuryo" ],
         "parameters" : [ {
@@ -3845,47 +2988,6 @@
       }
     },
     "/ToiawaseBunrui/{toiawaseBunruiId}" : {
-      "get" : {
-        "tags" : [ "ToiawaseBunrui" ],
-        "parameters" : [ {
-          "name" : "toiawaseBunruiId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetToiawaseBunruiRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
       "put" : {
         "tags" : [ "ToiawaseBunrui" ],
         "parameters" : [ {
@@ -4054,47 +3156,6 @@
       }
     },
     "/ToiawaseTemplate/{toiawaseTemplateId}" : {
-      "get" : {
-        "tags" : [ "ToiawaseTemplate" ],
-        "parameters" : [ {
-          "name" : "toiawaseTemplateId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetToiawaseTemplateRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
       "put" : {
         "tags" : [ "ToiawaseTemplate" ],
         "parameters" : [ {
@@ -4263,47 +3324,6 @@
       }
     },
     "/Alarm/{alarmId}" : {
-      "get" : {
-        "tags" : [ "Alarm" ],
-        "parameters" : [ {
-          "name" : "alarmId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetAlarmRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
       "put" : {
         "tags" : [ "Alarm" ],
         "parameters" : [ {
@@ -4620,142 +3640,6 @@
               "application/json" : {
                 "schema" : {
                   "$ref" : "#/components/schemas/PostAuctionCreateWithListRet"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      }
-    },
-    "/Auction/{auctionId}" : {
-      "get" : {
-        "tags" : [ "Auction" ],
-        "parameters" : [ {
-          "name" : "auctionId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetAuctionRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "Auction" ],
-        "parameters" : [ {
-          "name" : "auctionId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "requestBody" : {
-          "content" : {
-            "application/json; charset=utf-8" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/AuctionParam"
-              }
-            }
-          }
-        },
-        "responses" : {
-          "200" : {
-            "description" : "登録成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "example" : "{}"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "Auction" ],
-        "parameters" : [ {
-          "name" : "auctionId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "登録成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "type" : "object",
-                  "example" : "{}"
                 }
               }
             }
@@ -5603,26 +4487,27 @@
         }
       }
     },
-    "/Auction/Saishuppin" : {
+    "/Auction/Saishuppin/{auctionKaijoId}/{kaisaibi}" : {
       "get" : {
         "tags" : [ "Auction" ],
+        "description" : "該当の会場・開催日からtt_auctionを検索。tt_auction_saishuppin_irai.auction_idで連結して情報を取得(tt_auction→tt_auction_saishuppin_iraiのRIGHT JOIN)",
         "parameters" : [ {
           "name" : "auctionKaijoId",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
           "schema" : {
             "type" : "integer"
           }
         }, {
-          "name" : "auctionId",
-          "in" : "query",
-          "required" : false,
-          "style" : "form",
-          "explode" : true,
+          "name" : "kaisaibi",
+          "in" : "path",
+          "required" : true,
+          "style" : "simple",
+          "explode" : false,
           "schema" : {
-            "type" : "integer"
+            "type" : "string"
           }
         } ],
         "responses" : {
@@ -6731,47 +5616,6 @@
       }
     },
     "/Hasso/{hassoId}" : {
-      "get" : {
-        "tags" : [ "Hasso" ],
-        "parameters" : [ {
-          "name" : "hassoId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetHassoRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
       "put" : {
         "tags" : [ "Hasso" ],
         "parameters" : [ {
@@ -7152,46 +5996,6 @@
           }
         }
       },
-      "put" : {
-        "tags" : [ "Nyukin" ],
-        "requestBody" : {
-          "content" : {
-            "application/json; charset=utf-8" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/NyukinParam1"
-              }
-            }
-          }
-        },
-        "responses" : {
-          "200" : {
-            "description" : "登録成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/PostNyukinRet"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
       "post" : {
         "tags" : [ "Nyukin" ],
         "requestBody" : {
@@ -7234,47 +6038,6 @@
       }
     },
     "/Nyukin/{nyukinId}" : {
-      "get" : {
-        "tags" : [ "Nyukin" ],
-        "parameters" : [ {
-          "name" : "nyukinId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetNyukinRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
       "put" : {
         "tags" : [ "Nyukin" ],
         "parameters" : [ {
@@ -8601,47 +7364,6 @@
       }
     },
     "/Toiawase/{toiawaseId}" : {
-      "get" : {
-        "tags" : [ "Toiawase" ],
-        "parameters" : [ {
-          "name" : "toiawaseId",
-          "in" : "path",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "integer"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "取得成功",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/GetToiawaseRet2"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "パラメーター異常",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/ValidateError"
-                }
-              }
-            }
-          },
-          "404" : {
-            "description" : "該当するデータが見つかりません。"
-          },
-          "500" : {
-            "description" : "サーバーエラー発生"
-          }
-        }
-      },
       "put" : {
         "tags" : [ "Toiawase" ],
         "parameters" : [ {
@@ -9479,185 +8201,30 @@
         "type" : "object",
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/AuctionKaiin1"
+            "$ref" : "#/components/schemas/AuctionKaiinParamObj"
           }
         }
       },
-      "GetAuctionKaiinRet1" : {
+      "GetAuctionKaiinRetList" : {
         "required" : [ "ret" ],
         "type" : "object",
         "properties" : {
           "ret" : {
-            "$ref" : "#/components/schemas/GetAuctionKaiinRet1_ret"
+            "$ref" : "#/components/schemas/GetAuctionKaiinRetList_ret"
           }
         }
       },
-      "GetAuctionKaiinRet2" : {
+      "GetAuctionKaiinRetData" : {
         "required" : [ "ret" ],
         "type" : "object",
         "properties" : {
           "ret" : {
-            "$ref" : "#/components/schemas/AuctionKaiin2"
+            "$ref" : "#/components/schemas/AuctionKaiinRetObj"
           }
         }
       },
-      "PostAuctionKaiinRet" : {
-        "required" : [ "ret" ],
-        "type" : "object",
-        "properties" : {
-          "ret" : {
-            "$ref" : "#/components/schemas/PostAuctionKaiinRet_ret"
-          }
-        }
-      },
-      "AuctionKaiin1" : {
-        "required" : [ "daihyosha", "kaiin_id", "kaiin_kbn_id", "kaiin_name", "kaiin_name_kana", "kaiin_name_ryakusho", "kyoten_list", "live_osatsu", "login", "memo1", "memo2", "memo3", "nyusatsu_yoyaku", "soba", "taikai_date", "taikai_flg", "yoshin_gendogaku" ],
-        "properties" : {
-          "kaiin_id" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "kaiin_kbn_id" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "kaiin_name" : {
-            "type" : "string",
-            "example" : "会員名A株式会社"
-          },
-          "kaiin_name_kana" : {
-            "type" : "string",
-            "example" : "カイインメイAカブシキガイシャ"
-          },
-          "kaiin_name_ryakusyo" : {
-            "type" : "string",
-            "example" : "会員名A"
-          },
-          "daihyosha" : {
-            "type" : "string",
-            "example" : "代表者A"
-          },
-          "yoshin_gendogaku" : {
-            "type" : "integer",
-            "example" : 30000000
-          },
-          "memo1" : {
-            "type" : "string",
-            "example" : "メモ１"
-          },
-          "memo2" : {
-            "type" : "string",
-            "example" : "メモ２"
-          },
-          "memo3" : {
-            "type" : "string",
-            "example" : "メモ３"
-          },
-          "taikai_flg" : {
-            "type" : "string",
-            "example" : "1"
-          },
-          "taikai_date" : {
-            "type" : "string",
-            "example" : "2021-06-18 00:00:00"
-          },
-          "kyoten_list" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/AuctionKaiinKyoten"
-            }
-          },
-          "login" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "nyusatsu_yoyaku" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "live_osatsu" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "soba" : {
-            "type" : "integer",
-            "example" : 1
-          }
-        }
-      },
-      "AuctionKaiin2" : {
-        "required" : [ "daihyosha", "kaiin_kbn_id", "kaiin_name", "kaiin_name_kana", "kaiin_name_ryakusho", "kyoten_list", "live_osatsu", "login", "memo1", "memo2", "memo3", "nyusatsu_yoyaku", "soba", "taikai_date", "taikai_flg", "yoshin_gendogaku" ],
-        "properties" : {
-          "kaiin_kbn_id" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "kaiin_name" : {
-            "type" : "string",
-            "example" : "会員名A株式会社"
-          },
-          "kaiin_name_kana" : {
-            "type" : "string",
-            "example" : "カイインメイAカブシキガイシャ"
-          },
-          "kaiin_name_ryakusyo" : {
-            "type" : "string",
-            "example" : "会員名A"
-          },
-          "daihyosha" : {
-            "type" : "string",
-            "example" : "代表者A"
-          },
-          "yoshin_gendogaku" : {
-            "type" : "integer",
-            "example" : 30000000
-          },
-          "memo1" : {
-            "type" : "string",
-            "example" : "メモ１"
-          },
-          "memo2" : {
-            "type" : "string",
-            "example" : "メモ２"
-          },
-          "memo3" : {
-            "type" : "string",
-            "example" : "メモ３"
-          },
-          "taikai_flg" : {
-            "type" : "string",
-            "example" : "1"
-          },
-          "taikai_date" : {
-            "type" : "string",
-            "example" : "2021-06-18 00:00:00"
-          },
-          "kyoten_list" : {
-            "type" : "array",
-            "items" : {
-              "$ref" : "#/components/schemas/AuctionKaiinKyoten"
-            }
-          },
-          "login" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "nyusatsu_yoyaku" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "live_osatsu" : {
-            "type" : "integer",
-            "example" : 1
-          },
-          "soba" : {
-            "type" : "integer",
-            "example" : 1
-          }
-        }
-      },
-      "AuctionKaiin3" : {
-        "required" : [ "address", "daihyosha", "fax", "kaiin_id", "kaiin_kbn_id", "kaiin_kyoten_id", "kaiin_kyoten_name", "kaiin_name", "kaiin_name_kana", "kaiin_name_ryakusho", "kobutsusho_bango", "live_osatsu", "login", "mail_address", "memo", "memo1", "memo2", "memo3", "nyusatsu_yoyaku", "shikuchoson_name", "shozoku_kyoten", "soba", "staff_id", "staff_name", "staff_tel", "taikai_date", "taikai_flg", "tel", "todofuken_cd", "yoshin_gendogaku", "zip_code1", "zip_code2" ],
+      "AuctionKaiinParamObj" : {
+        "required" : [ "auction_kaiin_kyoten_list", "daihyosha", "kaiin_id", "kaiin_kbn_id", "kaiin_name", "kaiin_name_kana", "kaiin_name_ryakusho", "live_osatsu", "login", "memo1", "memo2", "memo3", "nyusatsu_yoyaku", "soba", "taikai_date", "taikai_flg", "yoshin_gendogaku" ],
         "properties" : {
           "kaiin_id" : {
             "type" : "integer",
@@ -9708,6 +8275,33 @@
             "type" : "string",
             "example" : "2021-06-18 00:00:00"
           },
+          "login" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "nyusatsu_yoyaku" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "live_osatsu" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "soba" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "auction_kaiin_kyoten_list" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AuctionKaiinKyotenParamObj"
+            }
+          }
+        }
+      },
+      "AuctionKaiinKyotenParamObj" : {
+        "required" : [ "address", "auction_kaiin_staff_list", "fax", "kaiin_kyoten_id", "kaiin_kyoten_name", "kobutsusho_bango", "shikuchoson_name", "tel", "todofuken_cd", "zip_code1", "zip_code2" ],
+        "properties" : {
           "kaiin_kyoten_id" : {
             "type" : "integer",
             "example" : 1
@@ -9748,6 +8342,17 @@
             "type" : "string",
             "example" : "123456789012"
           },
+          "auction_kaiin_staff_list" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AuctionKaiiStaffParamObj"
+            }
+          }
+        }
+      },
+      "AuctionKaiiStaffParamObj" : {
+        "required" : [ "mail_address", "memo", "shozoku_kyoten_id", "staff_id", "staff_name", "staff_tel" ],
+        "properties" : {
           "staff_id" : {
             "type" : "integer",
             "example" : 1
@@ -9771,6 +8376,60 @@
           "shozoku_kyoten_id" : {
             "type" : "integer",
             "example" : 1
+          }
+        }
+      },
+      "AuctionKaiinRetObj" : {
+        "required" : [ "auction_kaiin_kyoten_list", "daihyosha", "kaiin_id", "kaiin_kbn_id", "kaiin_name", "kaiin_name_kana", "kaiin_name_ryakusho", "live_osatsu", "login", "memo1", "memo2", "memo3", "nyusatsu_yoyaku", "soba", "taikai_date", "taikai_flg", "yoshin_gendogaku" ],
+        "properties" : {
+          "kaiin_id" : {
+            "type" : "integer",
+            "description" : "POSTの場合は不要",
+            "example" : 123
+          },
+          "kaiin_kbn_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "kaiin_name" : {
+            "type" : "string",
+            "example" : "会員名A株式会社"
+          },
+          "kaiin_name_kana" : {
+            "type" : "string",
+            "example" : "カイインメイAカブシキガイシャ"
+          },
+          "kaiin_name_ryakusyo" : {
+            "type" : "string",
+            "example" : "会員名A"
+          },
+          "daihyosha" : {
+            "type" : "string",
+            "example" : "代表者A"
+          },
+          "yoshin_gendogaku" : {
+            "type" : "integer",
+            "example" : 30000000
+          },
+          "memo1" : {
+            "type" : "string",
+            "example" : "メモ１"
+          },
+          "memo2" : {
+            "type" : "string",
+            "example" : "メモ２"
+          },
+          "memo3" : {
+            "type" : "string",
+            "example" : "メモ３"
+          },
+          "taikai_flg" : {
+            "type" : "string",
+            "example" : "1"
+          },
+          "taikai_date" : {
+            "type" : "string",
+            "example" : "2021-06-18 00:00:00"
           },
           "login" : {
             "type" : "integer",
@@ -9785,6 +8444,96 @@
             "example" : 1
           },
           "soba" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "auction_kaiin_kyoten_list" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AuctionKaiinKyotenRetObj"
+            }
+          }
+        }
+      },
+      "AuctionKaiinKyotenRetObj" : {
+        "required" : [ "address", "auction_kaiin_staff_list", "fax", "kaiin_kyoten_id", "kaiin_kyoten_name", "kobutsusho_bango", "shikuchoson_name", "tel", "todofuken_cd", "todofuken_name", "zip_code1", "zip_code2" ],
+        "properties" : {
+          "kaiin_kyoten_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "kaiin_kyoten_name" : {
+            "type" : "string",
+            "example" : "会員拠点名A"
+          },
+          "zip_code1" : {
+            "type" : "string",
+            "example" : "101"
+          },
+          "zip_code2" : {
+            "type" : "string",
+            "example" : "0064"
+          },
+          "todofuken_cd" : {
+            "type" : "integer",
+            "example" : 26
+          },
+          "todofuken_name" : {
+            "type" : "string",
+            "example" : "東京都"
+          },
+          "shikuchoson_name" : {
+            "type" : "string",
+            "example" : "千代田区"
+          },
+          "address" : {
+            "type" : "string",
+            "example" : "神田駿河台2-5-7  村田ビルディング6F"
+          },
+          "tel" : {
+            "type" : "string",
+            "example" : "03-5259-8300"
+          },
+          "fax" : {
+            "type" : "string",
+            "example" : "03-5259-8301"
+          },
+          "kobutsusho_bango" : {
+            "type" : "string",
+            "example" : "123456789012"
+          },
+          "auction_kaiin_staff_list" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AuctionKaiiStaffRetObj"
+            }
+          }
+        }
+      },
+      "AuctionKaiiStaffRetObj" : {
+        "required" : [ "mail_address", "memo", "shozoku_kyoten_id", "staff_id", "staff_name", "staff_tel" ],
+        "properties" : {
+          "staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "staff_name" : {
+            "type" : "string",
+            "example" : "スタッフA"
+          },
+          "mail_address" : {
+            "type" : "string",
+            "example" : "staff@test.co.jp"
+          },
+          "staff_tel" : {
+            "type" : "string",
+            "example" : "090-0000-0000"
+          },
+          "memo" : {
+            "type" : "string",
+            "example" : "スタッフに対してのメモです。"
+          },
+          "shozoku_kyoten_id" : {
             "type" : "integer",
             "example" : 1
           }
@@ -10835,7 +9584,7 @@
         "type" : "object",
         "properties" : {
           "param" : {
-            "$ref" : "#/components/schemas/Auction"
+            "$ref" : "#/components/schemas/AuctionParamObj"
           }
         }
       },
@@ -10853,7 +9602,7 @@
         "type" : "object",
         "properties" : {
           "ret" : {
-            "$ref" : "#/components/schemas/AuctionCreateWithListParam_param"
+            "$ref" : "#/components/schemas/GetAuctionRet1_ret"
           }
         }
       },
@@ -10862,7 +9611,7 @@
         "type" : "object",
         "properties" : {
           "ret" : {
-            "$ref" : "#/components/schemas/Auction"
+            "$ref" : "#/components/schemas/AuctionRetObj"
           }
         }
       },
@@ -10884,7 +9633,7 @@
           }
         }
       },
-      "Auction" : {
+      "AuctionParamObj" : {
         "required" : [ "auction_id", "auction_kaijo_id", "auction_kekka", "bango", "biko", "brand_cd", "chosei_kakaku", "denpyo_bango", "furakusatsu_tesuryo", "hako_bango", "hasso_kaiin_staff_id", "hasso_kaiin_staff_name", "hassobi", "hinban", "jisshi_chosei_kakaku", "jisshi_jikoku", "jisshi_kibo_kakaku", "jisshi_start_kakaku", "juryo", "kaisaibi", "kakutei_flg", "kibo_kakaku", "kosho_kaishi_kakaku", "kosho_status", "maebaraikin", "nyukinzumi_date", "nyukinzumi_flg", "nyusatsu_kingaku", "object_id", "rakusatsu_kaiin_id", "rakusatsu_kaiin_name", "rakusatsu_kakaku", "rakusatsu_shubetsu", "rakusatsuryo", "rakusatsuryo_rate", "rakusatsuryo_zei", "rank", "saishu_osatsu_kakaku", "seikyu_kaiin_cd", "seiyakuryo", "seiyakuryo_rate", "seiyakuryo_zei", "shiharai_kaiin_cd", "shiharaizumi_date", "shiharaizumi_flg", "shiiresaki_memo", "shimezumi_flg", "shohin_shubetsu_id", "shohinmei", "shosai", "shuppin_kaiin_comment", "shuppin_kaiin_id", "shuppin_kaiin_name", "shuppin_torikeshi_tesuryo", "shuppin_torikeshi_tesuryo_zei", "shuppinryo", "shuppinryo_rate", "shuppinryo_zei", "start_kakaku", "teisei", "teisei_naiyo", "wakiishi", "waku", "yoso_jikoku" ],
         "properties" : {
           "auction_id" : {
@@ -10918,6 +9667,284 @@
           "brand_cd" : {
             "type" : "integer",
             "example" : 0
+          },
+          "hinban" : {
+            "type" : "string",
+            "example" : "ABCDE12345"
+          },
+          "shohinmei" : {
+            "type" : "string",
+            "example" : "商品名A"
+          },
+          "rank" : {
+            "type" : "string",
+            "example" : "5.0"
+          },
+          "waku" : {
+            "type" : "string",
+            "example" : "SS"
+          },
+          "wakiishi" : {
+            "type" : "string",
+            "example" : "wakiishi"
+          },
+          "juryo" : {
+            "type" : "string",
+            "example" : "100g"
+          },
+          "biko" : {
+            "type" : "string",
+            "example" : "備考です"
+          },
+          "shosai" : {
+            "type" : "string",
+            "example" : "詳細"
+          },
+          "shiiresaki_memo" : {
+            "type" : "string",
+            "example" : "仕入れ先メモです"
+          },
+          "kakutei_flg" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "teisei" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "teisei_naiyo" : {
+            "type" : "string",
+            "example" : "訂正内容"
+          },
+          "nyusatsu_kingaku" : {
+            "type" : "integer",
+            "description" : "該当のauction_idに対して、mt_auction_kaiin_jishaのレコードでnyusatsu_toroku_flg=1のレコードの会員IDでtt_nyusatus_yoyakuに登録されている入札金額を取得してセットする。",
+            "example" : 10000
+          },
+          "maebaraikin" : {
+            "type" : "integer",
+            "description" : "tt_shohinyoから、該当のauction_idかつshohiyo_kbn=3でGROUPした時のshiharai_shohiyoの合計値をセットする。",
+            "example" : 20000
+          },
+          "shuppin_kaiin_id" : {
+            "type" : "string",
+            "example" : "10001"
+          },
+          "shuppin_kaiin_name" : {
+            "type" : "string",
+            "description" : "shuppin_kaiin_idとmt_auction_kaiin.kaiin_idと連結して、kaiin_nameを取得する。",
+            "example" : "出品店A"
+          },
+          "auction_kekka" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "rakusatsu_shubetsu" : {
+            "type" : "integer",
+            "example" : 2
+          },
+          "saishu_osatsu_kakaku" : {
+            "type" : "integer",
+            "example" : 100000
+          },
+          "rakusatsu_kaiin_id" : {
+            "type" : "string",
+            "example" : "20001"
+          },
+          "rakusatsu_kaiin_name" : {
+            "type" : "string",
+            "description" : "rakusatsu_kaiin_idとmt_auction_kaiin.kaiin_idと連結して、kaiin_nameを取得する。",
+            "example" : "落札店A"
+          },
+          "rakusatsu_kakaku" : {
+            "type" : "integer",
+            "example" : 100000
+          },
+          "shuppinryo_rate" : {
+            "type" : "integer",
+            "example" : 3
+          },
+          "shuppinryo" : {
+            "type" : "integer",
+            "example" : 1000
+          },
+          "shuppinryo_zei" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "seiyakuryo_rate" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "seiyakuryo" : {
+            "type" : "integer",
+            "example" : 3000
+          },
+          "seiyakuryo_zei" : {
+            "type" : "integer",
+            "example" : 300
+          },
+          "rakusatsuryo_rate" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "rakusatsuryo" : {
+            "type" : "integer",
+            "example" : 3000
+          },
+          "rakusatsuryo_zei" : {
+            "type" : "integer",
+            "example" : 300
+          },
+          "furakusatsu_tesuryo" : {
+            "type" : "integer",
+            "example" : 1000
+          },
+          "shuppin_torikeshi_tesuryo" : {
+            "type" : "integer",
+            "example" : 1000
+          },
+          "shuppin_torikeshi_tesuryo_zei" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "shimezumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "nyukinzumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "nyukinzumi_date" : {
+            "type" : "string",
+            "example" : "2021-07-21"
+          },
+          "shiharaizumi_flg" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "shiharaizumi_date" : {
+            "type" : "string",
+            "example" : "2021-07-21"
+          },
+          "shiharai_kaiin_cd" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "seikyu_kaiin_cd" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "start_kakaku" : {
+            "type" : "integer",
+            "example" : 10000
+          },
+          "chosei_kakaku" : {
+            "type" : "integer",
+            "example" : 10000
+          },
+          "kibo_kakaku" : {
+            "type" : "integer",
+            "example" : 10000
+          },
+          "jisshi_start_kakaku" : {
+            "type" : "integer",
+            "example" : 1000
+          },
+          "jisshi_chosei_kakaku" : {
+            "type" : "integer",
+            "example" : 1000
+          },
+          "jisshi_kibo_kakaku" : {
+            "type" : "integer",
+            "example" : 1000
+          },
+          "kosho_status" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "kosho_kaishi_kakaku" : {
+            "type" : "integer",
+            "example" : 10000
+          },
+          "yoso_jikoku" : {
+            "type" : "string",
+            "example" : "2021-06-31 10:00:00"
+          },
+          "jisshi_jikoku" : {
+            "type" : "string",
+            "example" : "2021-07-30 10:00:00"
+          },
+          "shuppin_kaiin_comment" : {
+            "type" : "string",
+            "example" : "出品店コメントです。"
+          },
+          "hassobi" : {
+            "type" : "string",
+            "description" : "tt_auction.auction_id → tt_hasso_detail.auction_idで連結   tt_hasso_detail.hasso_id→tt_hasso.hasso_idで連結　でtt_hassoのレコードを取得。以下の項目も同様",
+            "example" : "2021-07-25"
+          },
+          "hasso_kaiin_staff_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "hasso_kaiin_staff_name" : {
+            "type" : "string",
+            "example" : "スタッフA"
+          },
+          "denpyo_bango" : {
+            "type" : "string",
+            "example" : "1234567890"
+          }
+        }
+      },
+      "AuctionRetObj" : {
+        "required" : [ "auction_id", "auction_kaijo_id", "auction_kaijo_name", "auction_kekka", "bango", "biko", "brand_cd", "brand_name", "chosei_kakaku", "denpyo_bango", "furakusatsu_tesuryo", "hako_bango", "hasso_kaiin_staff_id", "hasso_kaiin_staff_name", "hassobi", "hinban", "jisshi_chosei_kakaku", "jisshi_jikoku", "jisshi_kibo_kakaku", "jisshi_start_kakaku", "juryo", "kaisaibi", "kakutei_flg", "kibo_kakaku", "kosho_kaishi_kakaku", "kosho_status", "maebaraikin", "nyukinzumi_date", "nyukinzumi_flg", "nyusatsu_kingaku", "object_id", "rakusatsu_kaiin_id", "rakusatsu_kaiin_name", "rakusatsu_kakaku", "rakusatsu_shubetsu", "rakusatsuryo", "rakusatsuryo_rate", "rakusatsuryo_zei", "rank", "saishu_osatsu_kakaku", "seikyu_kaiin_cd", "seiyakuryo", "seiyakuryo_rate", "seiyakuryo_zei", "shiharai_kaiin_cd", "shiharaizumi_date", "shiharaizumi_flg", "shiiresaki_memo", "shimezumi_flg", "shohin_shubetsu_id", "shohin_shubetsu_name", "shohinmei", "shosai", "shuppin_kaiin_comment", "shuppin_kaiin_id", "shuppin_kaiin_name", "shuppin_torikeshi_tesuryo", "shuppin_torikeshi_tesuryo_zei", "shuppinryo", "shuppinryo_rate", "shuppinryo_zei", "start_kakaku", "teisei", "teisei_naiyo", "wakiishi", "waku", "yoso_jikoku" ],
+        "properties" : {
+          "auction_id" : {
+            "type" : "integer",
+            "example" : 1
+          },
+          "object_id" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "auction_kaijo_id" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "auction_kaijo_name" : {
+            "type" : "string",
+            "example" : "オークション会場123"
+          },
+          "kaisaibi" : {
+            "type" : "string",
+            "example" : "2021-06-29"
+          },
+          "hako_bango" : {
+            "type" : "integer",
+            "example" : 100
+          },
+          "bango" : {
+            "type" : "integer",
+            "example" : 10
+          },
+          "shohin_shubetsu_id" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "shohin_shubetsu_name" : {
+            "type" : "string",
+            "example" : "バッグ"
+          },
+          "brand_cd" : {
+            "type" : "integer",
+            "example" : 0
+          },
+          "brand_name" : {
+            "type" : "string",
+            "example" : "GUCCI"
           },
           "hinban" : {
             "type" : "string",
@@ -11234,12 +10261,12 @@
         "type" : "object",
         "properties" : {
           "ret" : {
-            "$ref" : "#/components/schemas/AuctionSaishuppinRetObj"
+            "$ref" : "#/components/schemas/GetAuctionSaishuppinRet_ret"
           }
         }
       },
       "AuctionSaishuppinParamObj" : {
-        "required" : [ "irai_chosei_kakaku", "irai_kibo_kakaku", "irai_memo", "irai_nichiji", "irai_start_kakaku" ],
+        "required" : [ "irai_chosei_kakaku", "irai_kaisaibi", "irai_kibo_kakaku", "irai_memo", "irai_nichiji", "irai_start_kakaku" ],
         "properties" : {
           "irai_nichiji" : {
             "type" : "string",
@@ -11260,6 +10287,10 @@
           "irai_memo" : {
             "type" : "string",
             "example" : "依頼時のメモです。"
+          },
+          "irai_kaisaibi" : {
+            "type" : "string",
+            "example" : "2021-08-01"
           }
         },
         "description" : "tt_auction_saishuppin_irai"
@@ -11290,6 +10321,10 @@
           "irai_memo" : {
             "type" : "string",
             "example" : "依頼時のメモです。"
+          },
+          "irai_kaisaibi" : {
+            "type" : "string",
+            "example" : "2021-08-01"
           }
         },
         "description" : "tt_auction_saishuppin_irai"
@@ -12386,25 +11421,15 @@
           }
         }
       },
-      "GetAuctionKaiinRet1_ret" : {
+      "GetAuctionKaiinRetList_ret" : {
         "required" : [ "list" ],
         "type" : "object",
         "properties" : {
           "list" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/AuctionKaiin3"
+              "$ref" : "#/components/schemas/AuctionKaiinRetObj"
             }
-          }
-        }
-      },
-      "PostAuctionKaiinRet_ret" : {
-        "required" : [ "kaiin_id" ],
-        "type" : "object",
-        "properties" : {
-          "kaiin_id" : {
-            "type" : "integer",
-            "example" : 1
           }
         }
       },
@@ -12737,7 +11762,19 @@
           "list" : {
             "type" : "array",
             "items" : {
-              "$ref" : "#/components/schemas/Auction"
+              "$ref" : "#/components/schemas/AuctionParamObj"
+            }
+          }
+        }
+      },
+      "GetAuctionRet1_ret" : {
+        "required" : [ "list" ],
+        "type" : "object",
+        "properties" : {
+          "list" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AuctionRetObj"
             }
           }
         }
@@ -12760,6 +11797,18 @@
             "type" : "array",
             "items" : {
               "$ref" : "#/components/schemas/PostAuctionRet_ret"
+            }
+          }
+        }
+      },
+      "GetAuctionSaishuppinRet_ret" : {
+        "required" : [ "list" ],
+        "type" : "object",
+        "properties" : {
+          "list" : {
+            "type" : "array",
+            "items" : {
+              "$ref" : "#/components/schemas/AuctionSaishuppinRetObj"
             }
           }
         }
